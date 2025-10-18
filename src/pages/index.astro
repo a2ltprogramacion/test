@@ -1,9 +1,9 @@
 ---
 // Fase VERDE: Implementación de la Landing Page
-import { getEntry, getCollection } from 'astro:content'; // <--- IMPORT MODIFICADO
+// src/pages/index.astro (Fragmento Corregido)
+import { getEntry, getCollection } from 'astro:content'; 
 import Layout from '../layouts/Layout.astro';
-
-import PortafolioList from '../components/PortafolioList.astro';
+import PortafolioList from '../components/PortafolioList.astro'; // IMPORT MODIFICADO
 
 // 1. Leer la fuente de verdad (Headless CMS)
 const home = await getEntry('pages', 'home');
@@ -11,7 +11,7 @@ const { title, description, nosotros } = home.data;
 
 // 2. Lectura y Filtrado de Proyectos
 const allProjects = await getCollection('proyectos');
-// Ordenamos por fecha (el más reciente primero) y tomamos los primeros 3
+// @ts-ignore
 const recentProjects = allProjects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
 ---
 
