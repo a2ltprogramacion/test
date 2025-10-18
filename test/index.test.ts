@@ -32,3 +32,31 @@ describe('TDD - Landing Page Title', () => {
     expect(actualTitle).toBe(expectedTitle);
   });
 });
+
+describe('TDD - Arquitectura de UX', () => {
+  it('Fase ROJA: El Header debe cargarse y contener los enlaces de navegación', async () => {
+    // 1. Leer el contenido del Layout y del Header
+    const layoutPath = path.resolve(process.cwd(), 'src/layouts/Layout.astro');
+    let layoutContent = await fs.readFile(layoutPath, 'utf-8');
+    
+    const headerPath = path.resolve(process.cwd(), 'src/components/Header.astro');
+    const headerContent = await fs.readFile(headerPath, 'utf-8');
+
+    // 2. Simular la inclusión del Header en el Layout
+    // Nos saltamos el frontmatter de los componentes para la simulación del DOM
+    const headerHtml = headerContent.split('---')[2] || headerContent;
+    layoutContent = layoutContent.replace('<Header />', headerHtml);
+
+    // 3. Crear el DOM virtual
+    const dom = new JSDOM(layoutContent);
+    const document = dom.window.document;
+
+    // 4. VERIFICAR que el header y el enlace existen
+    const headerElement = document.querySelector('header');
+    expect(headerElement).not.toBeNull();
+
+    const projectsLink = document.querySelector('a[href="#proyectos"]');
+    expect(projectsLink).not.toBeNull();
+    expect(projectsLink.textContent).toBe('Proyectos');
+  });
+});

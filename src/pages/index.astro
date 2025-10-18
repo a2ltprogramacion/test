@@ -12,7 +12,7 @@ const { title, description, nosotros } = home.data;
 
 <Layout title={title} description={description}>
   <main>
-    <header class="hero">
+    <header id="inicio" class="hero">
       <h1>Un socio tecnológico, no un proveedor más.</h1>
       <p>Creamos soluciones de software e inteligencia artificial que se sienten cercanas, como parte de tu equipo.</p>
       <a href="mailto:contacto@elevawod.cl?subject=Quiero iniciar un proyecto" class="cta-button">Hablemos de tu idea</a>
@@ -31,11 +31,43 @@ const { title, description, nosotros } = home.data;
       <PortafolioList />
     </section>
 
-    <section class="cta-final">
+    <section id="servicios" class="services-section">
+      <h2>Nuestros Servicios</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Inteligencia Artificial</h3>
+          <p>Soluciones de IA a medida para optimizar tus procesos y potenciar la toma de decisiones.</p>
+        </div>
+        <div class="service-card">
+          <h3>Backend con Python/Django</h3>
+          <p>Desarrollo de APIs robustas, escalables y seguras que son el corazón de tu aplicación.</p>
+        </div>
+        <div class="service-card">
+          <h3>Marketing Automation</h3>
+          <p>Implementamos y personalizamos GoHighLevel para automatizar tu marketing y ventas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="clientes" class="testimonials-section">
+      <h2>Lo que dicen nuestros clientes</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <p class="quote">"El equipo de Elevawod transformó nuestro negocio con una solución de IA que superó todas las expectativas. ¡Increíble!"</p>
+          <p class="author">- CEO, Empresa de Logística</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="quote">"Profesionalismo, agilidad y resultados. Justo lo que necesitábamos para lanzar nuestro nuevo backend."</p>
+          <p class="author">- CTO, Startup de Fintech</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="cta-final">
         <h2>¿Listo para empezar?</h2>
         <p>Conversemos por WhatsApp para una respuesta más rápida o envíame un correo.</p>
         <div>
-            <a href="https://wa.me/569XXXXXXXX?text=Hola%2C%20vengo%20de%20Elevawod.cl%20y%20quiero%20cotizar%20un%20proyecto" class="cta-button whatsapp" target="_blank">WhatsApp</a>
+            <a href="https://wa.me/56934833633?text=Hola%2C%20vengo%20de%20Elevawod.cl%20y%20quiero%20cotizar%20un%20proyecto" class="cta-button whatsapp" target="_blank">WhatsApp</a>
             <a href="mailto:contacto@elevawod.cl" class="cta-button">Correo Electrónico</a>
         </div>
     </section>
@@ -108,6 +140,45 @@ const { title, description, nosotros } = home.data;
     max-width: 300px;
     border-radius: 10px;
     object-fit: cover;
+  }
+
+  .portfolio-section, .services-section, .testimonials-section {
+    padding: 4rem 2rem;
+  }
+
+  .portfolio-section h2, .services-section h2, .testimonials-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .services-grid, .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .service-card, .testimonial-card {
+    background-color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 10px;
+  }
+
+  .service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+  }
+
+  .testimonial-card .quote {
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-card .author {
+    font-weight: bold;
   }
 
   .cta-final {
