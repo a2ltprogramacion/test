@@ -1,0 +1,133 @@
+---
+// Fase VERDE: Implementación de la Landing Page
+import { getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+import PortafolioList from '../components/PortafolioList.astro';
+
+// 1. Leer la fuente de verdad (Headless CMS)
+const home = await getEntry('pages', 'home');
+const { title, description, nosotros } = home.data;
+---
+
+<Layout title={title} description={description}>
+  <main>
+    <header class="hero">
+      <h1>Un socio tecnológico, no un proveedor más.</h1>
+      <p>Creamos soluciones de software e inteligencia artificial que se sienten cercanas, como parte de tu equipo.</p>
+      <a href="mailto:contacto@elevawod.cl?subject=Quiero iniciar un proyecto" class="cta-button">Hablemos de tu idea</a>
+    </header>
+
+    <section id="nosotros" class="about-us">
+      <div class="content">
+        <h2>{nosotros.title}</h2>
+        <p>{nosotros.body}</p>
+      </div>
+      {nosotros.image && <img src={nosotros.image} alt={`Imagen de ${nosotros.title}`} />}
+    </section>
+
+    <section id="proyectos" class="portfolio-section">
+      <h2>Proyectos Recientes</h2>
+      <PortafolioList />
+    </section>
+
+    <section class="cta-final">
+        <h2>¿Listo para empezar?</h2>
+        <p>Conversemos por WhatsApp para una respuesta más rápida o envíame un correo.</p>
+        <div>
+            <a href="https://wa.me/569XXXXXXXX?text=Hola%2C%20vengo%20de%20Elevawod.cl%20y%20quiero%20cotizar%20un%20proyecto" class="cta-button whatsapp" target="_blank">WhatsApp</a>
+            <a href="mailto:contacto@elevawod.cl" class="cta-button">Correo Electrónico</a>
+        </div>
+    </section>
+
+  </main>
+</Layout>
+
+<style>
+  :root {
+    --primary-color: #0D1B2A;
+    --secondary-color: #415A77;
+    --accent-color: #E0E1DD;
+    --text-color: #FFFFFF;
+    --font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+
+  main {
+    font-family: var(--font-family);
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    text-align: center;
+  }
+
+  .hero {
+    padding: 6rem 2rem;
+    background-color: var(--secondary-color);
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero p {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+  }
+
+  .cta-button:hover {
+    transform: scale(1.05);
+  }
+
+  .about-us {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .about-us .content {
+    max-width: 500px;
+    text-align: left;
+  }
+
+  .about-us img {
+    max-width: 300px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .cta-final {
+      padding: 4rem 2rem;
+  }
+
+  .cta-final h2 {
+      font-size: 2.5rem;
+  }
+
+  .cta-final div {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+  }
+
+  .cta-button.whatsapp {
+      background-color: #25D366;
+      color: white;
+  }
+
+</style>

@@ -1,0 +1,130 @@
+---
+// @src/pages/proyectos/[slug].astro
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('proyectos');
+  return projects.map(project => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { title, description } = project.data;
+const { Content } = await project.render();
+---
+
+<Layout title={title} description={project.data.summary}>
+  <article class="project-detail">
+    <header>
+      <h1>{project.data.title}</h1>
+      <p class="client">Cliente: <strong>{project.data.client_name}</strong></p>
+      <time>{project.data.date.toLocaleDateString('es-CL')}</time>
+    </header>
+
+    <section class="project-body">
+      <div class="main-content">
+        <h2>Detalles del Proyecto</h2>
+        <Content />
+      </div>
+      <aside class="sidebar">
+        <h3>Servicios Realizados</h3>
+        <ul>
+          {project.data.services_list.map(service => (
+            <li>{service.item}</li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    {project.data.gallery && project.data.gallery.length > 0 && (
+      <section class="gallery">
+        <h2>Galería de Imágenes</h2>
+        <div class="gallery-grid">
+          {project.data.gallery.map(item => (
+            <img src={item.image_path} alt={`Imagen del proyecto ${title}`} loading="lazy" />
+          ))}
+        </div>
+      </section>
+    )}
+
+  </article>
+</Layout>
+
+<style>
+  .project-detail {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+  }
+
+  header {
+    text-align: center;
+    border-bottom: 1px solid var(--accent-color);
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  header h1 {
+    font-size: 3rem;
+    color: var(--accent-color);
+  }
+
+  .project-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .project-body {
+      grid-template-columns: 3fr 1fr;
+    }
+  }
+
+  .main-content h2 {
+    font-size: 2rem;
+  }
+
+  .sidebar h3 {
+    color: var(--accent-color);
+  }
+
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sidebar li {
+    background-color: rgba(0,0,0,0.2);
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+
+  .gallery {
+    margin-top: 3rem;
+  }
+
+  .gallery h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .gallery-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+</style>

@@ -1,0 +1,23 @@
+---
+// Componente simple para mostrar una tarjeta de proyecto en la Landing Page
+export interface Props {
+  project: Awaited<ReturnType<typeof import('astro:content')['getCollection']>>[number];
+}
+
+const { project } = Astro.props;
+const { title, summary, gallery } = project.data;
+
+// Obtener la primera imagen de la galería si existe
+const firstImage = gallery?.length ? gallery[0].image_path : '/placeholder.png';
+---
+
+<a href={`/proyectos/${project.slug}`} class="block rounded-lg shadow-xl hover:shadow-2xl transition duration-300 overflow-hidden bg-gray-700 text-white">
+  <div class="h-40 bg-cover bg-center" style={`background-image: url(${firstImage})`}>
+    <!-- Placeholder para la imagen, en un proyecto real usarías <Image /> de Astro -->
+  </div>
+  <div class="p-5">
+    <h3 class="text-xl font-semibold mb-2 text-yellow-300">{title}</h3>
+    <p class="text-sm opacity-80 mb-3">{summary}</p>
+    <span class="text-xs font-medium bg-blue-500 py-1 px-3 rounded-full inline-block">Ver Caso de Éxito →</span>
+  </div>
+</a>

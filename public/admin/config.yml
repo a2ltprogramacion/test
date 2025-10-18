@@ -1,0 +1,53 @@
+# public/admin/config.yml
+backend:
+  # Usaremos el backend git-gateway para integración con Netlify/Vercel
+  name: git-gateway
+  branch: main # La rama de producción del proyecto
+  squash_merges: true
+
+# ----------------------------------------------------
+# Configuración de Medios
+# ----------------------------------------------------
+media_folder: "public/assets/uploads" # Dónde se guardan las imágenes en tu repositorio
+public_folder: "/assets/uploads"     # URL base para acceder a esas imágenes
+display_url: https://elevawod.netlify.app # URL de tu sitio (ejemplo, ajustar en despliegue)
+
+# ----------------------------------------------------
+# Colecciones de Contenido (Modelos de Datos)
+# ----------------------------------------------------
+collections:
+  - name: 'paginas'
+    label: 'Páginas del Sitio'
+    files:
+      - file: "src/content/pages/home.md"
+        label: "Página Principal (Landing)"
+        name: "home"
+        # Estructura de campos para la Home Page
+        fields:
+          - {label: "Plantilla", name: "template", widget: "hidden", default: "home"}
+          - {label: "Título SEO", name: "title", widget: "string", hint: "Título de la página para buscadores."}
+          - {label: "Meta Descripción", name: "description", widget: "text", hint: "Descripción corta para SEO."}
+          - label: "Sección Nosotros"
+            name: "nosotros"
+            widget: "object"
+            fields:
+              - {label: "Título", name: "title", widget: "string"}
+              - {label: "Contenido", name: "body", widget: "markdown"}
+              - {label: "Imagen Principal", name: "image", widget: "image"}
+
+  - name: 'proyectos'
+    label: 'Portafolio / Proyectos'
+    folder: 'src/content/proyectos'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - {label: "Cliente (Nombre o Empresa)", name: "client_name", widget: "string", required: true} # ¡NUEVO CAMPO!
+      - {label: "Título del Proyecto", name: "title", widget: "string"}
+      - {label: "Servicios Realizados", name: "services_list", widget: "list", fields: [{label: "Servicio", name: "item", widget: "string"}]} # ¡NUEVO CAMPO!
+      - {label: "Fecha", name: "date", widget: "datetime"}
+      - {label: "Resumen (Descripción Corta)", name: "summary", widget: "text"}
+      - {label: "Contenido Detallado", name: "body", widget: "markdown"}
+      - label: "Galería de Fotos"
+        name: "gallery"
+        widget: "list"
+        field: {label: "Imagen", name: "image_path", widget: "image"} # ¡NUEVO CAMPO!

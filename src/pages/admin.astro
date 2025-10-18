@@ -1,0 +1,22 @@
+// src/pages/admin.astro (Versión Corregida)
+---
+// Este archivo simplemente carga la interfaz de Decap CMS.
+---
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Decap CMS Admin</title>
+    <link rel="stylesheet" href="/admin/cms.css">
+  </head>
+  <body>
+    <script src="/admin/cms.js"></script>
+    <div id="nc-root"></div>
+    <script>
+      // Script de inicialización
+      if (window.CMS) {
+        // Decap CMS usa la variable global CMS
+        window.CMS.init(); 
+      }
+    </script>
+  </body>
+</html>
