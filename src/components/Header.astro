@@ -1,17 +1,91 @@
 ---
-// src/components/Header.astro
+// src/components/Menu.astro
+// No hay sección de frontmatter JS/TS si no se necesita lógica dinámica aquí
 ---
-<header class="bg-gray-900 text-white py-4 px-8 sticky top-0 z-50">
-  <nav class="container mx-auto flex justify-between items-center">
-    <div>
-      <a href="#inicio" class="hover:text-gray-300">Inicio</a>
-      <a href="#proyectos" class="ml-6 hover:text-gray-300">Proyectos</a>
-      <a href="#servicios" class="ml-6 hover:text-gray-300">Servicios</a>
-      <a href="#nosotros" class="ml-6 hover:text-gray-300">Nosotros</a>
-      <a href="#contacto" class="ml-6 hover:text-gray-300">Contacto</a>
+
+<style>
+  /* Opcional: Puedes usar estilos globales o Tailwind directamente en las clases */
+  /* Si usas Tailwind, asegúrate de tenerlo configurado en tu proyecto Astro */
+  .menu-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+</style>
+
+<header class="bg-gray-900 text-white py-4 px-4 sticky top-0 z-50 menu-shadow">
+  <div class="container mx-auto flex justify-between items-center">
+    <!-- Logo o Nombre -->
+    <div class="text-xl font-bold">
+      {/* Puedes reemplazar esto con una imagen de logo */}
+      <a href="#inicio" class="hover:text-gray-300 transition duration-200">Tu Logo</a>
     </div>
-    <a href="https://wa.me/56934833633" target="_blank" rel="noopener noreferrer" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+
+    <!-- Navegación Principal (oculta en móviles) -->
+    <nav id="navMenu" class="hidden md:flex space-x-6">
+      <a href="#inicio" class="hover:text-gray-300 transition duration-200">Inicio</a>
+      <a href="#proyectos" class="hover:text-gray-300 transition duration-200">Proyectos</a>
+      <a href="#servicios" class="hover:text-gray-300 transition duration-200">Servicios</a>
+      <a href="#nosotros" class="hover:text-gray-300 transition duration-200">Nosotros</a>
+      <a href="#contacto" class="hover:text-gray-300 transition duration-200">Contacto</a>
+    </nav>
+
+    <!-- Botón de Enlace de WhatsApp (visible en escritorio) -->
+    <a href="https://wa.me/56934833633" target="_blank" rel="noopener noreferrer"
+       class="hidden md:block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-200">
       WhatsApp
     </a>
-  </nav>
+
+    <!-- Botón de Menú Hamburguesa (visible solo en móviles) -->
+    <div class="md:hidden flex items-center">
+      <button id="menuToggle" class="text-white focus:outline-none" aria-label="Alternar menú">
+        <!-- Icono de hamburguesa -->
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path id="pathOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          <!-- Icono de cierre (inicialmente oculto) -->
+          <path id="pathClose" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" class="hidden"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú móvil desplegable (inicialmente oculto) -->
+  <div id="mobileMenu" class="hidden md:hidden bg-gray-800 px-4 py-2 space-y-2">
+    <a href="#inicio" class="block hover:bg-gray-700 py-2 px-4 rounded transition duration-200">Inicio</a>
+    <a href="#proyectos" class="block hover:bg-gray-700 py-2 px-4 rounded transition duration-200">Proyectos</a>
+    <a href="#servicios" class="block hover:bg-gray-700 py-2 px-4 rounded transition duration-200">Servicios</a>
+    <a href="#nosotros" class="block hover:bg-gray-700 py-2 px-4 rounded transition duration-200">Nosotros</a>
+    <a href="#contacto" class="block hover:bg-gray-700 py-2 px-4 rounded transition duration-200">Contacto</a>
+    <!-- Enlace de WhatsApp en el menú móvil -->
+    <a href="https://wa.me/56934833633" target="_blank" rel="noopener noreferrer"
+       class="block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded text-center mt-2 transition duration-200">
+      WhatsApp
+    </a>
+  </div>
 </header>
+
+<script>
+  // Script para manejar el menú hamburguesa
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const pathOpen = document.getElementById('pathOpen');
+    const pathClose = document.getElementById('pathClose');
+
+    // Verifica que todos los elementos necesarios existan
+    if (menuToggle && mobileMenu && pathOpen && pathClose) {
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+
+        // Alterna la visibilidad de los iconos de hamburguesa y cierre
+        if (!mobileMenu.classList.contains('hidden')) {
+          pathOpen.classList.add('hidden');
+          pathClose.classList.remove('hidden');
+        } else {
+          pathOpen.classList.remove('hidden');
+          pathClose.classList.add('hidden');
+        }
+      });
+    } else {
+      console.warn('Algunos elementos del menú hamburguesa no se encontraron en el DOM.');
+    }
+  });
+</script>

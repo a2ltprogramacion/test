@@ -10,7 +10,7 @@ backend:
 # ----------------------------------------------------
 media_folder: "public/assets/uploads" # Dónde se guardan las imágenes en tu repositorio
 public_folder: "/assets/uploads"     # URL base para acceder a esas imágenes
-display_url: https://elevowod.cl # URL de tu sitio (ejemplo, ajustar en despliegue)
+display_url: https://elevawod.netlify.app # URL de tu sitio (ejemplo, ajustar en despliegue)
 
 # ----------------------------------------------------
 # Colecciones de Contenido (Modelos de Datos)
