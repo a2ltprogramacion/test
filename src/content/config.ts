@@ -30,6 +30,6 @@ const proyectosCollection = defineCollection({
 });
 
 export const collections = {
-  'paginas': paginasCollection,
+  'pages': paginasCollection,
   'proyectos': proyectosCollection,
 };
