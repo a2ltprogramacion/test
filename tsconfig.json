@@ -1,5 +1,15 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
+  "exclude": ["dist"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      // Configuración de los alias de Astro para resolver módulos
+      "~/*": ["src/*"]
+    },
+    "types": [
+      "astro/client" // Forzamos el reconocimiento de 'astro:content' y otros módulos
+    ]
+  }
 }
