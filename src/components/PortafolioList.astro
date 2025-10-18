@@ -1,50 +1,19 @@
 ---
-// @src/components/PortafolioList.astro
-import { getCollection } from 'astro:content';
-
-// 1. Obtener todos los proyectos
-const allProjects = await getCollection('proyectos');
-
-// 2. Ordenarlos por fecha (más reciente primero) y tomar los 3 primeros
-const recentProjects = allProjects
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+import ProjectCard from './ProjectCard.astro';
+// Define la prop 'projects' que viene de index.astro
+const { projects } = Astro.props;
 ---
-
 <div class="portfolio-grid">
-  {recentProjects.map(project => (
-    <a href={`/proyectos/${project.slug}`} class="project-card">
-      <h3>{project.data.title}</h3>
-      <p>{project.data.summary}</p>
-    </a>
-  ))}
+    {projects.map(project => (
+        <ProjectCard project={project} />
+    ))}
 </div>
 
 <style>
-  .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
-
-  .project-card {
-    background-color: var(--secondary-color);
-    padding: 1.5rem;
-    border-radius: 8px;
-    text-decoration: none;
-    color: var(--text-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  }
-
-  .project-card h3 {
-    margin-top: 0;
-    font-size: 1.5rem;
-    color: var(--accent-color);
-  }
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem 0;
+    }
 </style>

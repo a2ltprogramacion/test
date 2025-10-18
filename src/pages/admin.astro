@@ -1,26 +1,21 @@
 ---
-// src/pages/admin.astro (Versión Corregida con is:inline)
-// Este archivo le dice a Astro que construya una página estática
-// que simplemente cargará la interfaz gráfica de Decap CMS en el navegador.
+// src/pages/admin.astro (Versión 2.0: Usando CDN para evitar conflictos de bundling de Vite)
 ---
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Decap CMS Admin</title>
-    <!-- El CSS no necesita is:inline -->
+    <title>Decap CMS Admin | Elevawod</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/admin/cms.css">
   </head>
   <body>
-    <!-- CORRECCIÓN CLAVE: Agregamos la directiva 'is:inline' -->
-    <script src="/admin/cms.js" is:inline></script> 
-    <!-- Contenedor de montaje del CMS -->
-    <div id="nc-root"></div>
-    <script is:inline>
-      // Script de inicialización
-      if (window.CMS) {
-        // Decap CMS usa la variable global CMS
-        window.CMS.init(); 
-      }
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+    <script>
+        window.CMS_CONFIG = '/admin/config.yml';
     </script>
-  </body>
+
+    <div id="nc-root"></div>
+
+    </body>
 </html>
