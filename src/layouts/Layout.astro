@@ -36,6 +36,18 @@ const gaId = import.meta.env.PUBLIC_GA_ID || 'G-1A2B3C4D5E';
 			</>
 		)}
 
+		<script type="text/javascript" is:inline>
+		  if (window.netlifyIdentity) {
+		    window.netlifyIdentity.on("init", user => {
+		      if (!user) {
+		        window.netlifyIdentity.on("login", () => {
+		          document.location.href = "/admin/";
+		        });
+		      }
+		    });
+		  }
+		</script>
+		<script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 	</head>
 	<body>
 		<Header />

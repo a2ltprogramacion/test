@@ -11,3 +11,5 @@
 - Fuentes de Verdad: @public/admin/config.yml y @src/content/pages/home.md
 
 **Prioridad de Diseño (CTA):** Todo diseño en el Layout o la Home Page debe priorizar un **Call to Action (CTA) de "Contacto Directo" a WhatsApp/Correo**.
+
+**ERROR CONOCIDO EN NETLIFY DEV:** El error 'CSP unsafe-eval' y el '404 /config.yml' en la consola local (netlify dev) deben ser IGNORADOS. La CSP se resuelve con el netlify.toml en producción. El 404 de config.yml se resuelve al tener /admin/config.yml en la ruta estática.

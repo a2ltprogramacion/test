@@ -1,5 +1,5 @@
 ---
-// src/pages/admin.astro (Versión 2.0: Usando CDN para evitar conflictos de bundling de Vite)
+// src/pages/admin.astro
 ---
 <html lang="es">
   <head>
@@ -10,13 +10,74 @@
   </head>
   <body>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-
-    <script>
+    <script is:inline>
       // @ts-ignore
-        window.CMS_CONFIG = '/admin/config.yml';
+      // Embed the configuration directly to avoid 404 errors caused by server redirects.
+      window.CMS_CONFIG = {
+        backend: {
+          name: 'git-gateway',
+          branch: 'main',
+          squash_merges: true,
+        },
+        media_folder: "public/assets/uploads",
+        public_folder: "/assets/uploads",
+        display_url: "https://elevawod.netlify.app",
+        collections: [
+          {
+            name: 'paginas',
+            label: 'Páginas del Sitio',
+            files: [
+              {
+                file: "src/content/pages/home.md",
+                label: "Página Principal (Landing)",
+                name: "home",
+                fields: [
+                  {label: "Plantilla", name: "template", widget: "hidden", default: "home"},
+                  {label: "Título SEO", name: "title", widget: "string", hint: "Título de la página para buscadores."},
+                  {label: "Meta Descripción", name: "description", widget: "text", hint: "Descripción corta para SEO."},
+                  {
+                    label: "Sección Nosotros",
+                    name: "nosotros",
+                    widget: "object",
+                    fields: [
+                      {label: "Título", name: "title", widget: "string"},
+                      {label: "Contenido", name: "body", widget: "markdown"},
+                      {label: "Imagen Principal", name: "image", widget: "image"},
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            name: 'proyectos',
+            label: 'Portafolio / Proyectos',
+            folder: 'src/content/proyectos',
+            create: true,
+            slug: '{{slug}}',
+            fields: [
+              {label: "Cliente (Nombre o Empresa)", name: "client_name", widget: "string", required: true},
+              {label: "Título del Proyecto", name: "title", widget: "string"},
+              {label: "Servicios Realizados", name: "services_list", widget: "list", fields: [{label: "Servicio", name: "item", widget: "string"}]},
+              {label: "Fecha", name: "date", widget: "datetime"},
+              {label: "Resumen (Descripción Corta)", name: "summary", widget: "text"},
+              {label: "Contenido Detallado", name: "body", widget: "markdown"},
+              {
+                label: "Galería de Fotos",
+                name: "gallery",
+                widget: "list",
+                field: {label: "Imagen", name: "image_path", widget: "image"},
+              },
+            ],
+          },
+        ],
+      };
+
+      // Initialize the CMS with the embedded configuration
+      if (window.CMS) {
+        window.CMS.init(window.CMS_CONFIG);
+      }
     </script>
-
     <div id="nc-root"></div>
-
-    </body>
+  </body>
 </html>

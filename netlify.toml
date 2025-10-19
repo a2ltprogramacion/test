@@ -1,5 +1,5 @@
-# netlify.toml (Configuración de Despliegue y CSP para Decap CMS)
-# Versión: 1.2
+# netlify.toml (Configuración de Despliegue, Redirecciones y CSP para Decap CMS)
+# Versión: 3.0 (Corregido para 404 en /admin/index en netlify dev)
 # ----------------------------------------------------
 
 # Configuración del Build para Astro
@@ -7,17 +7,31 @@
   command = "npm run build"
   publish = "dist"
 
-# 1. Redirecciones para Decap CMS (Obligatorio)
-# Permite que Netlify Identity tome control del login
-[[redirects]]
-  from = "/admin/*"
-  to = "/admin/index.html"
-  status = 200
-
-# 2. CABECERAS CSP PARA RESOLVER EL ERROR EN CONSOLA
-# Esta cabecera solo aplica a la ruta /admin/ y relaja la CSP
-# para que el script de Decap CMS pueda ejecutarse.
+# CABECERAS CSP PARA ELIMINAR EL ERROR 'unsafe-eval'
 [[headers]]
   for = "/admin/*"
     [headers.values]
     Content-Security-Policy = "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com;"
+
+# REDIRECCIONES / REESCRITURAS
+# CRÍTICO: Estas reglas le dicen a Netlify cómo manejar las URLs.
+
+# 1. Redirección forzosa para el login del CMS (Evita el 404 en /admin)
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200
+  force = true # Obligamos la reescritura
+
+# 2. Redirección para todas las subrutas del CMS (Necesario para Decap/Identity)
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+  force = true
+
+# 3. Redirección de Fallback para rutas de Astro (Asegura que el index.html principal funcione)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
