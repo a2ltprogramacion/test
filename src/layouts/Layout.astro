@@ -8,7 +8,7 @@ export interface Props {
 }
 
 const { title, description } = Astro.props;
-import '../styles/global.css'; 
+const gaId = import.meta.env.PUBLIC_GA_ID || 'G-1A2B3C4D5E';
 ---
 
 <!doctype html>
@@ -22,6 +22,19 @@ import '../styles/global.css';
 		<!-- SEO Meta Tags -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
+
+		<!-- Google Analytics -->
+		{gaId && (
+			<>
+				<script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+				<script is:inline>
+					window.dataLayer = window.dataLayer || [];
+					function gtag(){dataLayer.push(arguments);}
+					gtag('js', new Date());
+					gtag('config', gaId);
+				</script>
+			</>
+		)}
 
 	</head>
 	<body>

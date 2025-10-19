@@ -1,67 +1,73 @@
 ---
 // src/components/Header.astro
 ---
-
-<style>
-  .menu-shadow {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  }
-</style>
-
-<header class="bg-gray-900 text-white py-4 px-4 sticky top-0 z-50 menu-shadow">
-  <div class="container mx-auto flex justify-between items-center">
-    <div class="text-xl font-bold">
-      <a href="#inicio" class="hover:text-gray-300 transition duration-200">Tu Logo</a>
+<header>
+  <nav>
+    <div class="logo">
+      <a href="/">Elevawod</a>
     </div>
-
-    <nav id="navMenu" class="hidden md:flex space-x-6">
-      <a href="#inicio" class="hover:text-gray-300 transition duration-200">Inicio</a>
-      <a href="#proyectos" class="hover:text-gray-300 transition duration-200">Proyectos</a>
-      <a href="#servicios" class="hover:text-gray-300 transition duration-200">Servicios</a>
-      <a href="#nosotros" class="hover:text-gray-300 transition duration-200">Nosotros</a>
-      <a href="#contacto" class="hover:text-gray-300 transition duration-200">Contacto</a>
-    </nav>
-
-    <div class="md:hidden flex items-center">
-      <button id="menuToggle" class="text-white focus:outline-none" aria-label="Alternar menú">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path id="pathOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          <path id="pathClose" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" class="hidden"></path>
-        </svg>
-      </button>
+    <div class="links">
+      <a href="/">Inicio</a>
+      <a href="/proyectos">Proyectos</a>
+      <a href="/#servicios">Servicios</a>
+      <a href="/#nosotros">Nosotros</a>
+      <a href="/#contacto">Contacto</a>
     </div>
-  </div>
-
-  <div id="mobileMenu" class="hidden md:hidden bg-gray-800 px-4 py-2 space-y-2">
-    <a href="#inicio" class="block hover:bg-gray-700 py-2 px-4 rounded transition duration-200">Inicio</a>
-    <a href="#proyectos" class="block hover:bg-gray-700 py-2 px-4 rounded transition duration-200">Proyectos</a>
-    <a href="#servicios" class="block hover:bg-gray-700 py-2 px-4 rounded transition duration-200">Servicios</a>
-    <a href="#nosotros" class="block hover:bg-gray-700 py-2 px-4 rounded transition duration-200">Nosotros</a>
-    <a href="#contacto" class="block hover:bg-gray-700 py-2 px-4 rounded transition duration-200">Contacto</a>
-  </div>
+    <a href="https://wa.me/56934833633" target="_blank" rel="noopener noreferrer" class="cta">
+      WhatsApp
+    </a>
+  </nav>
 </header>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const pathOpen = document.getElementById('pathOpen');
-    const pathClose = document.getElementById('pathClose');
+<style>
+  header {
+    background-color: #0D1B2A;
+    color: #FFFFFF;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+  .links a {
+    margin-left: 1.5rem;
+    color: #E0E1DD;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .links a:hover {
+    color: #FFFFFF;
+  }
+  .cta {
+    background-color: #25D366;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  .cta:hover {
+    background-color: #1EBE5A;
+  }
 
-    if (menuToggle && mobileMenu && pathOpen && pathClose) {
-      mobileMenu.classList.add('hidden');
-
-      menuToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-
-        if (!mobileMenu.classList.contains('hidden')) {
-          pathOpen.classList.add('hidden');
-          pathClose.classList.remove('hidden');
-        } else {
-          pathOpen.classList.remove('hidden');
-          pathClose.classList.add('hidden');
-        }
-      });
+  /* Basic responsive for mobile */
+  @media (max-width: 768px) {
+    .links {
+      display: none;
     }
-  });
-</script>
+  }
+</style>
