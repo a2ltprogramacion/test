@@ -41,9 +41,9 @@ collections:
     create: true
     slug: '{{slug}}'
     fields:
-      - {label: "Cliente (Nombre o Empresa)", name: "client_name", widget: "string", required: true} # ¡NUEVO CAMPO!
+      - {label: "Cliente (Nombre o Empresa)", name: "client_name", widget: "string", required: true} 
       - {label: "Título del Proyecto", name: "title", widget: "string"}
-      - {label: "Servicios Realizados", name: "services_list", widget: "list", fields: [{label: "Servicio", name: "item", widget: "string"}]} # ¡NUEVO CAMPO!
+      - {label: "Servicios Realizados", name: "services_list", widget: "list", fields: [{label: "Servicio", name: "item", widget: "string"}]} 
       - {label: "Fecha", name: "date", widget: "datetime"}
       - {label: "Resumen (Descripción Corta)", name: "summary", widget: "text"}
       - {label: "Contenido Detallado", name: "body", widget: "markdown"}
@@ -51,4 +51,4 @@ collections:
         name: "gallery"
         widget: "list"
         fields:
-          - {label: "Imagen", name: "image_path", widget: "image"} # ¡NUEVO CAMPO!
+          - {label: "Imagen", name: "image_path", widget: "image"}

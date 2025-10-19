@@ -1,10 +1,10 @@
 ---
-title: "Inicio | Elevawod - La Estrategia Cerca de Ti"
-description: "Somos expertos en IA y desarrollo, con un tono cercano e innovador."
-nosotros:
-  title: "Sobre Nosotros: El Arquitecto Asistente"
-  body: "Nuestra experiencia en Python/Django nos permite construir soluciones robustas con una visión resolutiva."
-  image: "/assets/uploads/perfil.jpg"
+title: "Título SEO de la Página Principal"
+description: "Meta Descripción de la Página Principal"
+image: "/ruta/a/imagen-ejemplo.jpg" # Asegúrate de que la ruta sea válida o quita este campo si no es requerido en config.ts
+nosotros: # <-- Añadir esta sección completa
+  title: "Título de la Sección Nosotros"
+  body: "Contenido de la sección Nosotros."
+  image: "/assets/uploads/perfil1.jpg" # Asegúrate de que la ruta sea válida
 ---
-# Bienvenidos a Elevawod
-Esto es un contenido de prueba para la sección principal.
+<!-- Aquí va el contenido opcional del body del markdown si lo hubiera -->

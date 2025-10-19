@@ -4,6 +4,8 @@
 
 **Tono de Marca (CRÍTICO):** Cercana e Innovadora. El lenguaje debe ser resolutivo, experto, pero con accesibilidad.
 
+**Idioma:** Español LATAM Neutro.
+
 **Objetivo:** Generar código en Astro que sea performante, accesible y que lea contenido del Headless CMS Decap.
 
 **Convenciones de Código:**

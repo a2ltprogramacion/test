@@ -4,7 +4,7 @@ import ProjectCard from './ProjectCard.astro';
 const { projects } = Astro.props;
 ---
 <div class="portfolio-grid">
-    {projects.map(project => (
+    {projects && projects.map(project => (
         <ProjectCard project={project} />
     ))}
 </div>

@@ -1,4 +1,3 @@
-
 import { describe, it, expect } from 'vitest';
 import { promises as fs } from 'fs';
 import path from 'path';
@@ -55,7 +54,7 @@ describe('TDD - Arquitectura de UX', () => {
     const headerElement = document.querySelector('header');
     expect(headerElement).not.toBeNull();
 
-    const projectsLink = document.querySelector('a[href="#proyectos"]');
+    const projectsLink = document.querySelector('a[href="/proyectos"]');
     expect(projectsLink).not.toBeNull();
     expect(projectsLink.textContent).toBe('Proyectos');
   });
