@@ -1,0 +1,23 @@
+# netlify.toml (Configuración de Despliegue y CSP para Decap CMS)
+# Versión: 1.2
+# ----------------------------------------------------
+
+# Configuración del Build para Astro
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# 1. Redirecciones para Decap CMS (Obligatorio)
+# Permite que Netlify Identity tome control del login
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+
+# 2. CABECERAS CSP PARA RESOLVER EL ERROR EN CONSOLA
+# Esta cabecera solo aplica a la ruta /admin/ y relaja la CSP
+# para que el script de Decap CMS pueda ejecutarse.
+[[headers]]
+  for = "/admin/*"
+    [headers.values]
+    Content-Security-Policy = "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com;"
