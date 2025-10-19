@@ -1,11 +1,10 @@
 ---
-client_name: Cliente 2
-title: Proyecto 2
-date: 2021-05-10T00:00:00.000-04:00
-summary: Descripción 2 de proyecto 2
+client_name: Cliente 3
+title: Proyecto 3
+date: 2021-06-11T00:00:00.000-04:00
+summary: Descripción 3 de proyecto 3
 gallery:
-  - image_path: https://www.itmplatform.com/lib/uploads/Gesti%C3%B3n-de-Proyectos-5-Requisitos-del-%C3%89xito-300x199.png
-  - image_path: https://s1.significados.com/foto/proyecto-og.jpg
+  - image_path: https://www.ceupe.com.ve/images/easyblog_articles/230/b2ap3_large_ges_proyec.png
 ---
-Detalle 2 de proyecto 2\
-otra linea de **detalle 2**
+Detalle 3 de proyecto 3\
+otra linea de **detalle 3**
