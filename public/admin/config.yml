@@ -50,4 +50,5 @@ collections:
       - label: "Galería de Fotos"
         name: "gallery"
         widget: "list"
-        field: {label: "Imagen", name: "image_path", widget: "image"} # ¡NUEVO CAMPO!
+        fields:
+          - {label: "Imagen", name: "image_path", widget: "image"} # ¡NUEVO CAMPO!
