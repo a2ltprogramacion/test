@@ -4,7 +4,7 @@ email: contacto@elevawod.cl
 emails:
   - test.secundario@testing.com
 address: "Dirección #1"
-contact_heading: ¿Listo para empezar?
-contact_subheading: Conversemos por WhatsApp para una respuesta más rápida o envíame un correo.
+contact_heading: ¿Empezamos?
+contact_subheading: "Decide: WhatsApp para una respuesta más rápida o envíame un correo."
 whatsapp_message: Hola, vengo a cotizar un proyecto
 show_contact_section: true
