@@ -39,196 +39,88 @@ if (featuredProjectSlugs.length > 0) {
 ---
 
 <Layout title={title} description={description}>
-  <main>
-    <header id="inicio" class="hero">
-      <h1>Un socio tecnológico, no un proveedor más.</h1>
-      <p>Creamos soluciones de software e inteligencia artificial que se sienten cercanas, como parte de tu equipo.</p>
-      <a href="mailto:contacto@elevawod.cl?subject=Quiero iniciar un proyecto" class="cta-button">Hablemos de tu idea</a>
+  <main class="bg-secondary">
+    <!-- Hero Section -->
+    <header id="inicio" class="bg-primary text-text-inverted text-center py-24 px-8">
+      <h1 class="text-4xl md:text-6xl font-sans font-bold mb-4">Un socio tecnológico, no un proveedor más.</h1>
+      <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8">Creamos soluciones de software e inteligencia artificial que se sienten cercanas, como parte de tu equipo.</p>
+      <a href="mailto:contacto@elevawod.cl?subject=Quiero iniciar un proyecto" 
+         class="bg-accent text-primary font-bold py-3 px-8 text-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+      >Hablemos de tu idea</a>
     </header>
 
-    <section id="nosotros" class="about-us">
-      <div class="content">
-        <h2>{nosotros.title}</h2>
-        <Content />
+    <!-- Nosotros Section -->
+    <section id="nosotros" class="py-20 px-8">
+      <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="prose prose-xl text-text-base max-w-none">
+          <h2 class="font-sans text-4xl font-bold mb-4 text-primary">{nosotros.title}</h2>
+          <Content />
+        </div>
+        {nosotros.image && <img src={nosotros.image} alt={`Imagen de ${nosotros.title}`} class="shadow-xl w-full h-auto object-cover" />}
       </div>
-      {nosotros.image && <img src={nosotros.image} alt={`Imagen de ${nosotros.title}`} />}
     </section>
 
+    <!-- Proyectos Section -->
     {featuredProjects.length > 0 && (
-      <section id="proyectos" class="portfolio-section">
-        <h2>Proyectos Destacados</h2>
-        <PortafolioList projects={featuredProjects} />
+      <section id="proyectos" class="bg-white py-20 px-8">
+        <div class="container mx-auto text-center">
+          <h2 class="font-sans text-4xl font-bold mb-12 text-primary">Proyectos Destacados</h2>
+          <PortafolioList projects={featuredProjects} />
+        </div>
       </section>
     )}
 
-    <section id="servicios" class="services-section">
-      <h2>Nuestros Servicios</h2>
-      <div class="services-grid">
-        <div class="service-card">
-          <h3>Inteligencia Artificial</h3>
-          <p>Soluciones de IA a medida para optimizar tus procesos y potenciar la toma de decisiones.</p>
-        </div>
-        <div class="service-card">
-          <h3>Backend con Python/Django</h3>
-          <p>Desarrollo de APIs robustas, escalables y seguras que son el corazón de tu aplicación.</p>
-        </div>
-        <div class="service-card">
-          <h3>Marketing Automation</h3>
-          <p>Implementamos y personalizamos GoHighLevel para automatizar tu marketing y ventas.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="clientes" class="testimonials-section">
-      <h2>Lo que dicen nuestros clientes</h2>
-      <div class="testimonial-grid">
-        <div class="testimonial-card">
-          <p class="quote">"El equipo de Elevawod transformó nuestro negocio con una solución de IA que superó todas las expectativas. ¡Increíble!"</p>
-          <p class="author">- CEO, Empresa de Logística</p>
-        </div>
-        <div class="testimonial-card">
-          <p class="quote">"Profesionalismo, agilidad y resultados. Justo lo que necesitábamos para lanzar nuestro nuevo backend."</p>
-          <p class="author">- CTO, Startup de Fintech</p>
+    <!-- Servicios Section -->
+    <section id="servicios" class="py-20 px-8">
+      <div class="container mx-auto text-center">
+        <h2 class="font-sans text-4xl font-bold mb-12 text-primary">Nuestros Servicios</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+          <div class="bg-white p-8 shadow-lg">
+            <h3 class="font-sans text-2xl font-bold mb-3 text-primary">Inteligencia Artificial</h3>
+            <p class="text-text-base">Soluciones de IA a medida para optimizar tus procesos y potenciar la toma de decisiones.</p>
+          </div>
+          <div class="bg-white p-8 shadow-lg">
+            <h3 class="font-sans text-2xl font-bold mb-3 text-primary">Backend con Python/Django</h3>
+            <p class="text-text-base">Desarrollo de APIs robustas, escalables y seguras que son el corazón de tu aplicación.</p>
+          </div>
+          <div class="bg-white p-8 shadow-lg">
+            <h3 class="font-sans text-2xl font-bold mb-3 text-primary">Marketing Automation</h3>
+            <p class="text-text-base">Implementamos y personalizamos GoHighLevel para automatizar tu marketing y ventas.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="contacto" class="cta-final">
-        <h2>¿Listo para empezar?</h2>
-        <p>Conversemos por WhatsApp para una respuesta más rápida o envíame un correo.</p>
-        <div>
-            <a href="https://wa.me/56934833633?text=Hola%2C%20vengo%20de%20Elevawod.cl%20y%20quiero%20cotizar%20un%20proyecto" class="cta-button whatsapp" target="_blank">WhatsApp</a>
-            <a href="mailto:contacto@elevawod.cl" class="cta-button">Correo Electrónico</a>
+    <!-- Testimonios Section -->
+    <section id="clientes" class="bg-primary py-20 px-8 text-text-inverted">
+      <div class="container mx-auto text-center">
+        <h2 class="font-sans text-4xl font-bold mb-12">Lo que dicen nuestros clientes</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+          <div class="bg-white/10 p-8">
+            <p class="text-xl italic mb-4">"El equipo de Elevawod transformó nuestro negocio con una solución de IA que superó todas las expectativas. ¡Increíble!"</p>
+            <p class="font-bold text-right">- CEO, Empresa de Logística</p>
+          </div>
+          <div class="bg-white/10 p-8">
+            <p class="text-xl italic mb-4">"Profesionalismo, agilidad y resultados. Justo lo que necesitábamos para lanzar nuestro nuevo backend."</p>
+            <p class="font-bold text-right">- CTO, Startup de Fintech</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="py-20 px-8 text-center">
+        <h2 class="font-sans text-4xl font-bold mb-4 text-primary">¿Listo para empezar?</h2>
+        <p class="text-lg max-w-2xl mx-auto mb-8">Conversemos por WhatsApp para una respuesta más rápida o envíame un correo.</p>
+        <div class="flex justify-center gap-4 flex-wrap">
+            <a href="https://wa.me/56934833633?text=Hola%2C%20vengo%20de%20Elevawod.cl%20y%20quiero%20cotizar%20un%20proyecto" 
+               class="bg-[#25D366] text-white font-bold py-3 px-8 text-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+               target="_blank">WhatsApp</a>
+            <a href="mailto:contacto@elevawod.cl" 
+               class="bg-accent text-primary font-bold py-3 px-8 text-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+            >Correo Electrónico</a>
         </div>
     </section>
 
   </main>
 </Layout>
-
-<style>
-  :root {
-    --primary-color: #0D1B2A;
-    --secondary-color: #415A77;
-    --accent-color: #E0E1DD;
-    --text-color: #FFFFFF;
-    --font-family: 'Segoe UI', system-ui, sans-serif;
-  }
-
-  main {
-    font-family: var(--font-family);
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    text-align: center;
-  }
-
-  .hero {
-    padding: 6rem 2rem;
-    background-color: var(--secondary-color);
-  }
-
-  .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-
-  .hero p {
-    font-size: 1.25rem;
-    max-width: 600px;
-    margin: 0 auto 2rem auto;
-  }
-
-  .cta-button {
-    display: inline-block;
-    background-color: var(--accent-color);
-    color: var(--primary-color);
-    padding: 1rem 2rem;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: transform 0.2s ease;
-  }
-
-  .cta-button:hover {
-    transform: scale(1.05);
-  }
-
-  .about-us {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4rem 2rem;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .about-us .content {
-    max-width: 500px;
-    text-align: left;
-  }
-
-  .about-us img {
-    max-width: 300px;
-    border-radius: 10px;
-    object-fit: cover;
-  }
-
-  .portfolio-section, .services-section, .testimonials-section {
-    padding: 4rem 2rem;
-  }
-
-  .portfolio-section h2, .services-section h2, .testimonials-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .services-grid, .testimonial-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: left;
-  }
-
-  .service-card, .testimonial-card {
-    background-color: var(--secondary-color);
-    padding: 2rem;
-    border-radius: 10px;
-  }
-
-  .service-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--accent-color);
-  }
-
-  .testimonial-card .quote {
-    font-style: italic;
-    margin-bottom: 1rem;
-  }
-
-  .testimonial-card .author {
-    font-weight: bold;
-  }
-
-  .cta-final {
-      padding: 4rem 2rem;
-  }
-
-  .cta-final h2 {
-      font-size: 2.5rem;
-  }
-
-  .cta-final div {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-  }
-
-  .cta-button.whatsapp {
-      background-color: #25D366;
-      color: white;
-  }
-
-</style>
