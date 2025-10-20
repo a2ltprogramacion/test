@@ -4,3 +4,4 @@ email: test.principal@testing.com
 emails:
   - email: test.secundario@testing.com
 address: ""
+show_contact_section: true
