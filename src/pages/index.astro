@@ -41,12 +41,22 @@ if (featuredProjectSlugs.length > 0) {
 <Layout title={title} description={description}>
   <main class="bg-secondary">
     <!-- Hero Section -->
-    <header id="inicio" class="bg-primary text-text-inverted text-center py-24 px-8">
-      <h1 class="text-4xl md:text-6xl font-sans font-bold mb-4">Un socio tecnológico, no un proveedor más.</h1>
-      <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8">Creamos soluciones de software e inteligencia artificial que se sienten cercanas, como parte de tu equipo.</p>
-      <a href="mailto:contacto@elevawod.cl?subject=Quiero iniciar un proyecto" 
-         class="bg-accent text-primary font-bold py-3 px-8 text-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg"
-      >Hablemos de tu idea</a>
+    <header id="inicio" class="relative h-screen flex items-center justify-center text-center text-text-inverted">
+      <!-- Background Image -->
+      <!-- Para cambiar la imagen, reemplaza la URL en el style. Puedes usar una imagen local subiéndola a la carpeta `public` -->
+      <div class="absolute top-0 left-0 w-full h-full bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop');"></div>
+      
+      <!-- Overlay -->
+      <div class="absolute top-0 left-0 w-full h-full bg-primary opacity-80"></div>
+    
+      <!-- Content -->
+      <div class="relative z-10 px-8 animate-fade-in-up">
+        <h1 class="text-4xl md:text-6xl font-sans font-bold mb-4">Un socio tecnológico, no un proveedor más.</h1>
+        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8">Creamos soluciones de software e inteligencia artificial que se sienten cercanas, como parte de tu equipo.</p>
+        <a href="mailto:contacto@elevawod.cl?subject=Quiero iniciar un proyecto" 
+           class="bg-accent text-primary font-bold py-3 px-8 text-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+        >Hablemos de tu idea</a>
+      </div>
     </header>
 
     <!-- Nosotros Section -->
@@ -56,7 +66,7 @@ if (featuredProjectSlugs.length > 0) {
           <h2 class="font-sans text-4xl font-bold mb-4 text-primary">{nosotros.title}</h2>
           <Content />
         </div>
-        {nosotros.image && <img src={nosotros.image} alt={`Imagen de ${nosotros.title}`} class="shadow-xl w-full h-auto object-cover" />}
+        {nosotros.image && <img src={nosotros.image} alt={`Imagen de ${nosotros.title}`} class="shadow-xl w-full h-auto object-cover transition-transform duration-300 hover:scale-105" />}
       </div>
     </section>
 
@@ -75,15 +85,15 @@ if (featuredProjectSlugs.length > 0) {
       <div class="container mx-auto text-center">
         <h2 class="font-sans text-4xl font-bold mb-12 text-primary">Nuestros Servicios</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-          <div class="bg-white p-8 shadow-lg">
+          <div class="bg-white p-8 shadow-lg border-4 border-transparent hover:border-accent transition-all duration-300">
             <h3 class="font-sans text-2xl font-bold mb-3 text-primary">Inteligencia Artificial</h3>
             <p class="text-text-base">Soluciones de IA a medida para optimizar tus procesos y potenciar la toma de decisiones.</p>
           </div>
-          <div class="bg-white p-8 shadow-lg">
+          <div class="bg-white p-8 shadow-lg border-4 border-transparent hover:border-accent transition-all duration-300">
             <h3 class="font-sans text-2xl font-bold mb-3 text-primary">Backend con Python/Django</h3>
             <p class="text-text-base">Desarrollo de APIs robustas, escalables y seguras que son el corazón de tu aplicación.</p>
           </div>
-          <div class="bg-white p-8 shadow-lg">
+          <div class="bg-white p-8 shadow-lg border-4 border-transparent hover:border-accent transition-all duration-300">
             <h3 class="font-sans text-2xl font-bold mb-3 text-primary">Marketing Automation</h3>
             <p class="text-text-base">Implementamos y personalizamos GoHighLevel para automatizar tu marketing y ventas.</p>
           </div>
@@ -96,11 +106,11 @@ if (featuredProjectSlugs.length > 0) {
       <div class="container mx-auto text-center">
         <h2 class="font-sans text-4xl font-bold mb-12">Lo que dicen nuestros clientes</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-          <div class="bg-white/10 p-8">
+          <div class="bg-white/10 p-8 transition-all duration-300 hover:bg-white/20">
             <p class="text-xl italic mb-4">"El equipo de Elevawod transformó nuestro negocio con una solución de IA que superó todas las expectativas. ¡Increíble!"</p>
             <p class="font-bold text-right">- CEO, Empresa de Logística</p>
           </div>
-          <div class="bg-white/10 p-8">
+          <div class="bg-white/10 p-8 transition-all duration-300 hover:bg-white/20">
             <p class="text-xl italic mb-4">"Profesionalismo, agilidad y resultados. Justo lo que necesitábamos para lanzar nuestro nuevo backend."</p>
             <p class="font-bold text-right">- CTO, Startup de Fintech</p>
           </div>
@@ -124,3 +134,20 @@ if (featuredProjectSlugs.length > 0) {
 
   </main>
 </Layout>
+
+<style>
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 1s ease-out forwards;
+  }
+</style>

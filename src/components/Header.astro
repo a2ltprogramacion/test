@@ -1,7 +1,7 @@
 ---
 // src/components/Header.astro
 ---
-<header class="bg-primary text-text-inverted shadow-md sticky top-0 z-50">
+<header id="main-header" class="fixed w-full text-text-inverted top-0 z-50 transition-all duration-300">
   <nav class="container mx-auto flex justify-between items-center p-4">
     <div class="logo">
       <a href="/" class="text-2xl font-sans font-bold hover:text-accent transition-colors duration-300">Elevawod</a>
@@ -34,7 +34,7 @@
   </nav>
 
   <!-- Mobile Menu (hidden by default) -->
-  <div id="mobile-menu" class="hidden md:hidden">
+  <div id="mobile-menu" class="hidden md:hidden bg-primary">
     <a href="/" class="block py-2 px-4 text-sm hover:bg-accent">Inicio</a>
     <a href="/proyectos/" class="block py-2 px-4 text-sm hover:bg-accent">Proyectos</a>
     <a href="/#servicios" class="block py-2 px-4 text-sm hover:bg-accent">Servicios</a>
@@ -46,9 +46,18 @@
   <script>
     const menuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
+    const header = document.getElementById('main-header');
 
     menuButton.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
+    });
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('bg-primary', 'shadow-md');
+      } else {
+        header.classList.remove('bg-primary', 'shadow-md');
+      }
     });
   </script>
 </header>
