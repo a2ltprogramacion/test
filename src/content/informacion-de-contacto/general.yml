@@ -1,7 +1,8 @@
 whatsapp: "56912345678"
-phone: "2-1234567"
-email: "contacto@elevawod.cl"
+phone: 2-1234567
+email: contacto@elevawod.cl
 emails:
   - email: test.secundario@testing.com
 address: ""
+whatsapp_message: Hola, quiero comprar
 show_contact_section: true
