@@ -1,7 +1,11 @@
-whatsapp: "584244691920"
-phone: "02418726086"
-email: test.principal@testing.com
+whatsapp: "56912345678"
+phone: "2-1234567"
+email: "contacto@elevawod.cl"
 emails:
-  - email: test.secundario@testing.com
-address: ""
+  - "soporte@elevawod.cl"
+  - "ventas@elevawod.cl"
+address: "Calle Falsa 123, Santiago, Chile"
+contact_heading: "¿Listo para empezar?"
+contact_subheading: "Conversemos por WhatsApp para una respuesta más rápida o envíame un correo."
+whatsapp_message: "Hola, vengo de Elevawod.cl y quiero cotizar un proyecto"
 show_contact_section: true

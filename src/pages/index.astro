@@ -12,7 +12,11 @@ const homeSettings = await getEntry('ajustes', 'home');
 // Valores por defecto para la página
 const title = home?.data.title ?? 'Elevawod - Desarrollo de Software e IA';
 const description = home?.data.description ?? 'Soluciones de software e inteligencia artificial a medida.';
+const hero = home?.data.hero ?? { background_image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop', title: 'Un socio tecnológico, no un proveedor más.', subtitle: 'Creamos soluciones de software e inteligencia artificial que se sienten cercanas, como parte de tu equipo.' };
 const nosotros = home?.data.nosotros ?? { title: 'Nosotros', image: '' };
+const servicios = home?.data.servicios ?? { title: 'Nuestros Servicios', lista: [] };
+const clientes = home?.data.clientes ?? { title: 'Lo que dicen nuestros clientes', lista: [] };
+const contacto = await getEntry('informacion-de-contacto', 'general');
 
 // Si la página de inicio no se carga, no podemos renderizar su contenido
 if (!home) {
@@ -43,16 +47,15 @@ if (featuredProjectSlugs.length > 0) {
     <!-- Hero Section -->
     <header id="inicio" class="relative h-screen flex items-center justify-center text-center text-text-inverted">
       <!-- Background Image -->
-      <!-- Para cambiar la imagen, reemplaza la URL en el style. Puedes usar una imagen local subiéndola a la carpeta `public` -->
-      <div class="absolute top-0 left-0 w-full h-full bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop');"></div>
+      <div class="absolute top-0 left-0 w-full h-full bg-cover bg-center" style={`background-image: url('${hero.background_image}');`}></div>
       
       <!-- Overlay -->
       <div class="absolute top-0 left-0 w-full h-full bg-primary opacity-80"></div>
     
       <!-- Content -->
       <div class="relative z-10 px-8 animate-fade-in-up">
-        <h1 class="text-4xl md:text-6xl font-sans font-bold mb-4">Un socio tecnológico, no un proveedor más.</h1>
-        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8">Creamos soluciones de software e inteligencia artificial que se sienten cercanas, como parte de tu equipo.</p>
+        <h1 class="text-4xl md:text-6xl font-sans font-bold mb-4">{hero.title}</h1>
+        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8">{hero.subtitle}</p>
         <a href="mailto:contacto@elevawod.cl?subject=Quiero iniciar un proyecto" 
            class="bg-accent text-primary font-bold py-3 px-8 text-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg"
         >Hablemos de tu idea</a>
@@ -83,20 +86,15 @@ if (featuredProjectSlugs.length > 0) {
     <!-- Servicios Section -->
     <section id="servicios" class="py-20 px-8">
       <div class="container mx-auto text-center">
-        <h2 class="font-sans text-4xl font-bold mb-12 text-primary">Nuestros Servicios</h2>
+        <h2 class="font-sans text-4xl font-bold mb-12 text-primary">{servicios.title}</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-          <div class="bg-white p-8 shadow-lg border-4 border-transparent hover:border-accent transition-all duration-300">
-            <h3 class="font-sans text-2xl font-bold mb-3 text-primary">Inteligencia Artificial</h3>
-            <p class="text-text-base">Soluciones de IA a medida para optimizar tus procesos y potenciar la toma de decisiones.</p>
-          </div>
-          <div class="bg-white p-8 shadow-lg border-4 border-transparent hover:border-accent transition-all duration-300">
-            <h3 class="font-sans text-2xl font-bold mb-3 text-primary">Backend con Python/Django</h3>
-            <p class="text-text-base">Desarrollo de APIs robustas, escalables y seguras que son el corazón de tu aplicación.</p>
-          </div>
-          <div class="bg-white p-8 shadow-lg border-4 border-transparent hover:border-accent transition-all duration-300">
-            <h3 class="font-sans text-2xl font-bold mb-3 text-primary">Marketing Automation</h3>
-            <p class="text-text-base">Implementamos y personalizamos GoHighLevel para automatizar tu marketing y ventas.</p>
-          </div>
+          {servicios.lista.map(servicio => (
+            <div class="bg-white p-8 shadow-lg border-4 border-transparent hover:border-accent transition-all duration-300">
+              {servicio.image && <img src={servicio.image} alt={`Imagen de ${servicio.title}`} class="w-full h-40 object-cover mb-4" />}
+              <h3 class="font-sans text-2xl font-bold mb-3 text-primary">{servicio.title}</h3>
+              <p class="text-text-base">{servicio.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -104,16 +102,20 @@ if (featuredProjectSlugs.length > 0) {
     <!-- Testimonios Section -->
     <section id="clientes" class="bg-primary py-20 px-8 text-text-inverted">
       <div class="container mx-auto text-center">
-        <h2 class="font-sans text-4xl font-bold mb-12">Lo que dicen nuestros clientes</h2>
+        <h2 class="font-sans text-4xl font-bold mb-12">{clientes.title}</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-          <div class="bg-white/10 p-8 transition-all duration-300 hover:bg-white/20">
-            <p class="text-xl italic mb-4">"El equipo de Elevawod transformó nuestro negocio con una solución de IA que superó todas las expectativas. ¡Increíble!"</p>
-            <p class="font-bold text-right">- CEO, Empresa de Logística</p>
-          </div>
-          <div class="bg-white/10 p-8 transition-all duration-300 hover:bg-white/20">
-            <p class="text-xl italic mb-4">"Profesionalismo, agilidad y resultados. Justo lo que necesitábamos para lanzar nuestro nuevo backend."</p>
-            <p class="font-bold text-right">- CTO, Startup de Fintech</p>
-          </div>
+          {clientes.lista.map(cliente => (
+            <div class="bg-white/10 p-8 transition-all duration-300 hover:bg-white/20">
+              {cliente.google_review_embed ? (
+                <div set:html={cliente.google_review_embed} />
+              ) : (
+                <>
+                  <p class="text-xl italic mb-4">\"{cliente.quote}\"</p>
+                  <p class="font-bold text-right">- {cliente.author}</p>
+                </>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -123,13 +125,20 @@ if (featuredProjectSlugs.length > 0) {
         <h2 class="font-sans text-4xl font-bold mb-4 text-primary">¿Listo para empezar?</h2>
         <p class="text-lg max-w-2xl mx-auto mb-8">Conversemos por WhatsApp para una respuesta más rápida o envíame un correo.</p>
         <div class="flex justify-center gap-4 flex-wrap">
-            <a href="https://wa.me/56934833633?text=Hola%2C%20vengo%20de%20Elevawod.cl%20y%20quiero%20cotizar%20un%20proyecto" 
-               class="bg-[#25D366] text-white font-bold py-3 px-8 text-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg"
-               target="_blank">WhatsApp</a>
-            <a href="mailto:contacto@elevawod.cl" 
-               class="bg-accent text-primary font-bold py-3 px-8 text-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg"
-            >Correo Electrónico</a>
+            {contacto?.data.whatsapp && (
+              <a href={`https://wa.me/${contacto.data.whatsapp}?text=Hola%2C%20vengo%20de%20Elevawod.cl%20y%20quiero%20cotizar%20un%20proyecto`} 
+                 class="bg-[#25D366] text-white font-bold py-3 px-8 text-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+                 target="_blank">WhatsApp</a>
+            )}
+            {contacto?.data.email && (
+              <a href={`mailto:${contacto.data.email}`} 
+                 class="bg-accent text-primary font-bold py-3 px-8 text-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+              >Correo Electrónico</a>
+            )}
         </div>
+        {contacto?.data.address && (
+          <p class="mt-8 text-text-base">{contacto.data.address}</p>
+        )}
     </section>
 
   </main>
