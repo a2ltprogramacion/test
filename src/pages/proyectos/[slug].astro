@@ -1,27 +1,36 @@
 ---
 // @src/pages/proyectos/[slug].astro
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('proyectos');
   return projects.map(project => ({
     params: { slug: project.slug },
-    props: { project },
   }));
 }
 
-const { project } = Astro.props;
-const { title } = project.data;
+const { slug } = Astro.params;
+const project = await getEntry('proyectos', slug);
+
+// Si el proyecto no se encuentra, devuelve un 404
+if (!project) {
+  return new Response(null, {
+    status: 404,
+    statusText: 'No encontrado'
+  });
+}
+
 const { Content } = await project.render();
+const { title, summary, client_name, date, services_list, gallery } = project.data;
 ---
 
-<Layout title={title ?? 'Proyecto sin título'} description={project.data.summary ?? 'Sin descripción.'}>
+<Layout title={title ?? 'Proyecto sin título'} description={summary ?? 'Sin descripción.'}>
   <article class="project-detail">
     <header>
-      <h1>{project.data.title}</h1>
-      <p class="client">Cliente: <strong>{project.data.client_name}</strong></p>
-      {project.data.date && <time>{project.data.date.toLocaleDateString('es-CL')}</time>}
+      <h1>{title}</h1>
+      <p class="client">Cliente: <strong>{client_name}</strong></p>
+      {date && <time>{date.toLocaleDateString('es-CL')}</time>}
     </header>
 
     <section class="project-body">
@@ -32,18 +41,18 @@ const { Content } = await project.render();
       <aside class="sidebar">
         <h3>Servicios Realizados</h3>
         <ul>
-          {project.data.services_list?.map(service => (
+          {services_list?.map(service => (
             <li>{service.item}</li>
           ))}
         </ul>
       </aside>
     </section>
 
-    {project.data.gallery && project.data.gallery.length > 0 && (
+    {gallery && gallery.length > 0 && (
       <section class="gallery">
         <h2>Galería de Imágenes</h2>
         <div class="gallery-grid">
-          {project.data.gallery.map(item => (
+          {gallery.map(item => (
             <img src={item.image_path} alt={`Imagen del proyecto ${title}`} loading="lazy" />
           ))}
         </div>
