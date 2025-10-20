@@ -162,11 +162,7 @@ collections:
           - {label: "Número de WhatsApp", name: "whatsapp", widget: "string", hint: "Número para WhatsApp sin +, ej: 56912345678", required: false}
           - {label: "Teléfono fijo / alternativo", name: "phone", widget: "string", required: false, hint: "Teléfono adicional (opcional)."}
           - {label: "Correo Electrónico Principal", name: "email", widget: "string", hint: "Correo electrónico principal de contacto.", required: false}
-          - label: "Correos secundarios (lista)"
-            name: "emails"
-            widget: "list"
-            required: false
-            hint: "Agregar correos adicionales si aplica. Cada ítem será un correo (string)."
+          # Correos secundarios eliminados: ahora solo hay un correo principal en la configuración.
           - {label: "Dirección", name: "address", widget: "string", hint: "Dirección física de la empresa.", required: false}
           - {label: "Título sección Contacto", name: "contact_heading", widget: "string", required: false, hint: "Ej: ¿Listo para empezar?"}
           - {label: "Subtítulo sección Contacto", name: "contact_subheading", widget: "text", required: false, hint: "Ej: Conversemos por WhatsApp para una respuesta más rápida o envíame un correo."}

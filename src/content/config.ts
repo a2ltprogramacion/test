@@ -79,7 +79,6 @@ const contactoCollection = defineCollection({
     whatsapp: z.string().optional(),
     phone: z.string().optional(),
     email: z.string().optional(),
-    emails: z.array(z.string()).optional(),
     address: z.string().optional(),
     contact_heading: z.string().optional(),
     contact_subheading: z.string().optional(),
