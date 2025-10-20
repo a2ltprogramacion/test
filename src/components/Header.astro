@@ -48,16 +48,20 @@
     const mobileMenu = document.getElementById('mobile-menu');
     const header = document.getElementById('main-header');
 
-    menuButton.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
+    if (menuButton && mobileMenu) {
+      menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
 
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('bg-primary', 'shadow-md');
-      } else {
-        header.classList.remove('bg-primary', 'shadow-md');
-      }
-    });
+    if (header) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          header.classList.add('bg-primary', 'shadow-md');
+        } else {
+          header.classList.remove('bg-primary', 'shadow-md');
+        }
+      });
+    }
   </script>
 </header>

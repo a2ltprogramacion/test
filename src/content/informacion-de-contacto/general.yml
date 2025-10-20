@@ -1,7 +1,10 @@
 whatsapp: "56912345678"
-phone: "2-1234567"
+phone: "56912345678"
 email: "contacto@elevawod.cl"
 emails:
-  - email: test.secundario@testing.com
-address: ""
+  - "test.secundario@testing.com"
+address: "Dirección #1"
+contact_heading: "¿Listo para empezar?"
+contact_subheading: "Conversemos por WhatsApp para una respuesta más rápida o envíame un correo."
+whatsapp_message: "Hola, vengo de Elevawod.cl y quiero cotizar un proyecto"
 show_contact_section: true
