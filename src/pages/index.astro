@@ -1,18 +1,33 @@
 ---
 // Fase VERDE: Implementación de la Landing Page
 // src/pages/index.astro (Fragmento Corregido)
-import { getEntry, getCollection } from 'astro:content'; 
+import { getEntry, getCollection, type CollectionEntry } from 'astro:content'; 
 import Layout from '../layouts/Layout.astro';
 import PortafolioList from '../components/PortafolioList.astro'; // IMPORT MODIFICADO
 
-// 1. Leer la fuente de verdad (Headless CMS)
+// 1. Leer la fuente de verdad (Headless CMS) de forma segura
 const home = await getEntry('pages', 'home');
-const { title, description, nosotros } = home.data;
+const homeSettings = await getEntry('ajustes', 'home');
 
-// 2. Lectura y Filtrado de Proyectos
-const allProjects = await getCollection('proyectos');
-// @ts-ignore
-const recentProjects = allProjects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
+// Valores por defecto para la página
+const title = home?.data.title ?? 'Elevawod - Desarrollo de Software e IA';
+const description = home?.data.description ?? 'Soluciones de software e inteligencia artificial a medida.';
+const nosotros = home?.data.nosotros ?? { title: 'Nosotros', body: 'Contenido no disponible.', image: '' };
+
+// 2. Lectura de Proyectos Destacados de forma segura
+const featuredProjectSlugs = homeSettings?.data.proyectos_destacados ?? [];
+
+let featuredProjects: CollectionEntry<'proyectos'>[] = [];
+if (featuredProjectSlugs.length > 0) {
+  featuredProjects = await getCollection('proyectos', ({ slug }) => {
+    return featuredProjectSlugs.includes(slug);
+  });
+
+  // Mantener el orden definido en el CMS
+  featuredProjects.sort((a, b) => {
+    return featuredProjectSlugs.indexOf(a.slug) - featuredProjectSlugs.indexOf(b.slug);
+  });
+}
 ---
 
 <Layout title={title} description={description}>
@@ -31,10 +46,12 @@ const recentProjects = allProjects.sort((a, b) => b.data.date.getTime() - a.data
       {nosotros.image && <img src={nosotros.image} alt={`Imagen de ${nosotros.title}`} />}
     </section>
 
-    <section id="proyectos" class="portfolio-section">
-      <h2>Proyectos Recientes</h2>
-      <PortafolioList projects={recentProjects} />  {/* <--- PROP MODIFICADA */}
-    </section>
+    {featuredProjects.length > 0 && (
+      <section id="proyectos" class="portfolio-section">
+        <h2>Proyectos Destacados</h2>
+        <PortafolioList projects={featuredProjects} />
+      </section>
+    )}
 
     <section id="servicios" class="services-section">
       <h2>Nuestros Servicios</h2>

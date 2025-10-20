@@ -28,9 +28,3 @@
   from = "/admin/*"
   to = "/admin/index.html"
   status = 200
-
-# 3. Redirección de Fallback para rutas de Astro (Asegura que el index.html principal funcione)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200

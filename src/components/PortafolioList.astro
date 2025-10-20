@@ -1,6 +1,11 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
-// Define la prop 'projects' que viene de index.astro
+
+export interface Props {
+  projects: CollectionEntry<'proyectos'>[];
+}
+
 const { projects } = Astro.props;
 ---
 <div class="portfolio-grid">

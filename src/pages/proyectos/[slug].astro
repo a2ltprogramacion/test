@@ -12,16 +12,16 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { title, description } = project.data;
+const { title } = project.data;
 const { Content } = await project.render();
 ---
 
-<Layout title={title} description={project.data.summary}>
+<Layout title={title ?? 'Proyecto sin título'} description={project.data.summary ?? 'Sin descripción.'}>
   <article class="project-detail">
     <header>
       <h1>{project.data.title}</h1>
       <p class="client">Cliente: <strong>{project.data.client_name}</strong></p>
-      <time>{project.data.date.toLocaleDateString('es-CL')}</time>
+      {project.data.date && <time>{project.data.date.toLocaleDateString('es-CL')}</time>}
     </header>
 
     <section class="project-body">
@@ -32,7 +32,7 @@ const { Content } = await project.render();
       <aside class="sidebar">
         <h3>Servicios Realizados</h3>
         <ul>
-          {project.data.services_list.map(service => (
+          {project.data.services_list?.map(service => (
             <li>{service.item}</li>
           ))}
         </ul>

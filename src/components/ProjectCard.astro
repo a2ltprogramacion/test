@@ -1,14 +1,16 @@
 ---
 // Componente simple para mostrar una tarjeta de proyecto en la Landing Page
+import type { CollectionEntry } from 'astro:content';
+
 export interface Props {
-  project: Awaited<ReturnType<typeof import('astro:content')['getCollection']>>[number];
+  project: CollectionEntry<'proyectos'>;
 }
 
 const { project } = Astro.props;
-const { title, summary, gallery } = project.data;
+const { title, summary, gallery, image } = project.data;
 
 // Obtener la primera imagen de la galería si existe
-const firstImage = gallery?.length ? gallery[0].image_path : '/placeholder.png';
+const firstImage = image ?? (gallery?.length ? gallery[0].image_path : '/placeholder.png');
 ---
 
 <a href={`/proyectos/${project.slug}`} class="block rounded-lg shadow-xl hover:shadow-2xl transition duration-300 overflow-hidden bg-gray-700 text-white">

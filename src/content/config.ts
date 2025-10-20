@@ -21,15 +21,25 @@ const proyectosCollection = defineCollection({
   schema: z.object({
     client_name: z.string(),
     title: z.string(),
-    services_list: z.array(z.object({ item: z.string() })),
-    date: z.date(),
-    summary: z.string(),
+    services_list: z.array(z.object({ item: z.string() })).optional(),
+    image: z.string().optional(),
+    date: z.date().optional(),
+    summary: z.string().optional(),
     // body es proveído por defecto por Astro
     gallery: z.array(z.object({ image_path: z.string() })).optional(),
+  }),
+});
+
+// Schema para la colección de Ajustes
+const ajustesCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    proyectos_destacados: z.array(z.string()),
   }),
 });
 
 export const collections = {
   'pages': paginasCollection,
   'proyectos': proyectosCollection,
+  'ajustes': ajustesCollection,
 };

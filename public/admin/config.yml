@@ -41,14 +41,52 @@ collections:
     create: true
     slug: '{{slug}}'
     fields:
-      - {label: "Cliente (Nombre o Empresa)", name: "client_name", widget: "string", required: true} 
-      - {label: "Título del Proyecto", name: "title", widget: "string"}
-      - {label: "Servicios Realizados", name: "services_list", widget: "list", fields: [{label: "Servicio", name: "item", widget: "string"}]} 
-      - {label: "Fecha", name: "date", widget: "datetime"}
-      - {label: "Resumen (Descripción Corta)", name: "summary", widget: "text"}
-      - {label: "Contenido Detallado", name: "body", widget: "markdown"}
+      - {label: "Slug (URL Amigable)", name: "slug", widget: "string", hint: "Parte de la URL, ej: mi-primer-proyecto. Usar solo letras, números y guiones."}
+      - label: "Cliente (Nombre o Empresa)"
+        name: "client_name"
+        widget: "string"
+        required: true
+      - label: "Título del Proyecto"
+        name: "title"
+        widget: "string"
+      - label: "Servicios Realizados"
+        name: "services_list"
+        widget: "list"
+        fields:
+          - label: "Servicio"
+            name: "item"
+            widget: "string"
+      - label: "Fecha"
+        name: "date"
+        widget: "datetime"
+      - label: "Resumen (Descripción Corta)"
+        name: "summary"
+        widget: "text"
+      - label: "Contenido Detallado"
+        name: "body"
+        widget: "markdown"
       - label: "Galería de Fotos"
         name: "gallery"
         widget: "list"
         fields:
-          - {label: "Imagen", name: "image_path", widget: "image"}
+          - label: "Imagen"
+            name: "image_path"
+            widget: "image"
+
+  - name: 'ajustes'
+    label: 'Ajustes del Sitio'
+    files:
+      - file: "src/content/ajustes/home.yml"
+        label: "Ajustes de la Página de Inicio"
+        name: "home_settings"
+        fields:
+          - label: "Proyectos Destacados en la Portada"
+            name: "proyectos_destacados"
+            widget: "relation"
+            collection: "proyectos"
+            multiple: true
+            max: 3
+            search_fields: ["title", "client_name"]
+            value_field: "slug"
+            display_fields: ["title"]
+            hint: "Selecciona hasta 3 proyectos para mostrar en la página de inicio."
