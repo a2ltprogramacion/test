@@ -9,7 +9,6 @@ const paginasCollection = defineCollection({
     description: z.string(),
     nosotros: z.object({
       title: z.string(),
-      body: z.string(),
       image: z.string(),
     }),
   }),

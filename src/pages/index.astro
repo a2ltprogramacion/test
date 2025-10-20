@@ -12,7 +12,15 @@ const homeSettings = await getEntry('ajustes', 'home');
 // Valores por defecto para la página
 const title = home?.data.title ?? 'Elevawod - Desarrollo de Software e IA';
 const description = home?.data.description ?? 'Soluciones de software e inteligencia artificial a medida.';
-const nosotros = home?.data.nosotros ?? { title: 'Nosotros', body: 'Contenido no disponible.', image: '' };
+const nosotros = home?.data.nosotros ?? { title: 'Nosotros', image: '' };
+
+// Si la página de inicio no se carga, no podemos renderizar su contenido
+if (!home) {
+  // Podríamos mostrar un mensaje de error o simplemente no renderizar la sección
+  // Por ahora, el layout se cargará con títulos por defecto.
+} 
+
+const { Content } = home ? await home.render() : { Content: () => null };
 
 // 2. Lectura de Proyectos Destacados de forma segura
 const featuredProjectSlugs = homeSettings?.data.proyectos_destacados ?? [];
@@ -41,7 +49,7 @@ if (featuredProjectSlugs.length > 0) {
     <section id="nosotros" class="about-us">
       <div class="content">
         <h2>{nosotros.title}</h2>
-        <p>{nosotros.body}</p>
+        <Content />
       </div>
       {nosotros.image && <img src={nosotros.image} alt={`Imagen de ${nosotros.title}`} />}
     </section>
