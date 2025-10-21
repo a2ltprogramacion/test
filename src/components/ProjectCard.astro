@@ -1,5 +1,5 @@
 ---
-// Componente simple para mostrar una tarjeta de proyecto en la Landing Page
+// Componente renovado para mostrar una tarjeta de proyecto con mejor estética y efectos hover
 import type { CollectionEntry } from 'astro:content';
 
 export interface Props {
@@ -7,19 +7,26 @@ export interface Props {
 }
 
 const { project } = Astro.props;
-const { title, summary, gallery, image } = project.data;
+const { title, summary, gallery, image, client_name } = project.data;
 
-// Obtener la primera imagen de la galería si existe
+// Obtener la primera imagen de la galería si existe, o una imagen de reemplazo
 const firstImage = image ?? (gallery?.length ? gallery[0].image_path : '/placeholder.png');
 ---
 
-<a href={`/proyectos/${project.slug}`} class="block shadow-xl hover:shadow-2xl transition duration-300 overflow-hidden bg-primary text-text-inverted">
-  <div class="h-40 bg-cover bg-center" style={`background-image: url(${firstImage})`}>
-    <!-- Placeholder para la imagen, en un proyecto real usarías <Image /> de Astro -->
+<a href={`/proyectos/${project.slug}`} class="group block overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-xl bg-white">
+  <div class="relative overflow-hidden">
+    <img src={firstImage} alt={`Imagen del proyecto ${title}`} class="w-full h-56 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105" />
+    <div class="absolute inset-0 bg-primary bg-opacity-40 transition-opacity duration-300 group-hover:bg-opacity-60"></div>
+    <div class="absolute top-4 left-4">
+      <span class="text-xs font-bold bg-white/80 text-primary py-1 px-3 rounded-full backdrop-blur-sm">{client_name}</span>
+    </div>
   </div>
-  <div class="p-5">
-    <h3 class="text-xl font-semibold mb-2 text-accent">{title}</h3>
-    <p class="text-sm opacity-80 mb-3">{summary}</p>
-    <span class="text-xs font-medium bg-accent py-1 px-3 inline-block text-text-inverted">Ver Caso de Éxito →</span>
+  <div class="p-6">
+    <h3 class="font-serif text-2xl font-bold text-primary mb-2">{title}</h3>
+    <p class="font-sans text-base text-gray-600 mb-4 line-clamp-3">{summary}</p>
+    <div class="flex items-center text-accent font-bold transition-colors duration-300 group-hover:text-primary">
+      <span>Ver Caso de Éxito</span>
+      <span class="ml-2 transition-transform duration-300 group-hover:translate-x-2">→</span>
+    </div>
   </div>
 </a>

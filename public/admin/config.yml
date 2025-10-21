@@ -17,7 +17,7 @@ display_url: https://elevawod.netlify.app # URL de tu sitio (ejemplo, ajustar en
 # ----------------------------------------------------
 collections:
   - name: 'pages'
-    label: 'Páginas del Sitio'
+    label: 'Página: Home'
     files:
       - file: "src/content/pages/home.md"
         label: "Página Principal (Landing)"
@@ -45,8 +45,8 @@ collections:
             required: false
             fields:
               - {label: "Imagen de Fondo (Hero)", name: "background_image", widget: "image", required: false, hint: "Imagen principal del hero. Recomendado 2000x1200 px."}
-              - {label: "Título (Hero)", name: "title", widget: "string", required: false, hint: "Texto principal del hero."}
-              - {label: "Subtítulo (Hero)", name: "subtitle", widget: "string", required: false, hint: "Subtítulo del hero."}
+              - {label: "Título (Hero)", name: "title", widget: "text", required: false, hint: "Texto principal del hero."}
+              - {label: "Subtítulo (Hero)", name: "subtitle", widget: "markdown", required: false, hint: "Subtítulo del hero."}
               - {label: "CTA Principal (texto)", name: "cta_text", widget: "string", required: false, hint: "Texto del botón principal, ej: 'Contactar'."}
               - {label: "CTA URL (link)", name: "cta_url", widget: "string", required: false, hint: "URL o anchor para el botón CTA, ej: /contacto o https://wa.me/569..."}
 
@@ -56,8 +56,8 @@ collections:
             widget: "object"
             required: false
             fields:
-              - {label: "Título (Nosotros)", name: "title", widget: "string", required: false, hint: "Título de la sección 'Nosotros'."}
-              - {label: "Descripción (Nosotros)", name: "content", widget: "text", required: false, hint: "Breve descripción."}
+              - {label: "Título (Nosotros)", name: "title", widget: "text", required: false, hint: "Título de la sección 'Nosotros'."}
+              - {label: "Descripción (Nosotros)", name: "content", widget: "markdown", required: false, hint: "Breve descripción."}
               - {label: "Imagen (Nosotros)", name: "image", widget: "image", required: false, hint: "Imagen representativa de la empresa o equipo."}
 
           # Servicios
@@ -66,16 +66,16 @@ collections:
             widget: "object"
             required: false
             fields:
-              - {label: "Título (Servicios)", name: "title", widget: "string", required: false, hint: "Título general de la sección de servicios."}
-              - {label: "Subtítulo (Servicios)", name: "subtitle", widget: "string", required: false, hint: "Subtítulo opcional para la sección."}
+              - {label: "Título (Servicios)", name: "title", widget: "text", required: false, hint: "Título general de la sección de servicios."}
+              - {label: "Subtítulo (Servicios)", name: "subtitle", widget: "text", required: false, hint: "Subtítulo opcional para la sección."}
               - label: "Lista de Servicios"
                 name: "lista"
                 widget: "list"
                 required: false
                 fields:
-                  - {label: "Título del Servicio", name: "title", widget: "string", required: true, hint: "Nombre del servicio."}
-                  - {label: "Subtítulo (opcional)", name: "subtitle", widget: "string", required: false}
-                  - {label: "Descripción", name: "description", widget: "text", required: false, hint: "Breve descripción."}
+                  - {label: "Título del Servicio", name: "title", widget: "text", required: true, hint: "Nombre del servicio."}
+                  - {label: "Subtítulo (opcional)", name: "subtitle", widget: "text", required: false}
+                  - {label: "Descripción", name: "description", widget: "markdown", required: false, hint: "Breve descripción."}
                   - {label: "Imagen (opcional)", name: "image", widget: "image", required: false, hint: "Icono o imagen representativa del servicio."}
 
           # Testimonios / Clientes
@@ -84,22 +84,20 @@ collections:
             widget: "object"
             required: false
             fields:
-              - {label: "Título (Testimonios)", name: "title", widget: "string", required: false}
+              - {label: "Título (Testimonios)", name: "title", widget: "text", required: false}
               - label: "Lista de Testimonios"
                 name: "lista"
                 widget: "list"
                 required: false
                 fields:
-                  - {label: "Texto del Testimonio", name: "quote", widget: "text", required: true, hint: "Cita del cliente."}
-                  - {label: "Autor", name: "author", widget: "string", required: false, hint: "Nombre del cliente o empresa."}
+                  - {label: "Texto del Testimonio", name: "quote", widget: "markdown", required: true, hint: "Cita del cliente."}
+                  - {label: "Autor", name: "author", widget: "text", required: false, hint: "Nombre del cliente o empresa."}
                   - {label: "Color del Texto (Testimonio)", name: "text_color", widget: "string", required: false, hint: "Color CSS (hex) para la cita."}
                   - {label: "Google Review Embed (HTML)", name: "google_review_embed", widget: "text", required: false, hint: "Pega el código de incrustación de una reseña específica de Google si quieres mostrarla incrustada."}
 
-          # Contenido principal (body) editable
-          # Contenido (body) eliminado por petición del cliente
-
+  #Proyectos / Portafolio
   - name: 'proyectos'
-    label: 'Portafolio / Proyectos'
+    label: 'Página: Proyectos / Portafolio'
     folder: 'src/content/proyectos'
     create: true
     slug: '{{slug}}'
@@ -107,11 +105,11 @@ collections:
       - {label: "Slug (URL Amigable)", name: "slug", widget: "string", hint: "Parte de la URL, ej: mi-primer-proyecto. Usar solo minúsculas, números y guiones."}
       - label: "Cliente (Nombre o Empresa)"
         name: "client_name"
-        widget: "string"
+        widget: "text"
         required: true
       - label: "Título del Proyecto"
         name: "title"
-        widget: "string"
+        widget: "text"
       - label: "Servicios Realizados"
         name: "services_list"
         widget: "list"
@@ -119,14 +117,14 @@ collections:
         fields:
           - label: "Servicio"
             name: "item"
-            widget: "string"
+            widget: "markdown"
       - label: "Fecha"
         name: "date"
         widget: "datetime"
         required: false
       - label: "Resumen (Descripción Corta)"
         name: "summary"
-        widget: "text"
+        widget: "markdown"
         required: false
       - label: "Contenido Detallado"
         name: "body"
@@ -141,8 +139,9 @@ collections:
             name: "image_path"
             widget: "image"
 
+  # Proyectos Destacados
   - name: 'ajustes'
-    label: 'Ajustes del Sitio'
+    label: 'Proyectos Destacados (Home)'
     files:
       - file: "src/content/ajustes/home.yml"
         label: "Ajustes de la Página de Inicio"
@@ -167,8 +166,8 @@ collections:
           - {label: "Teléfono fijo / alternativo", name: "phone", widget: "string", required: false, hint: "Teléfono adicional (opcional)."}
           - {label: "Correo Electrónico Principal", name: "email", widget: "string", hint: "Correo electrónico principal de contacto.", required: false}
           # Correos secundarios eliminados: ahora solo hay un correo principal en la configuración.
-          - {label: "Dirección", name: "address", widget: "string", hint: "Dirección física de la empresa.", required: false}
-          - {label: "Título sección Contacto", name: "contact_heading", widget: "string", required: false, hint: "Ej: ¿Listo para empezar?"}
+          - {label: "Dirección", name: "address", widget: "markdown", buttons: ["bold", "italic", "link"], hint: "Dirección física de la empresa.", required: false}
+          - {label: "Título sección Contacto", name: "contact_heading", widget: "text", required: false, hint: "Ej: ¿Listo para empezar?"}
           - {label: "Subtítulo sección Contacto", name: "contact_subheading", widget: "text", required: false, hint: "Ej: Conversemos por WhatsApp para una respuesta más rápida o envíame un correo."}
           - label: "Mensaje por defecto para WhatsApp"
             name: "whatsapp_message"

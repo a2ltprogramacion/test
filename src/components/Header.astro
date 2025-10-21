@@ -1,67 +1,78 @@
 ---
-// src/components/Header.astro
----
-<header id="main-header" class="fixed w-full text-text-inverted top-0 z-50 transition-all duration-300">
-  <nav class="container mx-auto flex justify-between items-center p-4">
-    <div class="logo">
-      <a href="/" class="text-2xl font-sans font-bold hover:text-accent transition-colors duration-300">Elevawod</a>
-    </div>
-    
-    <!-- Desktop Menu -->
-    <div class="hidden md:flex items-center space-x-6">
-      <a href="/" class="hover:text-accent transition-colors duration-300">Inicio</a>
-      <a href="/proyectos/" class="hover:text-accent transition-colors duration-300">Proyectos</a>
-      <a href="/#servicios" class="hover:text-accent transition-colors duration-300">Servicios</a>
-      <a href="/#nosotros" class="hover:text-accent transition-colors duration-300">Nosotros</a>
-      <a href="/#contacto" class="hover:text-accent transition-colors duration-300">Contacto</a>
-    </div>
+import { getEntry } from 'astro:content';
 
-    <a href="https://wa.me/56934833633" 
-       target="_blank" 
-       rel="noopener noreferrer" 
-       class="hidden md:inline-block bg-[#25D366] text-white font-bold py-2 px-5 text-base transition-transform duration-300 hover:scale-105">
-      WhatsApp
-    </a>
+const contacto = await getEntry('informacion-de-contacto', 'general');
+const c = contacto?.data ?? {};
+const waNumber = c.whatsapp ?? '';
+const waMsg = encodeURIComponent(c.whatsapp_message ?? 'Hola, vengo de Elevawod.cl y quiero cotizar un proyecto');
+const waHref = waNumber ? `https://wa.me/${waNumber}?text=${waMsg}` : null;
+
+const navLinks = [
+  { href: "/#inicio", text: "Inicio" },
+  { href: "/#nosotros", text: "Nosotros" },
+  { href: "/proyectos", text: "Proyectos" },
+  { href: "/#servicios", text: "Servicios" },
+];
+---
+
+<header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-colors duration-300 ease-in-out">
+  <div class="container mx-auto flex justify-between items-center p-4">
+    <a href="/" class="text-2xl font-bold font-serif text-white">Elevawod</a>
+    
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center space-x-6">
+      {navLinks.map(link => 
+        <a href={link.href} class="text-white font-sans hover:text-accent transition-colors duration-200">{link.text}</a>
+      )}
+      {waHref && (
+        <a href={waHref} target="_blank" rel="noopener noreferrer" class="bg-accent text-primary font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out hover:bg-white hover:text-accent border-2 border-accent">Contacto</a>
+      )}
+    </nav>
 
     <!-- Mobile Menu Button -->
-    <div class="md:hidden">
-      <button id="mobile-menu-button" class="text-text-inverted focus:outline-none">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-        </svg>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Mobile Menu (hidden by default) -->
-  <div id="mobile-menu" class="hidden md:hidden bg-primary">
-    <a href="/" class="block py-2 px-4 text-sm hover:bg-accent">Inicio</a>
-    <a href="/proyectos/" class="block py-2 px-4 text-sm hover:bg-accent">Proyectos</a>
-    <a href="/#servicios" class="block py-2 px-4 text-sm hover:bg-accent">Servicios</a>
-    <a href="/#nosotros" class="block py-2 px-4 text-sm hover:bg-accent">Nosotros</a>
-    <a href="/#contacto" class="block py-2 px-4 text-sm hover:bg-accent">Contacto</a>
-    <a href="https://wa.me/56934833633" target="_blank" rel="noopener noreferrer" class="block py-2 px-4 text-sm hover:bg-accent">WhatsApp</a>
+    <button id="mobile-menu-button" class="md:hidden text-white z-50">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+    </button>
   </div>
 
-  <script>
-    const menuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const header = document.getElementById('main-header');
-
-    if (menuButton && mobileMenu) {
-      menuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-      });
-    }
-
-    if (header) {
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-          header.classList.add('bg-primary', 'shadow-md');
-        } else {
-          header.classList.remove('bg-primary', 'shadow-md');
-        }
-      });
-    }
-  </script>
+  <!-- Mobile Nav -->
+  <div id="mobile-menu" class="md:hidden fixed top-0 left-0 w-full h-screen bg-primary/95 backdrop-blur-sm flex flex-col items-center justify-center space-y-8 transform -translate-x-full transition-transform duration-300 ease-in-out">
+    {navLinks.map(link => 
+      <a href={link.href} class="text-white text-3xl font-sans mobile-link">{link.text}</a>
+    )}
+    {waHref && (
+      <a href={waHref} target="_blank" rel="noopener noreferrer" class="bg-accent text-primary font-bold py-3 px-8 text-lg rounded-md mt-8">Contacto</a>
+    )}
+  </div>
 </header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.getElementById('main-header');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = mobileMenu.querySelectorAll('.mobile-link');
+
+    // Header background on scroll
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('bg-primary', 'shadow-lg');
+      } else {
+        header.classList.remove('bg-primary', 'shadow-lg');
+      }
+    });
+
+    // Toggle mobile menu
+    mobileMenuButton.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mobileMenu.classList.toggle('-translate-x-full');
+    });
+
+    // Close mobile menu when a link is clicked
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('-translate-x-full');
+      });
+    });
+  });
+</script>
