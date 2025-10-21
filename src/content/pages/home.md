@@ -25,6 +25,15 @@ servicios:
     - title: "TÍTULO SERVICIO #2"
       subtitle: "SUBTÍTULO SERVICIO #2"
       description: "Descripción SERVICIO #2"
+    - title: |-
+        
+        TÍTULO SERVICIO #3
+      subtitle: |-
+        
+        SUBTÍTULO SERVICIO #3
+      description: |-
+        
+        Descripción SERVICIO #3
 clientes:
   title: NUESTROS CLIENTES COMENTAN
   lista: []
