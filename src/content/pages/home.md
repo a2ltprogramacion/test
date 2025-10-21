@@ -45,7 +45,16 @@ servicios:
 nosotros:
   title: "Sobre Nosotros: El Arquitecto Asistente"
   image: /assets/uploads/logo.jpg
-  content: Nuestra experiencia en **Python/Django** nos permite construir
-    soluciones robustas con una visión resolutiva.
+  content: >-
+    Sabemos que el mundo digital puede ser abrumador y que muchas agencias te
+    tratan como un número más. **ELEVAWOD** nació de una idea simple: hacer la
+    digitalización estratégica verdaderamente accesible para los emprendedores y
+    dueños de PYMES.
+
+
+    No solo nos enfocamos en métricas y campañas; **construimos relaciones**. Somos un equipo de estrategas y creativos que se involucra de verdad con tu negocio, porque entendemos el esfuerzo que hay detrás de cada emprendimiento. Creemos que la colaboración y la empatía son las herramientas más poderosas para lograr resultados extraordinarios.
+
+
+    **Tu éxito es nuestro éxito.** Estamos aquí para ser el socio que te acompaña, te entiende y te ayuda a escalar.
 ---
 Nuestra experiencia en **Python/Django** nos permite construir soluciones robustas con una visión resolutiva. **TEST**
