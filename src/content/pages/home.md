@@ -9,8 +9,14 @@ og:
     sin la complejidad. ¡Descubre cómo lo hacemos!
 title: Agencia de Marketing Digital para PYMES y Emprendedores | ELEVAWOD
 clientes:
-  title: NUESTROS CLIENTES COMENTAN
-  lista: []
+  title: Lo que dicen nuestros socios
+  lista:
+    - quote: '"Antes de ELEVAWOD, invertir en publicidad era como tirar dinero a un
+        pozo sin fondo. Ellos no solo optimizaron nuestro presupuesto, sino que
+        triplicaron el retorno de nuestra inversión en menos de tres meses. Por
+        primera vez, vemos resultados claros y un crecimiento real en las
+        ventas. Son indispensables."'
+      author: Sofía Calderón, Fundadora de Tienda Aura
 hero:
   background_image: https://zerotrust.mx/wp-content/uploads/2023/08/Dimensiones-personalizadas-1000x600-px.jpg
   title: Marketing Digital Estratégico para hacer crecer tu PYME.
