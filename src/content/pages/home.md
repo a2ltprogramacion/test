@@ -24,8 +24,10 @@ description: En ELEVAWOD, creamos estrategias de marketing digital para PYMES.
   Nos enfocamos en resultados medibles y un retorno de inversión (ROAS) real
   para escalar tu negocio. ¡Solicita un diagnóstico gratuito!
 servicios:
-  title: Nuestro Servicios Diseñados para Ti
-  subtitle: Variedad para tus necesidades
+  title: Soluciones diseñadas para tu crecimiento
+  subtitle: Dejamos la jerga técnica a un lado para ofrecerte rutas claras y
+    efectivas. Cada servicio está pensado para generar un impacto real y medible
+    en tu negocio.
   lista:
     - title: "TÍTULO SERVICIO #1"
       subtitle: "SUBTÍTULO SERVICIO #1"
