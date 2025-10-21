@@ -13,7 +13,7 @@ hero:
 nosotros:
   title: "Sobre Nosotros: El Arquitecto Asistente"
   image: /assets/uploads/logo.jpg
-  content: "###### Nuestra experiencia en **Python/Django** nos permite construir
+  content: "# Nuestra experiencia en Python/Django nos permite construir
     soluciones robustas con una visión resolutiva."
 servicios:
   title: Nuestro Servicios Diseñados para Ti
