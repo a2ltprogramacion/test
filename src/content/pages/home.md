@@ -28,22 +28,7 @@ servicios:
   subtitle: Dejamos la jerga técnica a un lado para ofrecerte rutas claras y
     efectivas. Cada servicio está pensado para generar un impacto real y medible
     en tu negocio.
-  lista:
-    - title: "TÍTULO SERVICIO #1"
-      subtitle: "SUBTÍTULO SERVICIO #1"
-      description: "Descripción SERVICIO #1"
-    - title: "TÍTULO SERVICIO #2"
-      subtitle: "SUBTÍTULO SERVICIO #2"
-      description: "Descripción SERVICIO #2"
-    - title: |-
-        
-        TÍTULO SERVICIO #3
-      subtitle: |-
-        
-        SUBTÍTULO SERVICIO #3
-      description: |-
-        
-        Descripción SERVICIO #3
+  lista: []
 nosotros:
   title: "Sobre Nosotros: El Arquitecto Asistente"
   image: /assets/uploads/logo.jpg
