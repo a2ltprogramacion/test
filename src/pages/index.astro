@@ -23,6 +23,7 @@ const clientes = home?.data.clientes ?? { title: 'Lo que dicen nuestros clientes
 const contacto = await getEntry('informacion-de-contacto', 'general');
 
 const serviciosTitle = home?.data.servicios?.title ?? 'Nuestros Servicios';
+const serviciosSubtitle = home?.data.servicios?.subtitle;
 
 // Si la página de inicio no se carga, no podemos renderizar su contenido
 if (!home) {
@@ -108,6 +109,12 @@ if (featuredProjectSlugs.length > 0) {
         <h2 class="font-sans text-4xl font-bold mb-12 text-primary">
           <span>{serviciosTitle}</span>
         </h2>
+
+        {serviciosSubtitle && (
+          <p class="text-2xl max-w-2xl mx-auto mt-4 mb-12 text-gray-600">
+            {serviciosSubtitle}
+          </p>
+        )}
 
         <div class="flex flex-wrap justify-center gap-8">
           {todosLosServicios.map(servicio => (
