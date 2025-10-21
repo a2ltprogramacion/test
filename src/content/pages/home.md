@@ -23,6 +23,12 @@ clientes:
         clave para organizar nuestra estrategia y dar el siguiente paso.
         Realmente se preocupan por tu negocio."'
       author: Javier Mendoza, CEO de Café Origen
+    - quote: '"Habíamos trabajado con otras agencias y siempre terminábamos
+        confundidos con informes llenos de jerga técnica y sin resultados
+        claros. El equipo de ELEVAWOD fue diferente desde el día uno. Nos
+        presentaron una estrategia simple, un plan de acción concreto y, lo más
+        importante, lo cumplieron. ¡Por fin entendemos hacia dónde vamos!"'
+      author: Carolina Rivas, Gerente de Servicios Integrales R&G
 hero:
   background_image: https://zerotrust.mx/wp-content/uploads/2023/08/Dimensiones-personalizadas-1000x600-px.jpg
   title: Marketing Digital Estratégico para hacer crecer tu PYME.
