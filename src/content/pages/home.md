@@ -11,7 +11,7 @@ hero:
   cta_text: Trabajemos juntos en tu próximo proyecto.
   cta_url: /contacto
 nosotros:
-  title: "Sobre Nosotros: El Arquitecto Asistente "
+  title: "**Sobre Nosotros:** El Arquitecto Asistente"
   image: /assets/uploads/logo.jpg
   content: "Nuestra experiencia en Python/Django nos permite construir soluciones
     robustas con una visión resolutiva. "
