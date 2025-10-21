@@ -1,19 +1,17 @@
 ---
 // Componente renovado para mostrar una tarjeta de proyecto con mejor estética y efectos hover
 import type { CollectionEntry } from 'astro:content';
-
 export interface Props {
   project: CollectionEntry<'proyectos'>;
 }
 
 const { project } = Astro.props;
 const { title, summary, gallery, image, client_name } = project.data;
-
-// Obtener la primera imagen de la galería si existe, o una imagen de reemplazo
-const firstImage = image ?? (gallery?.length ? gallery[0].image_path : '/placeholder.png');
+const firstImage = image ??
+(gallery?.length ? gallery[0].image_path : '/placeholder.png');
 ---
 
-<a href={`/proyectos/${project.slug}`} class="group block overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-xl bg-white">
+<a href={`/proyectos/${project.slug}`} class="group block overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-xl bg-white hover:no-underline">
   <div class="relative overflow-hidden">
     <img src={firstImage} alt={`Imagen del proyecto ${title}`} class="w-full h-56 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105" />
     <div class="absolute inset-0 bg-primary bg-opacity-40 transition-opacity duration-300 group-hover:bg-opacity-60"></div>
@@ -22,9 +20,27 @@ const firstImage = image ?? (gallery?.length ? gallery[0].image_path : '/placeho
     </div>
   </div>
   <div class="p-6">
-    <h3 class="font-serif text-2xl font-bold text-primary mb-2">{title}</h3>
+    {/* 👇 CAMBIO CLAVE: Añadimos clases para crear y animar el pseudo-elemento ::after */}
+    <h3 class="
+      font-serif text-2xl font-bold text-primary mb-2
+      relative inline-block {/* Necesario para posicionar el pseudo-elemento correctamente */}
+      
+      after:content-[''] {/* Crea el pseudo-elemento */}
+      after:absolute after:bottom-0 after:left-0 {/* Lo posiciona abajo a la izquierda */}
+      after:w-full after:h-[2px] {/* Le da el tamaño de un subrayado */}
+      after:bg-accent {/* Le da el color naranja */}
+      
+      after:origin-left {/* La animación comenzará desde la izquierda */}
+      after:scale-x-0 {/* Estado inicial: escala horizontal de 0 (invisible) */}
+      group-hover:after:scale-x-100 {/* Estado final: escala horizontal de 100% al hacer hover en la tarjeta */}
+      after:transition-transform after:duration-300 after:ease-in-out {/* Define la animación */}
+    ">
+      {title}
+    </h3>
+    
     <p class="font-sans text-base text-gray-600 mb-4 line-clamp-3">{summary}</p>
-    <div class="flex items-center text-accent font-bold transition-colors duration-300 group-hover:text-primary">
+    
+    <div class="flex items-center text-accent font-bold">
       <span>Ver Caso de Éxito</span>
       <span class="ml-2 transition-transform duration-300 group-hover:translate-x-2">→</span>
     </div>

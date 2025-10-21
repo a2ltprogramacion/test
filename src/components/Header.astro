@@ -17,7 +17,7 @@ const navLinks = [
 
 <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-colors duration-300 ease-in-out">
   <div class="container mx-auto flex justify-between items-center p-4">
-    <a href="/" class="text-2xl font-bold font-serif text-white">Elevawod</a>
+    <a href="/" class="text-2xl font-bold font-serif text-white ml-5 md:ml-0">Elevawod</a>
     
     <!-- Desktop Nav -->
     <nav class="hidden md:flex items-center space-x-6">
@@ -30,7 +30,7 @@ const navLinks = [
     </nav>
 
     <!-- Mobile Menu Button -->
-    <button id="mobile-menu-button" class="md:hidden text-white z-50">
+    <button id="mobile-menu-button" class="md:hidden text-white z-50 mr-5">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
     </button>
   </div>
@@ -51,6 +51,11 @@ const navLinks = [
     const header = document.getElementById('main-header');
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
+
+    if (!header || !mobileMenuButton || !mobileMenu) {
+      return; 
+    }
+
     const mobileLinks = mobileMenu.querySelectorAll('.mobile-link');
 
     // Header background on scroll
@@ -75,4 +80,3 @@ const navLinks = [
       });
     });
   });
-</script>

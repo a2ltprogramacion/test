@@ -1,29 +1,26 @@
 # public/admin/config.yml
 backend:
-  # Usaremos el backend git-gateway para integración con Netlify/Vercel
   name: git-gateway
-  branch: main # La rama de producción del proyecto
+  branch: main
   squash_merges: true
 
-# ----------------------------------------------------
-# Configuración de Medios
-# ----------------------------------------------------
-media_folder: "public/assets/uploads" # Dónde se guardan las imágenes en tu repositorio
-public_folder: "/assets/uploads"     # URL base para acceder a esas imágenes
-display_url: https://elevawod.netlify.app # URL de tu sitio (ejemplo, ajustar en despliegue)
+media_folder: "public/assets/uploads"
+public_folder: "/assets/uploads"
+display_url: https://elevawod.netlify.app
 
 # ----------------------------------------------------
-# Colecciones de Contenido (Modelos de Datos)
+# Colecciones de Contenido (Ahora organizadas por roles)
 # ----------------------------------------------------
 collections:
-  - name: 'pages'
-    label: 'Página: Home'
+  # 1. Tareas de SEO / Técnicas
+  - name: 'seo_global'
+    label: 'SEO / Metadatos (Home)'
     files:
       - file: "src/content/pages/home.md"
-        label: "Página Principal (Landing)"
-        name: "home"
-        # Estructura de campos para la Home Page
+        label: "Metadatos de la Página Principal"
+        name: "home_seo"
         fields:
+          # Aquí solo ponemos los campos de SEO que ya definiste
           - {label: "Plantilla", name: "template", widget: "hidden", default: "home"}
           - {label: "Título SEO", name: "title", widget: "string", hint: "Título de la página."}
           - {label: "Meta Descripción", name: "description", widget: "text", hint: "Descripción corta para SEO. Máx. 155 caracteres."}
@@ -38,19 +35,34 @@ collections:
               - {label: "Descripción OG", name: "description", widget: "text", required: false}
               - {label: "Imagen OG", name: "image", widget: "image", required: false, hint: "Imagen para compartir en redes (1200x630 px recomendado)"}
 
-          # Hero
+  # 2. Contenido de la Página Principal (dividido en secciones)
+  # HERO
+  - name: 'home_hero'
+    label: 'Home: Sección Hero'
+    files:
+      - file: "src/content/pages/home.md"
+        label: "Contenido de la Sección Hero"
+        name: "hero_content"
+        fields:
           - label: "Sección Hero"
             name: "hero"
             widget: "object"
             required: false
             fields:
               - {label: "Imagen de Fondo (Hero)", name: "background_image", widget: "image", required: false, hint: "Imagen principal del hero. Recomendado 2000x1200 px."}
-              - {label: "Título (Hero)", name: "title", widget: "text", required: false, hint: "Texto principal del hero."}
+              - {label: "Título (Hero)", name: "title", widget: "text", required: false, hint: "Texto principal/Título del hero."}
               - {label: "Subtítulo (Hero)", name: "subtitle", widget: "markdown", required: false, hint: "Subtítulo del hero."}
               - {label: "CTA Principal (texto)", name: "cta_text", widget: "string", required: false, hint: "Texto del botón principal, ej: 'Contactar'."}
-              - {label: "CTA URL (link)", name: "cta_url", widget: "string", required: false, hint: "URL o anchor para el botón CTA, ej: /contacto o https://wa.me/569..."}
+              - {label: "CTA URL (link)", name: "cta_url", widget: "string", required: false, hint: "URL para el botón CTA; Sección interna ej: /contacto, o Enlace externo ej: https://wa.me/584... o https://calendly.com/..."}
 
-          # Nosotros
+  # NOSOTROS
+  - name: 'home_nosotros'
+    label: 'Home: Sección Nosotros'
+    files:
+      - file: "src/content/pages/home.md"
+        label: "Contenido de la Sección Nosotros"
+        name: "nosotros_content"
+        fields:
           - label: "Sección Nosotros"
             name: "nosotros"
             widget: "object"
@@ -60,7 +72,14 @@ collections:
               - {label: "Descripción (Nosotros)", name: "content", widget: "markdown", required: false, hint: "Breve descripción."}
               - {label: "Imagen (Nosotros)", name: "image", widget: "image", required: false, hint: "Imagen representativa de la empresa o equipo."}
 
-          # Servicios
+  # SERVICIOS
+  - name: 'home_servicios'
+    label: 'Home: Sección Servicios'
+    files:
+      - file: "src/content/pages/home.md"
+        label: "Contenido de la Sección Servicios"
+        name: "servicios_content"
+        fields:
           - label: "Nuestros Servicios"
             name: "servicios"
             widget: "object"
@@ -78,7 +97,14 @@ collections:
                   - {label: "Descripción", name: "description", widget: "markdown", required: false, hint: "Breve descripción."}
                   - {label: "Imagen (opcional)", name: "image", widget: "image", required: false, hint: "Icono o imagen representativa del servicio."}
 
-          # Testimonios / Clientes
+  # TESTIMONIOS
+  - name: 'home_clientes'
+    label: 'Home: Sección Testimonios'
+    files:
+      - file: "src/content/pages/home.md"
+        label: "Contenido de la Sección Testimonios"
+        name: "clientes_content"
+        fields:
           - label: "Lo que dicen nuestros clientes"
             name: "clientes"
             widget: "object"
@@ -92,69 +118,45 @@ collections:
                 fields:
                   - {label: "Texto del Testimonio", name: "quote", widget: "markdown", required: true, hint: "Cita del cliente."}
                   - {label: "Autor", name: "author", widget: "text", required: false, hint: "Nombre del cliente o empresa."}
-                  - {label: "Color del Texto (Testimonio)", name: "text_color", widget: "string", required: false, hint: "Color CSS (hex) para la cita."}
                   - {label: "Google Review Embed (HTML)", name: "google_review_embed", widget: "text", required: false, hint: "Pega el código de incrustación de una reseña específica de Google si quieres mostrarla incrustada."}
 
-  #Proyectos / Portafolio
+  # 3. Contenido del Portafolio
+  # Proyectos
   - name: 'proyectos'
-    label: 'Página: Proyectos / Portafolio'
+    label: 'Proyectos / Portafolio'
     folder: 'src/content/proyectos'
     create: true
     slug: '{{slug}}'
     fields:
-      - {label: "Slug (URL Amigable)", name: "slug", widget: "string", hint: "Parte de la URL, ej: mi-primer-proyecto. Usar solo minúsculas, números y guiones."}
-      - label: "Cliente (Nombre o Empresa)"
-        name: "client_name"
-        widget: "text"
-        required: true
-      - label: "Título del Proyecto"
-        name: "title"
-        widget: "text"
-      - label: "Servicios Realizados"
-        name: "services_list"
-        widget: "list"
-        required: false
-        fields:
-          - label: "Servicio"
-            name: "item"
-            widget: "markdown"
-      - label: "Fecha"
-        name: "date"
-        widget: "datetime"
-        required: false
-      - label: "Resumen (Descripción Corta)"
-        name: "summary"
-        widget: "markdown"
-        required: false
-      - label: "Contenido Detallado"
-        name: "body"
-        widget: "markdown"
-        required: false
-      - label: "Galería de Fotos"
-        name: "gallery"
-        widget: "list"
-        required: false
-        fields:
-          - label: "Imagen"
-            name: "image_path"
-            widget: "image"
+      - {label: "Slug (URL Amigable)", name: "slug", widget: "string", hint: "Parte final de la URL, ej: mi-primer-proyecto. Usar solo minúsculas, números y guiones. Resultado: mi-sitio.com/proyectos/mi-primer-proyecto", required: true}
+      - {label: "Cliente (Nombre o Empresa)", name: "client_name", widget: "text", required: true}
+      - {label: "Título del Proyecto", name: "title", widget: "text"}
+      - {label: "Servicios Realizados", name: "services_list", widget: "list", required: false, fields: [{label: "Servicio", name: "item", widget: "markdown"}]}
+      - {label: "Fecha", name: "date", widget: "datetime", required: false}
+      - {label: "Resumen (Descripción Corta)", name: "summary", widget: "markdown", required: false}
+      - {label: "Contenido Detallado", name: "body", widget: "markdown", required: false}
+      - {label: "Galería de Fotos", name: "gallery", widget: "list", required: false, fields: [{label: "Imagen", name: "image_path", widget: "image"}]}
 
-  # Proyectos Destacados
+  # 4. Proyectos Destacados
   - name: 'ajustes'
     label: 'Proyectos Destacados (Home)'
     files:
       - file: "src/content/ajustes/home.yml"
-        label: "Ajustes de la Página de Inicio"
+        label: "Proyectos Destacados (Home)" 
         name: "home_settings"
         fields:
           - label: "Proyectos Destacados en la Portada"
             name: "proyectos_destacados"
-            hint: "Selecciona hasta 3 proyectos para mostrar en la página de inicio."
-            widget: "list"
-            required: false
-            fields:
-              - {label: "Slug del Proyecto", name: "slug", widget: "string", hint: "usa el slug del proyecto"}
+            hint: "Selecciona los proyectos que aparecerán en la página de inicio."
+            widget: "relation"
+            collection: "proyectos"
+            multiple: true
+            max: 3
+            search_fields: ["title", "client_name"]
+            value_field: "slug"
+            display_fields: ["title"]
 
+  # 5. Información de Contacto    
   - name: 'informacion-de-contacto'
     label: 'Información de Contacto'
     files:
