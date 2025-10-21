@@ -55,10 +55,10 @@ if (featuredProjectSlugs.length > 0) {
     
       <!-- Content -->
       <div class="relative z-10 px-8 animate-fade-in-up">
-        <h1 class="text-4xl md:text-6xl font-sans font-bold mb-4" style={hero.title_color ? `color: ${hero.title_color}` : ''}>
+        <h1 class="text-4xl md:text-6xl font-sans font-bold mb-4">
           <span set:html={mdToHtml(hero.title)} />
         </h1>
-        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8" style={hero.subtitle_color ? `color: ${hero.subtitle_color}` : ''}>
+        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8">
           <span set:html={mdToHtml(hero.subtitle)} />
         </p>
         <a href="mailto:contacto@elevawod.cl?subject=Quiero iniciar un proyecto" 
@@ -71,11 +71,11 @@ if (featuredProjectSlugs.length > 0) {
     <section id="nosotros" class="py-20 px-8">
       <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div class="prose prose-xl text-text-base max-w-none">
-          <h2 class="font-sans text-4xl font-bold mb-4 text-primary" style={nosotros.title_color ? `color: ${nosotros.title_color}` : ''}>
+          <h2 class="font-sans text-4xl font-bold mb-4 text-primary"}>
             <span set:html={mdToHtml(nosotros.title)} />
           </h2>
           {nosotros.content ? (
-            <div class="text-base leading-relaxed" style={nosotros.content_color ? `color: ${nosotros.content_color}` : ''}>
+            <div class="text-base leading-relaxed"}>
               <span set:html={mdToHtml(nosotros.content)} />
             </div>
           ) : (
@@ -115,10 +115,10 @@ if (featuredProjectSlugs.length > 0) {
                 {col1.map(s => (
                   <div class="w-full max-w-md bg-white p-6 shadow-lg rounded-lg text-center">
                     {s.image && <img src={s.image} alt={`Imagen de ${s.title}`} class="w-full h-40 object-cover mb-4 rounded" />}
-                    <h3 class="font-sans text-2xl font-bold mb-2 text-primary" style={s.title_color ? `color: ${s.title_color}` : ''}>
+                    <h3 class="font-sans text-2xl font-bold mb-2 text-primary">
                       <span set:html={mdToHtml(s.title)} />
                     </h3>
-                    <p class="text-text-base" style={s.text_color ? `color: ${s.text_color}` : ''}>
+                    <p class="text-text-base" >
                       <span set:html={mdToHtml(s.description)} />
                     </p>
                   </div>
@@ -152,7 +152,7 @@ if (featuredProjectSlugs.length > 0) {
                 <div set:html={cliente.google_review_embed} />
               ) : (
                 <>
-                  <p class="text-xl italic mb-4" style={cliente.text_color ? `color: ${cliente.text_color}` : ''}>
+                  <p class="text-xl italic mb-4" >
                     <span set:html={mdToHtml(cliente.quote)} />
                   </p>
                   <p class="font-bold text-right">- {cliente.author}</p>
