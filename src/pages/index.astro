@@ -127,7 +127,7 @@ if (featuredProjectSlugs.length > 0) {
         <div class="flex justify-center gap-4 flex-wrap">
             {contacto?.data.whatsapp && (
               (() => {
-                const msg = encodeURIComponent(contacto.data.whatsapp_message ?? 'Hola, vengo de Elevawod.cl y quiero cotizar un proyecto');
+                const msg = encodeURIComponent(contacto.data.whatsapp_message ?? 'Hola, quiero cotizar un proyecto');
                 const href = `https://wa.me/${contacto.data.whatsapp}?text=${msg}`;
                 return (
                   <a href={href}
@@ -142,9 +142,7 @@ if (featuredProjectSlugs.length > 0) {
               >Correo Electrónico</a>
             )}
         </div>
-        {contacto?.data.address && (
-          <p class="mt-8 text-text-base">{contacto.data.address}</p>
-        )}
+					{contacto?.data.address ? <div class="mt-6 text-sm text-primary">{contacto.data.address}</div> : null}
     </section>
 
   </main>
