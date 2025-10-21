@@ -1,8 +1,19 @@
 ---
-title: Inicio | Elevawod - La Estrategia Cerca de Ti
-description: "Somos expertos en IA y desarrollo, con un tono cercano e innovador. "
+title: Agencia de Marketing Digital para PYMES y Emprendedores | ELEVAWOD
+description: En ELEVAWOD, creamos estrategias de marketing digital para PYMES.
+  Nos enfocamos en resultados medibles y un retorno de inversión (ROAS) real
+  para escalar tu negocio. ¡Solicita un diagnóstico gratuito!
 canonical_url: https://elevawod.cl/
 robots: index, follow
+og:
+  image: /assets/uploads/logo.jpg
+  title: "ELEVAWOD: Tu Socio Estratégico en Marketing Digital para PYMES"
+  description: No somos la típica agencia. Combinamos estrategia profesional con
+    un trato humano para potenciar a PYMES y emprendedores. Resultados reales,
+    sin la complejidad. ¡Descubre cómo lo hacemos!
+clientes:
+  title: NUESTROS CLIENTES COMENTAN
+  lista: []
 hero:
   background_image: https://zerotrust.mx/wp-content/uploads/2023/08/Dimensiones-personalizadas-1000x600-px.jpg
   title: Un socio tecnológico, no solo un proveedor más.
@@ -10,11 +21,7 @@ hero:
     sienten cercanas, como si fuéramos parte de tu equipo.
   cta_text: Trabajemos juntos en tu próximo proyecto.
   cta_url: /contacto
-nosotros:
-  title: "Sobre Nosotros: El Arquitecto Asistente"
-  image: /assets/uploads/logo.jpg
-  content: Nuestra experiencia en **Python/Django** nos permite construir
-    soluciones robustas con una visión resolutiva.
+image: /ruta/a/imagen-ejemplo.jpg
 servicios:
   title: Nuestro Servicios Diseñados para Ti
   subtitle: Variedad para tus necesidades
@@ -34,9 +41,10 @@ servicios:
       description: |-
         
         Descripción SERVICIO #3
-clientes:
-  title: NUESTROS CLIENTES COMENTAN
-  lista: []
-image: /ruta/a/imagen-ejemplo.jpg
+nosotros:
+  title: "Sobre Nosotros: El Arquitecto Asistente"
+  image: /assets/uploads/logo.jpg
+  content: Nuestra experiencia en **Python/Django** nos permite construir
+    soluciones robustas con una visión resolutiva.
 ---
 Nuestra experiencia en **Python/Django** nos permite construir soluciones robustas con una visión resolutiva. **TEST**
