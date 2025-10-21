@@ -17,6 +17,12 @@ clientes:
         primera vez, vemos resultados claros y un crecimiento real en las
         ventas. Son indispensables."'
       author: Sofía Calderón, Fundadora de Tienda Aura
+    - quote: '"Como emprendedor, uno hace de todo. Estaba perdido con el marketing
+        digital hasta que encontré a ELEVAWOD. Más que una agencia, sentí que
+        eran una extensión de mi equipo. Su apoyo, claridad y empatía fueron
+        clave para organizar nuestra estrategia y dar el siguiente paso.
+        Realmente se preocupan por tu negocio."'
+      author: Javier Mendoza, CEO de Café Origen
 hero:
   background_image: https://zerotrust.mx/wp-content/uploads/2023/08/Dimensiones-personalizadas-1000x600-px.jpg
   title: Marketing Digital Estratégico para hacer crecer tu PYME.
