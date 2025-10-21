@@ -5,7 +5,7 @@ canonical_url: https://elevawod.cl/
 robots: index, follow
 hero:
   background_image: https://zerotrust.mx/wp-content/uploads/2023/08/Dimensiones-personalizadas-1000x600-px.jpg
-  title: "# Un socio tecnológico, no solo un proveedor más."
+  title: Un socio tecnológico, no solo un proveedor más.
   subtitle: Creamos soluciones de software e inteligencia artificial que se
     sienten cercanas, como si fuéramos parte de tu equipo.
   cta_text: Trabajemos juntos en tu próximo proyecto.
