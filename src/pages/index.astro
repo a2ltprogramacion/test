@@ -4,11 +4,14 @@
 import { getEntry, getCollection, type CollectionEntry } from 'astro:content'; 
 import Layout from '../layouts/Layout.astro';
 import { mdToHtml } from '../utils/markdown';
-import PortafolioList from '../components/PortafolioList.astro'; // IMPORT MODIFICADO
+import PortafolioList from '../components/PortafolioList.astro'; 
 
 // 1. Leer la fuente de verdad (Headless CMS) de forma segura
 const home = await getEntry('pages', 'home');
 const homeSettings = await getEntry('ajustes', 'home');
+
+//Servicios Collection importada
+const todosLosServicios = await getCollection('servicios');
 
 // Valores por defecto para la página
 const title = home?.data.title ?? 'Elevawod - Desarrollo de Software e IA';
@@ -18,6 +21,8 @@ const nosotros = home?.data.nosotros ?? { title: 'Nosotros', image: '' };
 const servicios = home?.data.servicios ?? { title: 'Nuestros Servicios', lista: [] };
 const clientes = home?.data.clientes ?? { title: 'Lo que dicen nuestros clientes', lista: [] };
 const contacto = await getEntry('informacion-de-contacto', 'general');
+
+const serviciosTitle = home?.data.servicios?.title ?? 'Nuestros Servicios';
 
 // Si la página de inicio no se carga, no podemos renderizar su contenido
 if (!home) {
@@ -99,23 +104,22 @@ if (featuredProjectSlugs.length > 0) {
     <!-- Servicios Section -->
     <section id="servicios" class="py-20 px-8">
       <div class="container mx-auto text-center">
+        {/* Usamos el título que obtuvimos de home.md */}
         <h2 class="font-sans text-4xl font-bold mb-12 text-primary">
-          <span>{servicios.title}</span>
+          <span>{serviciosTitle}</span>
         </h2>
 
         <div class="flex flex-wrap justify-center gap-8">
-
-          {(servicios.lista ?? []).map(s => (
+          {todosLosServicios.map(servicio => (
             <div class="w-full md:w-1/3 lg:w-[30%] flex flex-col bg-white p-6 shadow-lg rounded-lg text-center transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-2">
-              
-              {s.image && <img src={s.image} alt={`Imagen de ${s.title}`} class="w-full h-40 object-cover mb-4 rounded" />}
+              {servicio.data.image && <img src={servicio.data.image} alt={`Imagen de ${servicio.data.title}`} class="w-full h-40 object-cover mb-4 rounded" />}
               
               <div class="flex-grow">
                 <h3 class="font-sans text-2xl font-bold mb-2 text-primary">
-                  <span>{s.title}</span>
+                  <span>{servicio.data.title}</span>
                 </h3>
                 <p class="text-text-base">
-                  <span set:html={mdToHtml(s.description)} />
+                  <span set:html={mdToHtml(servicio.data.description)} />
                 </p>
               </div>
 
@@ -123,7 +127,7 @@ if (featuredProjectSlugs.length > 0) {
           ))}
         </div>
       </div>
-    </section>
+</section>
 
     <!-- Testimonios Section -->
     <section id="clientes" class="bg-primary py-20 px-8 text-text-inverted">

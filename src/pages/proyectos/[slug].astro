@@ -1,139 +1,99 @@
 ---
 // @src/pages/proyectos/[slug].astro
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { mdToHtml } from '../../utils/markdown';
 
+// 1. Obtenemos todos los servicios una sola vez para tenerlos disponibles.
+const allServices = await getCollection('servicios');
+
+// 2. Generamos las rutas para cada proyecto (esto se mantiene igual).
 export async function getStaticPaths() {
   const projects = await getCollection('proyectos');
   return projects.map(project => ({
     params: { slug: project.slug },
+    props: { project }, // Pasamos el proyecto completo como prop
   }));
 }
 
-const { slug } = Astro.params;
-const project = await getEntry('proyectos', slug);
-
-// Si el proyecto no se encuentra, devuelve un 404
+// 3. Obtenemos el proyecto específico para esta página.
+const { project } = Astro.props;
 if (!project) {
-  return new Response(null, {
-    status: 404,
-    statusText: 'No encontrado'
-  });
+  return new Response(null, { status: 404, statusText: 'No encontrado' });
 }
 
-const { Content } = await project.render();
-const { title, summary, client_name, date, services_list, gallery } = project.data;
+// 4. AQUÍ ESTÁ LA NUEVA LÓGICA:
+//    - Leemos la lista de slugs de servicios guardada en el proyecto.
+//    - Filtramos la colección `allServices` para obtener los detalles completos de solo esos servicios.
+const selectedServiceSlugs = project.data.services_list ?? [];
+const relatedServices = allServices.filter(service => 
+  selectedServiceSlugs.includes(service.slug)
+);
+
+const { title, summary, client_name, date, body, gallery } = project.data;
 ---
 
-<Layout title={title ?? 'Proyecto sin título'} description={summary ?? 'Sin descripción.'}>
-  <article class="project-detail">
-    <header>
-      <h1>{title}</h1>
-      <p class="client">Cliente: <strong>{client_name}</strong></p>
-      {date && <time>{date.toLocaleDateString('es-CL')}</time>}
+<Layout title={title ?? 'Proyecto'} description={summary ?? 'Detalles del proyecto.'}>
+  <article class="bg-secondary">
+    <header class="relative h-80 sm:h-96 flex items-center justify-center text-center text-white">
+      <div 
+        class="absolute top-0 left-0 w-full h-full bg-cover bg-center" 
+        style={`background-image: url('${gallery?.[0]?.image_path ?? '/placeholder.png'}')`}
+      ></div>
+      <div class="absolute top-0 left-0 w-full h-full bg-primary opacity-80"></div>
+      <div class="relative z-10 p-8">
+        <h1 class="text-4xl md:text-5xl font-serif font-bold text-white">{title}</h1>
+        <p class="text-xl mt-2">Cliente: <strong>{client_name}</strong></p>
+        {date && <time class="text-sm mt-1 block">{date.toLocaleDateString('es-CL')}</time>}
+      </div>
     </header>
 
-    <section class="project-body">
-      <div class="main-content">
-        <h2>Detalles del Proyecto</h2>
-        <Content />
-      </div>
-      <aside class="sidebar">
-        <h3>Servicios Realizados</h3>
-        <ul>
-          {services_list?.map(service => (
-            <li>{service.item}</li>
-          ))}
-        </ul>
-      </aside>
-    </section>
-
-    {gallery && gallery.length > 0 && (
-      <section class="gallery">
-        <h2>Galería de Imágenes</h2>
-        <div class="gallery-grid">
-          {gallery.map(item => (
-            <img src={item.image_path} alt={`Imagen del proyecto ${title}`} loading="lazy" />
-          ))}
+    <div class="max-w-4xl mx-auto p-8 md:p-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <div class="lg:col-span-2 prose prose-xl max-w-none">
+          <h2 class="font-serif text-3xl font-bold text-primary mb-4">Detalles del Proyecto</h2>
+          <div set:html={mdToHtml(body)} />
         </div>
-      </section>
-    )}
 
+        <aside>
+          <div class="bg-white p-6 shadow-lg rounded-lg sticky top-28">
+            <h3 class="text-xl font-serif font-bold text-primary border-b-2 border-accent pb-2 mb-4">Servicios Realizados</h3>
+            
+            {/* 👇 AQUÍ MOSTRAMOS LA NUEVA LISTA DE SERVICIOS 👇 */}
+            {relatedServices.length > 0 ? (
+              <ul class="space-y-2">
+                {relatedServices.map(service => (
+                  <li class="bg-accent/10 text-accent font-semibold text-sm py-1 px-3 rounded-full inline-block">
+                    {service.data.title}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p class="text-sm text-gray-500">No hay servicios especificados.</p>
+            )}
+          </div>
+        </aside>
+
+      </div>
+
+      {gallery && gallery.length > 0 && (
+        <section class="mt-16">
+          <h2 class="text-3xl font-serif font-bold text-primary text-center mb-8">Galería de Imágenes</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {gallery.map(item => (
+              <a href={item.image_path} target="_blank">
+                <img 
+                  src={item.image_path} 
+                  alt={`Imagen del proyecto ${title}`} 
+                  loading="lazy" 
+                  class="w-full h-56 object-cover rounded-lg shadow-md transition-transform duration-300 hover:scale-105"
+                />
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
   </article>
 </Layout>
-
-<style>
-  .project-detail {
-    max-width: 960px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: var(--secondary-color);
-    border-radius: 8px;
-  }
-
-  header {
-    text-align: center;
-    border-bottom: 1px solid var(--accent-color);
-    padding-bottom: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  header h1 {
-    font-size: 3rem;
-    color: var(--accent-color);
-  }
-
-  .project-body {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  @media (min-width: 768px) {
-    .project-body {
-      grid-template-columns: 3fr 1fr;
-    }
-  }
-
-  .main-content h2 {
-    font-size: 2rem;
-  }
-
-  .sidebar h3 {
-    color: var(--accent-color);
-  }
-
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .sidebar li {
-    background-color: rgba(0,0,0,0.2);
-    padding: 0.5rem;
-    border-radius: 4px;
-    margin-bottom: 0.5rem;
-  }
-
-  .gallery {
-    margin-top: 3rem;
-  }
-
-  .gallery h2 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-  }
-
-  .gallery-grid img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-  }
-</style>

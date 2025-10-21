@@ -1,6 +1,20 @@
 // @src/content/config.ts
 import { z, defineCollection } from 'astro:content';
 
+// ==================================================================
+// schema para la colección 'servicios'
+// Esta es la "licencia de conducir" que Astro necesita.
+// ==================================================================
+const serviciosCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string().optional(),
+    description: z.string().optional(),
+    image: z.string().optional(),
+  }),
+});
+
 // Schema para la colección de Páginas (ej. Home)
 const paginasCollection = defineCollection({
   type: 'content',
@@ -29,15 +43,13 @@ const paginasCollection = defineCollection({
       image: z.string().optional(),
     }).optional(),
 
+    // ==================================================================
+    // El objeto 'servicios' aquí se simplifica.
+    // Ya no contiene la 'lista', solo los campos de presentación de la sección.
+    // ==================================================================
     servicios: z.object({
       title: z.string().optional(),
       subtitle: z.string().optional(),
-      lista: z.array(z.object({
-        title: z.string(),
-        subtitle: z.string().optional(),
-        description: z.string().optional(),
-        image: z.string().optional(),
-      })).optional(),
     }).optional(),
 
     clientes: z.object({
@@ -57,10 +69,11 @@ const proyectosCollection = defineCollection({
   schema: z.object({
     client_name: z.string(),
     title: z.string().optional(),
-    services_list: z.array(z.object({ item: z.string() })).optional(),
+    services_list: z.array(z.string()).optional(),
     image: z.string().optional(),
     date: z.date().optional(),
     summary: z.string().optional(),
+    body: z.string().optional(),
     gallery: z.array(z.object({ image_path: z.string() })).optional(),
   }),
 });
@@ -73,6 +86,7 @@ const ajustesCollection = defineCollection({
   }),
 });
 
+// Schema para la colección de Información de Contacto
 const contactoCollection = defineCollection({
   type: 'data',
   schema: z.object({
@@ -87,7 +101,11 @@ const contactoCollection = defineCollection({
   }),
 });
 
+// ==================================================================
+// Se exporta la nueva colección 'servicios'
+// ==================================================================
 export const collections = {
+  'servicios': serviciosCollection,
   'pages': paginasCollection,
   'proyectos': proyectosCollection,
   'ajustes': ajustesCollection,

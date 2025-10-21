@@ -72,7 +72,7 @@ collections:
               - {label: "Descripción (Nosotros)", name: "content", widget: "markdown", required: false, hint: "Breve descripción."}
               - {label: "Imagen (Nosotros)", name: "image", widget: "image", required: false, hint: "Imagen representativa de la empresa o equipo."}
 
-  # SERVICIOS
+  # SERVICIOS "SECCIÓN"
   - name: 'home_servicios'
     label: 'Home: Sección Servicios'
     files:
@@ -87,15 +87,18 @@ collections:
             fields:
               - {label: "Título (Servicios)", name: "title", widget: "text", required: false, hint: "Título general de la sección de servicios."}
               - {label: "Subtítulo (Servicios)", name: "subtitle", widget: "text", required: false, hint: "Subtítulo opcional para la sección."}
-              - label: "Lista de Servicios"
-                name: "lista"
-                widget: "list"
-                required: false
-                fields:
-                  - {label: "Título del Servicio", name: "title", widget: "text", required: true, hint: "Nombre del servicio."}
-                  - {label: "Subtítulo (opcional)", name: "subtitle", widget: "text", required: false}
-                  - {label: "Descripción", name: "description", widget: "markdown", required: false, hint: "Breve descripción."}
-                  - {label: "Imagen (opcional)", name: "image", widget: "image", required: false, hint: "Icono o imagen representativa del servicio."}
+
+  # SERVICIOS "COLECCIÓN ""
+  - name: 'servicios'
+    label: 'Coleeción de Servicios de la Empresa'
+    folder: 'src/content/servicios'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - {label: "Nombre del Servicio", name: "title", widget: "text", required: true}
+      - {label: "Subtítulo (opcional)", name: "subtitle", widget: "text", required: false}
+      - {label: "Descripción", name: "description", widget: "markdown", required: false}
+      - {label: "Imagen (opcional)", name: "image", widget: "image", required: false}
 
   # TESTIMONIOS
   - name: 'home_clientes'
@@ -131,8 +134,16 @@ collections:
       - {label: "Slug (URL Amigable)", name: "slug", widget: "string", hint: "Parte final de la URL, ej: mi-primer-proyecto. Usar solo minúsculas, números y guiones. Resultado: mi-sitio.com/proyectos/mi-primer-proyecto", required: true}
       - {label: "Cliente (Nombre o Empresa)", name: "client_name", widget: "text", required: true}
       - {label: "Título del Proyecto", name: "title", widget: "text"}
-      - {label: "Servicios Realizados", name: "services_list", widget: "list", required: false, fields: [{label: "Servicio", name: "item", widget: "markdown"}]}
-      - {label: "Fecha", name: "date", widget: "datetime", required: false}
+      - label: "Servicios Realizados"
+        name: "services_list"
+        widget: "relation"
+        collection: "servicios"
+        multiple: true
+        search_fields: ["title"]
+        value_field: "slug"
+        display_fields: ["title"]
+        required: false
+      - {label: "Fecha", name: "date", widget: "datetime", time_format: false, date_format: "DD-MM-YYYY", required: false}
       - {label: "Resumen (Descripción Corta)", name: "summary", widget: "markdown", required: false}
       - {label: "Contenido Detallado", name: "body", widget: "markdown", required: false}
       - {label: "Galería de Fotos", name: "gallery", widget: "list", required: false, fields: [{label: "Imagen", name: "image_path", widget: "image"}]}
