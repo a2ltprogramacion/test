@@ -25,8 +25,8 @@ collections:
         # Estructura de campos para la Home Page
         fields:
           - {label: "Plantilla", name: "template", widget: "hidden", default: "home"}
-          - {label: "Título SEO", name: "title", widget: "string", hint: "Título de la página para buscadores. Máx. 60 caracteres."}
-          - {label: "Meta Descripción", name: "description", widget: "text", hint: "Descripción corta para SEO. Máx. 155 caracteres."}
+          - {label: "Título SEO", name: "title", widget: "markdown", hint: "Título de la página (soporta formato básico Markdown: **bold**, *italic*)."}
+          - {label: "Meta Descripción", name: "description", widget: "markdown", hint: "Descripción corta para SEO (soporta Markdown básico). Máx. 155 caracteres."}
           - {label: "URL Canónica", name: "canonical_url", widget: "string", required: false, hint: "La URL preferida para esta página, ej: https://elevawod.cl/"}
           - {label: "Meta Robots", name: "robots", widget: "string", required: false, hint: "Instrucciones para robots, ej: index, follow / noindex, nofollow"}
           - label: "Open Graph / Redes Sociales"
@@ -45,8 +45,10 @@ collections:
             required: false
             fields:
               - {label: "Imagen de Fondo (Hero)", name: "background_image", widget: "image", required: false, hint: "Imagen principal del hero. Recomendado 2000x1200 px."}
-              - {label: "Título (Hero)", name: "title", widget: "string", required: false, hint: "Texto principal grande del hero."}
-              - {label: "Subtítulo (Hero)", name: "subtitle", widget: "string", required: false, hint: "Texto secundario del hero."}
+              - {label: "Título (Hero)", name: "title", widget: "markdown", required: false, hint: "Texto principal del hero. Puedes usar **bold** y *italic*."}
+              - {label: "Color del Título (Hero)", name: "title_color", widget: "string", required: false, hint: "Color CSS (hex), ej: #ffffff"}
+              - {label: "Subtítulo (Hero)", name: "subtitle", widget: "markdown", required: false, hint: "Subtítulo del hero (Markdown básico)."}
+              - {label: "Color del Subtítulo (Hero)", name: "subtitle_color", widget: "string", required: false, hint: "Color CSS (hex), ej: #ffffff"}
               - {label: "CTA Principal (texto)", name: "cta_text", widget: "string", required: false, hint: "Texto del botón principal, ej: 'Contactar'."}
               - {label: "CTA URL (link)", name: "cta_url", widget: "string", required: false, hint: "URL o anchor para el botón CTA, ej: /contacto o https://wa.me/569..."}
 
@@ -56,8 +58,10 @@ collections:
             widget: "object"
             required: false
             fields:
-              - {label: "Título (Nosotros)", name: "title", widget: "string", required: false, hint: "Título de la sección 'Nosotros'."}
-              - {label: "Descripción (Nosotros)", name: "content", widget: "text", required: false, hint: "Breve descripción o historia de la empresa."}
+              - {label: "Título (Nosotros)", name: "title", widget: "markdown", required: false, hint: "Título de la sección 'Nosotros' (Markdown básico)."}
+              - {label: "Color del Título (Nosotros)", name: "title_color", widget: "string", required: false, hint: "Color CSS (hex), ej: #222222"}
+              - {label: "Descripción (Nosotros)", name: "content", widget: "markdown", required: false, hint: "Breve descripción (Markdown)."}
+              - {label: "Color del Texto (Nosotros)", name: "content_color", widget: "string", required: false, hint: "Color CSS (hex), ej: #666666"}
               - {label: "Imagen (Nosotros)", name: "image", widget: "image", required: false, hint: "Imagen representativa de la empresa o equipo."}
 
           # Servicios
@@ -73,9 +77,11 @@ collections:
                 widget: "list"
                 required: false
                 fields:
-                  - {label: "Título del Servicio", name: "title", widget: "string", required: true, hint: "Nombre del servicio, ej: 'Desarrollo Web'."}
-                  - {label: "Subtítulo (opcional)", name: "subtitle", widget: "string", required: false}
-                  - {label: "Descripción", name: "description", widget: "text", required: false, hint: "Breve descripción del servicio."}
+                  - {label: "Título del Servicio", name: "title", widget: "markdown", required: true, hint: "Nombre del servicio (puedes usar **bold**)."}
+                  - {label: "Color del Título (Servicio)", name: "title_color", widget: "string", required: false, hint: "Color CSS (hex), ej: #111111"}
+                  - {label: "Subtítulo (opcional)", name: "subtitle", widget: "markdown", required: false}
+                  - {label: "Descripción", name: "description", widget: "markdown", required: false, hint: "Breve descripción (Markdown)."}
+                  - {label: "Color del Texto (Servicio)", name: "text_color", widget: "string", required: false, hint: "Color CSS (hex), ej: #444444"}
                   - {label: "Imagen (opcional)", name: "image", widget: "image", required: false, hint: "Icono o imagen representativa del servicio."}
 
           # Testimonios / Clientes
@@ -90,9 +96,13 @@ collections:
                 widget: "list"
                 required: false
                 fields:
-                  - {label: "Texto del Testimonio", name: "quote", widget: "text", required: true, hint: "Cita del cliente."}
+                  - {label: "Texto del Testimonio", name: "quote", widget: "markdown", required: true, hint: "Cita del cliente (Markdown)."}
                   - {label: "Autor", name: "author", widget: "string", required: false, hint: "Nombre del cliente o empresa."}
+                  - {label: "Color del Texto (Testimonio)", name: "text_color", widget: "string", required: false, hint: "Color CSS (hex) para la cita."}
                   - {label: "Google Review Embed (HTML)", name: "google_review_embed", widget: "text", required: false, hint: "Pega el código de incrustación de una reseña específica de Google si quieres mostrarla incrustada."}
+
+          # Contenido principal (body) editable
+          - {label: "Contenido (body)", name: "body", widget: "markdown", required: false, hint: "Contenido principal de la página, editable en formato Markdown."}
 
   - name: 'proyectos'
     label: 'Portafolio / Proyectos'

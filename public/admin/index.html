@@ -14,5 +14,21 @@
 <body>
   <!-- Carga el script de Decap CMS -->
   <script src="/admin/decap-cms.js"></script>
+  <!-- Carga nuestras extensiones (editor components, etc).
+       Por seguridad, cargamos el script solo cuando se añade ?enableColorEditor=1
+       a la URL de /admin. Esto evita que una extensión inestable rompa la carga.
+       Para habilitar temporalmente el plugin del editor, visita:
+         /admin?enableColorEditor=1
+  -->
+  <script>
+    (function(){
+      try {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('enableColorEditor') === '1') {
+          const s = document.createElement('script'); s.src = '/admin/cms.js'; s.defer = true; document.body.appendChild(s);
+        }
+      } catch (e) { /* no-op */ }
+    })();
+  </script>
 </body>
 </html>

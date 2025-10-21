@@ -3,6 +3,7 @@
 // src/pages/index.astro (Fragmento Corregido)
 import { getEntry, getCollection, type CollectionEntry } from 'astro:content'; 
 import Layout from '../layouts/Layout.astro';
+import { mdToHtml } from '../utils/markdown';
 import PortafolioList from '../components/PortafolioList.astro'; // IMPORT MODIFICADO
 
 // 1. Leer la fuente de verdad (Headless CMS) de forma segura
@@ -54,8 +55,12 @@ if (featuredProjectSlugs.length > 0) {
     
       <!-- Content -->
       <div class="relative z-10 px-8 animate-fade-in-up">
-        <h1 class="text-4xl md:text-6xl font-sans font-bold mb-4">{hero.title}</h1>
-        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8">{hero.subtitle}</p>
+        <h1 class="text-4xl md:text-6xl font-sans font-bold mb-4" style={hero.title_color ? `color: ${hero.title_color}` : ''}>
+          <span set:html={mdToHtml(hero.title)} />
+        </h1>
+        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8" style={hero.subtitle_color ? `color: ${hero.subtitle_color}` : ''}>
+          <span set:html={mdToHtml(hero.subtitle)} />
+        </p>
         <a href="mailto:contacto@elevawod.cl?subject=Quiero iniciar un proyecto" 
            class="bg-accent text-primary font-bold py-3 px-8 text-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg"
         >Hablemos de tu idea</a>
@@ -66,8 +71,16 @@ if (featuredProjectSlugs.length > 0) {
     <section id="nosotros" class="py-20 px-8">
       <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div class="prose prose-xl text-text-base max-w-none">
-          <h2 class="font-sans text-4xl font-bold mb-4 text-primary">{nosotros.title}</h2>
-          <Content />
+          <h2 class="font-sans text-4xl font-bold mb-4 text-primary" style={nosotros.title_color ? `color: ${nosotros.title_color}` : ''}>
+            <span set:html={mdToHtml(nosotros.title)} />
+          </h2>
+          {nosotros.content ? (
+            <div class="text-base leading-relaxed" style={nosotros.content_color ? `color: ${nosotros.content_color}` : ''}>
+              <span set:html={mdToHtml(nosotros.content)} />
+            </div>
+          ) : (
+            <Content />
+          )}
         </div>
         {nosotros.image && <img src={nosotros.image} alt={`Imagen de ${nosotros.title}`} class="shadow-xl w-full h-auto object-cover transition-transform duration-300 hover:scale-105" />}
       </div>
@@ -83,19 +96,48 @@ if (featuredProjectSlugs.length > 0) {
       </section>
     )}
 
-    <!-- Servicios Section -->
+    <!-- Servicios Section (2 columnas centradas, max 4 por columna) -->
     <section id="servicios" class="py-20 px-8">
       <div class="container mx-auto text-center">
         <h2 class="font-sans text-4xl font-bold mb-12 text-primary">{servicios.title}</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-          {(servicios.lista ?? []).map(servicio => (
-            <div class="bg-white p-8 shadow-lg border-4 border-transparent hover:border-accent transition-all duration-300">
-              {servicio.image && <img src={servicio.image} alt={`Imagen de ${servicio.title}`} class="w-full h-40 object-cover mb-4" />}
-              <h3 class="font-sans text-2xl font-bold mb-3 text-primary">{servicio.title}</h3>
-              <p class="text-text-base">{servicio.description}</p>
+
+        {(() => {
+          const all = servicios.lista ?? [];
+          // Mostrar como máximo 8 servicios (4 por columna). Si hay más, se pueden mostrar en otra sección o paginar.
+          const visible = all.slice(0, 8);
+          const mid = Math.ceil(visible.length / 2);
+          const col1 = visible.slice(0, mid);
+          const col2 = visible.slice(mid);
+
+          return (
+            <div class="flex flex-col md:flex-row justify-center gap-8">
+              <div class="flex flex-col gap-8 w-full md:w-1/2 items-center">
+                {col1.map(s => (
+                  <div class="w-full max-w-md bg-white p-6 shadow-lg rounded-lg text-center">
+                    {s.image && <img src={s.image} alt={`Imagen de ${s.title}`} class="w-full h-40 object-cover mb-4 rounded" />}
+                    <h3 class="font-sans text-2xl font-bold mb-2 text-primary" style={s.title_color ? `color: ${s.title_color}` : ''}>
+                      <span set:html={mdToHtml(s.title)} />
+                    </h3>
+                    <p class="text-text-base" style={s.text_color ? `color: ${s.text_color}` : ''}>
+                      <span set:html={mdToHtml(s.description)} />
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div class="flex flex-col gap-8 w-full md:w-1/2 items-center">
+                {col2.map(s => (
+                  <div class="w-full max-w-md bg-white p-6 shadow-lg rounded-lg text-center">
+                    {s.image && <img src={s.image} alt={`Imagen de ${s.title}`} class="w-full h-40 object-cover mb-4 rounded" />}
+                    <h3 class="font-sans text-2xl font-bold mb-2 text-primary">{s.title}</h3>
+                    <p class="text-text-base">{s.description}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
-        </div>
+          );
+        })()}
+
       </div>
     </section>
 
@@ -110,7 +152,9 @@ if (featuredProjectSlugs.length > 0) {
                 <div set:html={cliente.google_review_embed} />
               ) : (
                 <>
-                  <p class="text-xl italic mb-4">"{cliente.quote}"</p>
+                  <p class="text-xl italic mb-4" style={cliente.text_color ? `color: ${cliente.text_color}` : ''}>
+                    <span set:html={mdToHtml(cliente.quote)} />
+                  </p>
                   <p class="font-bold text-right">- {cliente.author}</p>
                 </>
               )}
