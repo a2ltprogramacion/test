@@ -6,14 +6,14 @@ export interface Props {
 }
 
 const { project } = Astro.props;
-const { title, summary, gallery, image, client_name } = project.data;
+const { titulo, summary, gallery, image, client_name } = project.data;
 const firstImage = image ??
 (gallery?.length ? gallery[0].image_path : '/placeholder.png');
 ---
 
 <a href={`/proyectos/${project.slug}`} class="group block overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-xl bg-white hover:no-underline">
   <div class="relative overflow-hidden">
-    <img src={firstImage} alt={`Imagen del proyecto ${title}`} class="w-full h-56 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105" />
+    <img src={firstImage} alt={`Imagen del proyecto ${titulo}`} class="w-full h-56 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105" />
     <div class="absolute inset-0 bg-primary bg-opacity-40 transition-opacity duration-300 group-hover:bg-opacity-60"></div>
     <div class="absolute top-4 left-4">
       <span class="text-xs font-bold bg-white/80 text-primary py-1 px-3 rounded-full backdrop-blur-sm">{client_name}</span>
@@ -35,7 +35,7 @@ const firstImage = image ??
       group-hover:after:scale-x-100 {/* Estado final: escala horizontal de 100% al hacer hover en la tarjeta */}
       after:transition-transform after:duration-300 after:ease-in-out {/* Define la animación */}
     ">
-      {title}
+      {titulo}
     </h3>
     
     <p class="font-sans text-base text-gray-600 mb-4 line-clamp-3">{summary}</p>
