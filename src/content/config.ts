@@ -1,10 +1,6 @@
-// @src/content/config.ts
+// @src/content/config.ts (VERSIÓN FINAL Y CORREGIDA)
 import { z, defineCollection } from 'astro:content';
 
-// ==================================================================
-// schema para la colección 'servicios'
-// Esta es la "licencia de conducir" que Astro necesita.
-// ==================================================================
 const serviciosCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -15,7 +11,6 @@ const serviciosCollection = defineCollection({
   }),
 });
 
-// Schema para la colección de Páginas (ej. Home)
 const paginasCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -28,7 +23,6 @@ const paginasCollection = defineCollection({
       description: z.string().optional(),
       image: z.string().optional(),
     }).optional(),
-
     hero: z.object({
       background_image: z.string().optional(),
       title: z.string().optional(),
@@ -36,22 +30,15 @@ const paginasCollection = defineCollection({
       cta_text: z.string().optional(),
       cta_url: z.string().optional(),
     }).optional(),
-
     nosotros: z.object({
       title: z.string().optional(),
       content: z.string().optional(),
       image: z.string().optional(),
     }).optional(),
-
-    // ==================================================================
-    // El objeto 'servicios' aquí se simplifica.
-    // Ya no contiene la 'lista', solo los campos de presentación de la sección.
-    // ==================================================================
     servicios: z.object({
       title: z.string().optional(),
       subtitle: z.string().optional(),
     }).optional(),
-
     clientes: z.object({
       title: z.string().optional(),
       lista: z.array(z.object({
@@ -73,12 +60,14 @@ const proyectosCollection = defineCollection({
     image: z.string().optional(),
     date: z.date().optional(),
     summary: z.string().optional(),
+    
+    // ✅ LA LÍNEA QUE FALTABA: Le decimos a Astro que el campo 'body' existe.
     body: z.string().optional(),
+    
     gallery: z.array(z.object({ image_path: z.string() })).optional(),
   }),
 });
 
-// Schema para la colección de Ajustes
 const ajustesCollection = defineCollection({
   type: 'data',
   schema: z.object({
@@ -86,7 +75,6 @@ const ajustesCollection = defineCollection({
   }),
 });
 
-// Schema para la colección de Información de Contacto
 const contactoCollection = defineCollection({
   type: 'data',
   schema: z.object({
@@ -101,9 +89,6 @@ const contactoCollection = defineCollection({
   }),
 });
 
-// ==================================================================
-// Se exporta la nueva colección 'servicios'
-// ==================================================================
 export const collections = {
   'servicios': serviciosCollection,
   'pages': paginasCollection,
