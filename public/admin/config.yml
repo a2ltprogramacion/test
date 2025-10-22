@@ -130,6 +130,7 @@ collections:
     folder: 'src/content/proyectos'
     create: true
     slug: '{{slug}}'
+    identifier_field: 'title'
     fields:
       - {label: "Slug (URL Amigable)", name: "slug", widget: "string", hint: "Parte final de la URL, ej: mi-primer-proyecto. Usar solo minúsculas, números y guiones. Resultado: mi-sitio.com/proyectos/mi-primer-proyecto", required: true}
       - {label: "Cliente (Nombre o Empresa)", name: "client_name", widget: "text", required: true}
