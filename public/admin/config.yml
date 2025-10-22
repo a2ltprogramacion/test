@@ -134,7 +134,7 @@ collections:
     fields:
       - {label: "Slug (URL Amigable)", name: "slug", widget: "string", hint: "Parte final de la URL, ej: mi-primer-proyecto. Usar solo minúsculas, números y guiones. Resultado: mi-sitio.com/proyectos/mi-primer-proyecto", required: true}
       - {label: "Cliente (Nombre o Empresa)", name: "client_name", widget: "text", required: true}
-      - {label: "Título del Proyecto", name: "titulo", widget: "text" hint: "Maximo 80 caracteres recomendado", required: true}
+      - {label: "Título del Proyecto", name: "titulo", widget: "text", hint: "Maximo 80 caracteres recomendado", required: true}
       - {label: "Servicios Realizados", name: "services_list", widget: "relation", collection: "servicios", multiple: true, search_fields: ["title"], value_field: "title", display_fields: ["title"], required: false}
       - {label: "Fecha", name: "date", widget: "datetime", time_format: false, date_format: "YYYY-MM-DD", required: false}
       - {label: "Resumen (Descripción Corta)", name: "summary", widget: "markdown", required: false}
