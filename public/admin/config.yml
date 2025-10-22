@@ -129,9 +129,10 @@ collections:
     label: 'Proyectos / Portafolio'
     folder: 'src/content/proyectos'
     create: true
-    slug: '{{slug}}'
+    slug: '{{url_path}}'
+    identifier_field: 'title'
     fields:
-      - {label: "Slug (URL Amigable)", name: "slug", widget: "string", hint: "Parte final de la URL, ej: mi-primer-proyecto. Usar solo minúsculas, números y guiones. Resultado: mi-sitio.com/proyectos/mi-primer-proyecto", required: true}
+      - {label: "Slug (URL Amigable)", name: "url_path", widget: "string", hint: "Parte final de la URL, ej: mi-primer-proyecto. Usar solo minúsculas, números y guiones. Resultado: mi-sitio.com/proyectos/mi-primer-proyecto", required: true}
       - {label: "Cliente (Nombre o Empresa)", name: "client_name", widget: "text", required: true}
       - {label: "Título del Proyecto", name: "title", widget: "text"}
       - {label: "Servicios Realizados", name: "services_list", widget: "relation", collection: "servicios", multiple: true, search_fields: ["title"], value_field: "title", display_fields: ["title"], required: false}
