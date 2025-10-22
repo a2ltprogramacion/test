@@ -31,7 +31,7 @@ const relatedServices = allServices.filter(service =>
   selectedServiceTitles.includes(service.data.title)
 );
 
-const { title, summary, client_name, date, body, gallery } = project.data;
+const { title, summary, client_name, date, project_details, gallery } = project.data;
 ---
 
 <Layout title={title ?? 'Proyecto'} description={summary ?? 'Detalles del proyecto.'}>
@@ -60,14 +60,14 @@ const { title, summary, client_name, date, body, gallery } = project.data;
             </div>
           )}
 
-          {body && (
+          {project_details && (
             <div class="prose prose-xl max-w-none">
               <h2 class="font-serif text-3xl font-bold text-primary mb-4">Solución y Resultados</h2>
-              <div set:html={mdToHtml(body)}></div>
+              <div set:html={mdToHtml(project_details)}></div>
             </div>
           )}
 
-          {!summary && !body && (
+          {!summary && !project_details && (
             <p class="text-gray-500">No hay más detalles disponibles para este proyecto.</p>
           )}
         </div>

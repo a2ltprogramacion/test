@@ -60,7 +60,7 @@ const proyectosCollection = defineCollection({
     image: z.string().optional(),
     date: z.date().optional(),
     summary: z.string().optional(),
-    body: z.string().optional(),    
+    project_details: z.string().optional(),    
     gallery: z.array(z.object({ image_path: z.string() })).optional(),
   }),
 });
