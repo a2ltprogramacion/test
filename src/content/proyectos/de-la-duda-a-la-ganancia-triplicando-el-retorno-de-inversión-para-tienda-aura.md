@@ -6,7 +6,7 @@ title: "De la Duda a la Ganancia: Triplicando el Retorno de Inversión para
 services_list:
   - Publicidad Digital con Retorno (ROAS)
   - Sitios Web que Generan Conversiones
-date: 15-06-2025
+date: 2025-06-15
 summary: Tienda Aura tenía un gran producto pero luchaba con bajas ventas online
   y un alto abandono de carritos. A través de una optimización web estratégica y
   campañas de Meta Ads enfocadas, logramos un aumento del 320% en su ROAS en
