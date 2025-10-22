@@ -135,26 +135,45 @@ if (featuredProjectSlugs.length > 0) {
       </div>
 </section>
 
-    <!-- Testimonios Section -->
+    <!-- Testimonios Section (Carousel) -->
     <section id="clientes" class="bg-primary py-20 px-8 text-text-inverted">
       <div class="container mx-auto text-center">
-        <h2 class="font-sans text-4xl font-bold mb-12 text-text-inverted">{clientes.title}</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-          {(clientes.lista ?? []).map(cliente => (
-            <div class="bg-white/10 p-8 transition-all duration-300 hover:bg-white/20">
-              {cliente.google_review_embed ? (
-                <div set:html={cliente.google_review_embed} />
-              ) : (
-                <>
-                  <p class="text-xl italic mb-4" >
-                    <span set:html={mdToHtml(cliente.quote)} />
-                  </p>
-                  <p class="font-bold text-right">- {cliente.author}</p>
-                </>
-              )}
+        <h2 class="font-sans text-4xl font-bold mb-8 text-text-inverted">{clientes.title}</h2>
+
+        {((clientes.lista ?? []).length > 0) ? (
+          <div class="relative max-w-4xl mx-auto">
+            <!-- viewport -->
+            <div class="overflow-hidden rounded-lg" id="clientes-viewport">
+              <div class="flex transition-transform duration-700 ease-in-out" id="clientes-track" style="transform: translateX(0%);">
+                {(clientes.lista ?? []).map(cliente => (
+                  <div class="min-w-full p-6 flex-shrink-0 flex items-center justify-center">
+                    <div class="w-full max-w-3xl bg-white/10 p-8 rounded-lg shadow-md text-left clientes-card">
+                      {cliente.google_review_embed ? (
+                        <div set:html={cliente.google_review_embed} />
+                      ) : (
+                        <>
+                          <p class="text-lg md:text-xl italic mb-4 quote whitespace-normal break-words">
+                            <span set:html={mdToHtml(cliente.quote)} />
+                          </p>
+                          <p class="font-bold text-right mt-4 author">- {cliente.author}</p>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
-        </div>
+
+            <!-- controls -->
+            <button aria-label="Anterior" id="clientes-prev" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white rounded-full w-10 h-10 flex items-center justify-center">‹</button>
+            <button aria-label="Siguiente" id="clientes-next" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white rounded-full w-10 h-10 flex items-center justify-center">›</button>
+
+            <!-- dots -->
+            <div id="clientes-dots" class="flex justify-center gap-3 mt-6"></div>
+          </div>
+        ) : (
+          <p class="text-lg">No hay testimonios disponibles.</p>
+        )}
       </div>
     </section>
 
@@ -212,6 +231,23 @@ if (featuredProjectSlugs.length > 0) {
     from, to { opacity: 1 }
     50% { opacity: 0 }
   }
+
+  /* Carousel styles for testimonials */
+  #clientes-viewport { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
+  #clientes-track > div { padding: 2rem; }
+  #clientes-dots button { width: 10px; height: 10px; border-radius: 9999px; background: rgba(255,255,255,0.4); border: none; }
+  #clientes-dots button.active { background: white; }
+
+  /* Testimonial card styling */
+  .clientes-card { min-height: 160px; display: flex; flex-direction: column; justify-content: space-between; }
+  .clientes-card .quote { line-height: 1.5; max-height: 28vh; overflow: auto; }
+  .clientes-card .author { margin-top: 1rem; }
+  /* Ensure long words wrap */
+  .clientes-card, .clientes-card .quote { word-break: break-word; overflow-wrap: anywhere; }
+
+  @media (min-width: 768px) {
+    .clientes-card { min-height: 200px; }
+  }
 </style>
 
 <script>
@@ -235,5 +271,64 @@ if (featuredProjectSlugs.length > 0) {
 
       setTimeout(typeWriter, 1000);
     }
+
+    // Testimonials carousel logic
+    (function(){
+      const track = document.getElementById('clientes-track');
+      const prev = document.getElementById('clientes-prev');
+      const next = document.getElementById('clientes-next');
+      const dotsContainer = document.getElementById('clientes-dots');
+      const viewport = document.getElementById('clientes-viewport');
+      if (!track || !dotsContainer) return;
+
+  if (!track) return;
+  const slides = Array.from(track.children);
+  const total = slides.length;
+      if (total === 0) return;
+
+  let index: number = 0;
+  let autoplay = true;
+  let timer: number | null = null;
+  const interval = 5000; // 5s
+
+      function goTo(i: number) {
+        index = (i + total) % total;
+        if (track) track.style.transform = `translateX(-${index * 100}%)`;
+        if (dotsContainer) Array.from(dotsContainer.children).forEach((b, idx) => (b as HTMLElement).classList.toggle('active', idx === index));
+      }
+
+      function nextSlide() { goTo(index + 1); }
+      function prevSlide() { goTo(index - 1); }
+
+      // create dots
+      for (let i=0;i<total;i++){
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.addEventListener('click', ()=>{ goTo(i); resetTimer(); });
+        dotsContainer.appendChild(b);
+      }
+
+      // attach controls
+      if (next) next.addEventListener('click', ()=>{ nextSlide(); resetTimer(); });
+      if (prev) prev.addEventListener('click', ()=>{ prevSlide(); resetTimer(); });
+
+  function startTimer(){ if (timer) clearInterval(timer as number); timer = window.setInterval(()=>{ nextSlide(); }, interval); }
+  function stopTimer(){ if (timer) { clearInterval(timer as number); timer = null; } }
+  function resetTimer(){ stopTimer(); startTimer(); }
+
+      // pause on hover/focus
+      [viewport, track, prev, next, dotsContainer].forEach(el=>{
+        if (!el) return;
+        el.addEventListener('mouseenter', ()=>{ stopTimer(); });
+        el.addEventListener('mouseleave', ()=>{ startTimer(); });
+        el.addEventListener('focusin', ()=>{ stopTimer(); });
+        el.addEventListener('focusout', ()=>{ startTimer(); });
+      });
+
+      // init
+      goTo(0);
+      startTimer();
+
+    })();
   });
 </script>
