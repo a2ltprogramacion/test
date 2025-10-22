@@ -31,10 +31,10 @@ const relatedServices = allServices.filter(service =>
   selectedServiceTitles.includes(service.data.title)
 );
 
-const { title, summary, client_name, date, project_details, gallery } = project.data;
+const { titulo, summary, client_name, date, project_details, gallery } = project.data;
 ---
 
-<Layout title={title ?? 'Proyecto'} description={summary ?? 'Detalles del proyecto.'}>
+<Layout title={titulo ?? 'Proyecto'} description={summary ?? 'Detalles del proyecto.'}>
   <article class="bg-secondary">
     <header class="relative h-80 sm:h-96 flex items-center justify-center text-center text-white">
       <div 
@@ -43,7 +43,7 @@ const { title, summary, client_name, date, project_details, gallery } = project.
       ></div>
       <div class="absolute top-0 left-0 w-full h-full bg-primary opacity-80"></div>
       <div class="relative z-10 p-8">
-        <h1 class="text-4xl md:text-5xl font-serif font-bold text-white">{title}</h1>
+        <h1 class="text-4xl md:text-5xl font-serif font-bold text-white">{titulo}</h1>
         <p class="text-xl mt-2">Cliente: <strong>{client_name}</strong></p>
         {date && <time class="text-sm mt-1 block">{new Date(date).toLocaleDateString('es-CL')}</time>}
       </div>
@@ -98,7 +98,7 @@ const { title, summary, client_name, date, project_details, gallery } = project.
               <a href={item.image_path} target="_blank">
                 <img 
                   src={item.image_path} 
-                  alt={`Imagen del proyecto ${title}`} 
+                  alt={`Imagen del proyecto ${titulo}`} 
                   loading="lazy" 
                   class="w-full h-56 object-cover rounded-lg shadow-md transition-transform duration-300 hover:scale-105"
                 />

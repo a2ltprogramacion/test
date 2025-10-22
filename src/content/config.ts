@@ -55,7 +55,7 @@ const proyectosCollection = defineCollection({
   type: 'content',
   schema: z.object({
     client_name: z.string(),
-    title: z.string().optional(),
+    titulo: z.string().optional(),
     services_list: z.array(z.string()).optional(),
     image: z.string().optional(),
     date: z.date().optional(),
