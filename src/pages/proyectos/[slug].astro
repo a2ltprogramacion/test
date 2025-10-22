@@ -1,33 +1,32 @@
 ---
-// @src/pages/proyectos/[slug].astro
-import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+// @src/pages/proyectos/[slug].astro (VERSIÓN COMPLETA Y SEGURA)
+import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { mdToHtml } from '../../utils/markdown';
 
 // 1. Obtenemos todos los servicios una sola vez para tenerlos disponibles.
 const allServices = await getCollection('servicios');
 
-// 2. Generamos las rutas para cada proyecto (esto se mantiene igual).
+// ✅ CAMBIO 1: Modificamos getStaticPaths para que pase el proyecto completo como 'props'
 export async function getStaticPaths() {
   const projects = await getCollection('proyectos');
   return projects.map(project => ({
     params: { slug: project.slug },
-    props: { project }, // Pasamos el proyecto completo como prop
+    props: { project }, // <-- ¡La pieza clave! Pasamos todos los datos del proyecto aquí.
   }));
 }
 
-// 3. Obtenemos el proyecto específico para esta página.
+// ✅ CAMBIO 2: Ya no necesitamos buscar el proyecto de nuevo. Lo recibimos directamente de Astro.props.
 const { project } = Astro.props;
 if (!project) {
+  // Esta comprobación se mantiene como una medida de seguridad.
   return new Response(null, { status: 404, statusText: 'No encontrado' });
 }
 
-// 4. AQUÍ ESTÁ LA NUEVA LÓGICA:
-//    - Leemos la lista de slugs de servicios guardada en el proyecto.
-//    - Filtramos la colección `allServices` para obtener los detalles completos de solo esos servicios.
+// La lógica para buscar servicios se mantiene igual.
 const selectedServiceTitles = project.data.services_list ?? [];
 const relatedServices = allServices.filter(service => 
-  selectedServiceTitles.includes(service.data.title) // <-- Buscamos por 'title' en lugar de 'slug'
+  selectedServiceTitles.includes(service.data.title)
 );
 
 const { title, summary, client_name, date, body, gallery } = project.data;
@@ -44,7 +43,7 @@ const { title, summary, client_name, date, body, gallery } = project.data;
       <div class="relative z-10 p-8">
         <h1 class="text-4xl md:text-5xl font-serif font-bold text-white">{title}</h1>
         <p class="text-xl mt-2">Cliente: <strong>{client_name}</strong></p>
-        {date && <time class="text-sm mt-1 block">{date.toLocaleDateString('es-CL')}</time>}
+        {date && <time class="text-sm mt-1 block">{new Date(date).toLocaleDateString('es-CL')}</time>}
       </div>
     </header>
 
@@ -53,18 +52,17 @@ const { title, summary, client_name, date, body, gallery } = project.data;
         
         <div class="lg:col-span-2 prose prose-xl max-w-none">
           <h2 class="font-serif text-3xl font-bold text-primary mb-4">Detalles del Proyecto</h2>
-          <div set:html={mdToHtml(body)} />
+          {body && <div set:html={mdToHtml(body)} />}
         </div>
 
         <aside>
           <div class="bg-white p-6 shadow-lg rounded-lg sticky top-28">
             <h3 class="text-xl font-serif font-bold text-primary border-b-2 border-accent pb-2 mb-4">Servicios Realizados</h3>
             
-            {/* 👇 AQUÍ MOSTRAMOS LA NUEVA LISTA DE SERVICIOS 👇 */}
             {relatedServices.length > 0 ? (
-              <ul class="space-y-2">
+              <ul class="flex flex-wrap gap-2">
                 {relatedServices.map(service => (
-                  <li class="bg-accent/10 text-accent font-semibold text-sm py-1 px-3 rounded-full inline-block">
+                  <li class="bg-accent/10 text-accent font-semibold text-sm py-1 px-3 rounded-full">
                     {service.data.title}
                   </li>
                 ))}
