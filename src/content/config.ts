@@ -60,10 +60,7 @@ const proyectosCollection = defineCollection({
     image: z.string().optional(),
     date: z.date().optional(),
     summary: z.string().optional(),
-    
-    // ✅ LA LÍNEA QUE FALTABA: Le decimos a Astro que el campo 'body' existe.
-    body: z.string().optional(),
-    
+    body: z.string().optional(),    
     gallery: z.array(z.object({ image_path: z.string() })).optional(),
   }),
 });
