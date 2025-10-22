@@ -16,7 +16,7 @@ const sortedProjects = allProjects.sort((a, b) => new Date(b.data.date).getTime(
     {/* Imagen de Fondo */}
     <div 
       class="absolute top-0 left-0 w-full h-full bg-cover bg-center" 
-      style="background-image: url('/public/assets/uploads/logo.jpg');"
+      style="background-image: url('/assets/uploads/logo.jpg');"
     ></div>
     
     {/* Capa Oscura (Overlay) */}
@@ -36,10 +36,12 @@ const sortedProjects = allProjects.sort((a, b) => new Date(b.data.date).getTime(
   <section class="py-20 px-8">
     <div class="container mx-auto text-center">
       <h1 class="text-4xl font-serif font-bold mb-12 text-primary">Todos Nuestros Proyectos</h1>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {sortedProjects.map(project => (
-          <ProjectCard project={project} />
-        ))}
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {sortedProjects.map(project => (
+            <ProjectCard project={project} />
+          ))}
+        </div>
       </div>
     </div>
   </section>

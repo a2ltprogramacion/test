@@ -1,48 +1,71 @@
 ---
-// Componente renovado para mostrar una tarjeta de proyecto con mejor estética y efectos hover
 import type { CollectionEntry } from 'astro:content';
+import { mdToHtml } from '../utils/markdown';
+
 export interface Props {
-  project: CollectionEntry<'proyectos'>;
+    project: CollectionEntry<'proyectos'>;
 }
 
 const { project } = Astro.props;
 const { titulo, summary, gallery, image, client_name } = project.data;
 const firstImage = image ??
-(gallery?.length ? gallery[0].image_path : '/public/assets/uploads/placeholder.jpeg');
+(gallery?.length ? gallery[0].image_path : '/assets/uploads/placeholder.jpeg');
+
+
+// --- LÓGICA DE CORTE DE CARACTERES (Mobile-First / Más Estricta) ---
+// Usaremos 120 caracteres como límite universal para asegurar la visibilidad en móviles.
+// El cliente ajustará este valor (o el del *frontmatter* en CMS) si necesita más.
+const MAX_CHARS_UNIVERSAL = 120; // Límite de caracteres para asegurar CTA visible en el peor caso (móvil)
+const MAX_CHARS_TITLE = 80; 
+
+const cutSummary = (text: string | undefined, limit: number): string => {
+    if (!text) return '';
+    // Convertimos el Markdown a texto plano (eliminando saltos de línea de Markdown)
+    const plainText = text.replace(/[\n\r]/g, ' ').trim();
+    if (plainText.length <= limit) {
+        return plainText;
+    }
+
+    // Cortamos y aseguramos que terminamos en '...'
+    return plainText.substring(0, limit).trim() + '...';
+};
+// Obtenemos el resumen cortado
+const renderedSummary = mdToHtml(cutSummary(summary, MAX_CHARS_UNIVERSAL));
+const renderedTitle = cutSummary(titulo, MAX_CHARS_TITLE);
+// ---------------------------------------------
+
 ---
 
-<a href={`/proyectos/${project.slug}`} class="group block overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-xl bg-white hover:no-underline">
-  <div class="relative overflow-hidden">
-    <img src={firstImage} alt={`Imagen del proyecto ${titulo}`} class="w-full h-56 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105" />
-    <div class="absolute inset-0 bg-primary bg-opacity-40 transition-opacity duration-300 group-hover:bg-opacity-60"></div>
-    <div class="absolute top-4 left-4">
-      <span class="text-xs font-bold bg-white/80 text-primary py-1 px-3 rounded-full backdrop-blur-sm">{client_name}</span>
+<a href={`/proyectos/${project.slug}`}
+    class="group block overflow-hidden shadow-lg transition-shadow duration-300 hover:shadow-xl bg-white hover:no-underline
+           max-w-[400px] h-[500px] flex flex-col {/* CRÍTICO: Tarjeta con altura fija y Flexbox vertical */}">
+    <div class="relative overflow-hidden flex-shrink-0">
+        <img src={firstImage} alt={`Imagen del proyecto ${titulo}`} class="w-full h-56 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105" />
+        <div class="absolute inset-0 bg-primary bg-opacity-40 transition-opacity duration-300 group-hover:bg-opacity-60"></div>
+        <div class="absolute top-4 left-4">
+            <span class="text-xs font-bold bg-white/80 text-primary py-1 px-3 rounded-full backdrop-blur-sm">{client_name}</span>
+        </div>
     </div>
-  </div>
-  <div class="p-6">
-    {/* 👇 CAMBIO CLAVE: Añadimos clases para crear y animar el pseudo-elemento ::after */}
-    <h3 class="
-      font-serif text-2xl font-bold text-primary mb-2
-      relative inline-block {/* Necesario para posicionar el pseudo-elemento correctamente */}
-      
-      after:content-[''] {/* Crea el pseudo-elemento */}
-      after:absolute after:bottom-0 after:left-0 {/* Lo posiciona abajo a la izquierda */}
-      after:w-full after:h-[2px] {/* Le da el tamaño de un subrayado */}
-      after:bg-accent {/* Le da el color naranja */}
-      
-      after:origin-left {/* La animación comenzará desde la izquierda */}
-      after:scale-x-0 {/* Estado inicial: escala horizontal de 0 (invisible) */}
-      group-hover:after:scale-x-100 {/* Estado final: escala horizontal de 100% al hacer hover en la tarjeta */}
-      after:transition-transform after:duration-300 after:ease-in-out {/* Define la animación */}
-    ">
-      {titulo}
-    </h3>
-    
-    <p class="font-sans text-base text-gray-600 mb-4 line-clamp-3">{summary}</p>
-    
-    <div class="flex items-center text-accent font-bold">
-      <span>Ver Caso de Éxito</span>
-      <span class="ml-2 transition-transform duration-300 group-hover:translate-x-2">→</span>
+    <div class="p-6 h-auto md:h-80 flex flex-col">
+        <h3 class="
+            font-serif text-lg lg:text-2xl font-bold text-primary mb-2
+            relative inline-block
+            after:content-[''] after:absolute after:bottom-0 after:left-0
+            after:w-full after:h-[2px] after:bg-accent
+            after:origin-left after:scale-x-0
+            group-hover:after:scale-x-100
+            after:transition-transform after:duration-300 after:ease-in-out
+        ">
+            {renderedTitle}
+        </h3>
+
+        <p class="font-sans text-base text-gray-600 mb-4 line-clamp-3">
+            <span set:html={renderedSummary} />
+        </p>
+
+        <div class="flex items-center text-accent font-bold mt-5 md:mt-auto">
+            <span>Ver Caso de Éxito</span>
+            <span class="ml-2 transition-transform duration-300 group-hover:translate-x-2">→</span>
+        </div>
     </div>
-  </div>
 </a>

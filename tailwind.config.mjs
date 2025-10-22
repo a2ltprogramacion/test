@@ -2,6 +2,18 @@
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
+        screens: {
+      // NUEVO BREAKPOINT para 1366px y más grande
+      'desktop-med': '1366px', 
+      // NUEVO BREAKPOINT para 1920px y más grande
+      'desktop-lg': '1920px',
+      // Breakpoints predeterminados de Tailwind
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
     extend: {
       colors: {
         'primary': '#0A253F',      // Azul oscuro corporativo (de agencialean.cl)
