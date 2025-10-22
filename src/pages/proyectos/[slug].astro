@@ -25,9 +25,9 @@ if (!project) {
 // 4. AQUÍ ESTÁ LA NUEVA LÓGICA:
 //    - Leemos la lista de slugs de servicios guardada en el proyecto.
 //    - Filtramos la colección `allServices` para obtener los detalles completos de solo esos servicios.
-const selectedServiceSlugs = project.data.services_list ?? [];
+const selectedServiceTitles = project.data.services_list ?? [];
 const relatedServices = allServices.filter(service => 
-  selectedServiceSlugs.includes(service.slug)
+  selectedServiceTitles.includes(service.data.title) // <-- Buscamos por 'title' en lugar de 'slug'
 );
 
 const { title, summary, client_name, date, body, gallery } = project.data;
