@@ -21,6 +21,11 @@ if (!project) {
   return new Response(null, { status: 404, statusText: 'No encontrado' });
 }
 
+console.log('--- DATOS RECIBIDOS PARA EL PROYECTO ---');
+console.log(project.data);
+console.log('------------------------------------');
+
+
 const selectedServiceTitles = project.data.services_list ?? [];
 const relatedServices = allServices.filter(service => 
   selectedServiceTitles.includes(service.data.title)
