@@ -8,7 +8,7 @@ export interface Props {
 const { project } = Astro.props;
 const { titulo, summary, gallery, image, client_name } = project.data;
 const firstImage = image ??
-(gallery?.length ? gallery[0].image_path : '/placeholder.png');
+(gallery?.length ? gallery[0].image_path : '/public/assets/uploads/placeholder.jpeg');
 ---
 
 <a href={`/proyectos/${project.slug}`} class="group block overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-xl bg-white hover:no-underline">
