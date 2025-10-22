@@ -73,23 +73,34 @@ if (featuredProjectSlugs.length > 0) {
     </header>
 
     <!-- Nosotros Section -->
-    <section id="nosotros" class="py-20 px-8">
-      <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div class="text-text-base max-w-none">
-          <h2 class="font-sans text-4xl font-bold mb-4 text-primary">
-            <span>{nosotros.title}</span>
-          </h2>
-          {nosotros.content ? (
-            <div class="prose prose-2xl max-w-none">
-              <span set:html={mdToHtml(nosotros.content)} />
-            </div>
-          ) : (
-            <Content />
-          )}
+<section id="nosotros" class="py-20 px-8">
+
+  <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-center desktop-lg:max-w-[80%]">
+
+    <div class="text-text-base w-full max-w-none text-center md:text-left md:col-span-2">
+      <h2 class="font-sans text-4xl font-bold mb-4 text-primary">
+        <span>{nosotros.title}</span>
+      </h2>
+      {nosotros.content ? (
+        <div class="prose prose-2xl max-w-none">
+          <span set:html={mdToHtml(nosotros.content)} />
         </div>
-        {nosotros.image && <img src={nosotros.image} alt={`Imagen de ${nosotros.title}`} class="shadow-xl w-full h-auto object-cover transition-transform duration-300 hover:scale-105" />}
-      </div>
-    </section>
+      ) : (
+        <Content />
+      )}
+    </div>
+
+    {nosotros.image && 
+      <img 
+        src={nosotros.image} 
+        alt={`Imagen de ${nosotros.title}`} 
+        class="shadow-xl w-full h-auto object-cover transition-transform duration-300 hover:scale-105 
+               max-w-md mx-auto {/* Restringe la imagen y la centra en su celda */}
+              " 
+      />
+    }
+  </div>
+</section>
 
     <!-- Proyectos Section -->
     {featuredProjects.length > 0 && (
@@ -181,7 +192,7 @@ if (featuredProjectSlugs.length > 0) {
     <section id="contacto" class="py-20 px-8 text-center">
         <h2 class="font-sans text-4xl font-bold mb-4 text-primary">{contacto?.data.contact_heading ?? '¿Listo para empezar?'}</h2>
         <p class="text-lg max-w-2xl mx-auto mb-8">{contacto?.data.contact_subheading ?? 'Conversemos por WhatsApp para una respuesta más rápida o envíame un correo.'}</p>
-        <div class="flex justify-center gap-4 flex-wrap">
+        <div class="flex justify-center items-center gap-4 flex-wrap"> 
             {contacto?.data.whatsapp && (
               (() => {
                 const msg = encodeURIComponent(contacto.data.whatsapp_message ?? 'Hola, quiero cotizar un proyecto');
@@ -196,8 +207,24 @@ if (featuredProjectSlugs.length > 0) {
             {contacto?.data.email && (
               <a href={`mailto:${contacto.data.email}`} 
                   class="bg-accent text-primary font-bold py-3 px-8 text-lg rounded-md transition-all duration-300 ease-in-out hover:bg-white hover:text-accent border-2 border-accent"
-              >Correo Electrónico</a>
+              >Correo Electrónico: {contacto.data.email}</a>
             )}
+
+            {contacto?.data.email && (
+          <div class="relative"> {/* ELIMINAMOS inline-block del padre */}
+            <a id="email-copy-button" 
+              data-email={contacto.data.email}
+              href={`mailto:${contacto.data.email}`} 
+              class="bg-accent text-primary font-bold py-3 px-8 text-lg rounded-md transition-all duration-300 ease-in-out hover:bg-white hover:text-accent border-2 border-accent"
+            >
+              📄 Copiar Correo
+            </a>
+             {/* Tooltip de confirmación (oculto por defecto) */}
+            <span id="copy-tooltip" class="absolute left-1/2 transform -translate-x-1/2 bottom-full mb-2 px-3 py-1 bg-green-600 text-white text-sm rounded-md opacity-0 transition-opacity duration-300 pointer-events-none">
+                ¡Copiado!
+            </span>
+          </div>
+        )}
         </div>
 					{contacto?.data.address ? <div class="mt-6 text-sm text-primary">{contacto.data.address}</div> : null}
     </section>
@@ -331,4 +358,42 @@ if (featuredProjectSlugs.length > 0) {
 
     })();
   });
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ... [Tu código existente de navegación móvil aquí] ...
+    
+    // --- Lógica de Copia al Portapapeles ---
+    const copyButton = document.getElementById('email-copy-button');
+    const tooltip = document.getElementById('copy-tooltip');
+
+    if (copyButton && tooltip) {
+        // Previene la acción por defecto (abrir cliente de correo)
+        copyButton.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            
+            const email = copyButton.getAttribute('data-email');
+            
+            if (email) {
+                // 1. Usar la API moderna de Portapapeles
+                navigator.clipboard.writeText(email)
+                    .then(() => {
+                        // 2. Mostrar la confirmación (Tooltip)
+                        tooltip.classList.remove('opacity-0');
+                        tooltip.classList.add('opacity-100');
+                        
+                        // 3. Revertir el estado después de 2 segundos
+                        setTimeout(() => {
+                            tooltip.classList.remove('opacity-100');
+                            tooltip.classList.add('opacity-0');
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Fallo al intentar copiar el texto: ', err);
+                        // Fallback simple: alert('No se pudo copiar el correo.');
+                    });
+            }
+        });
+    }
+});
 </script>
+

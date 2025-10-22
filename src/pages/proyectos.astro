@@ -11,12 +11,12 @@ const sortedProjects = allProjects.sort((a, b) => new Date(b.data.date).getTime(
 <Layout title="Nuestros Proyectos | Elevawod" description="Un vistazo a todos los proyectos que hemos realizado.">
   <header 
     id="header-proyectos" 
-    class="relative h-64 sm:h-80 flex items-center justify-center text-center text-text-inverted"
+    class="relative h-56 sm:h-80 flex items-center justify-center text-center text-text-inverted"
   >
     {/* Imagen de Fondo */}
     <div 
       class="absolute top-0 left-0 w-full h-full bg-cover bg-center" 
-      style="background-image: url('/assets/uploads/logo.jpg');"
+      style="background-image: url('/assets/uploads/proyectos.png');"
     ></div>
     
     {/* Capa Oscura (Overlay) */}
@@ -24,7 +24,7 @@ const sortedProjects = allProjects.sort((a, b) => new Date(b.data.date).getTime(
   
     {/* Contenido del Título */}
     <div class="relative z-10 px-8 animate-fade-in-up">
-      <h1 class="text-4xl md:text-5xl font-serif font-bold text-white">
+      <h1 class="text-4xl md:text-5xl font-serif font-bold text-white pt-20">
         Nuestros Proyectos
       </h1>
       <p class="text-lg md:text-xl max-w-2xl mx-auto mt-4 text-white/90">
