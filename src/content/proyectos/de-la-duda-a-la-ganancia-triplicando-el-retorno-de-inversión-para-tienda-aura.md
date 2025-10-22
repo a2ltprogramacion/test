@@ -1,7 +1,8 @@
 ---
 slug: triplicando-roas-tienda-aura
 client_name: Tienda Aura (E-commerce de moda)
-title: triplicando-roas-tienda-aura
+title: "De la Duda a la Ganancia: Triplicando el Retorno de Inversión para
+  Tienda Aura."
 services_list:
   - Publicidad Digital con Retorno (ROAS)
   - Sitios Web que Generan Conversiones
