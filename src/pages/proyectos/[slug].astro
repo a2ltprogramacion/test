@@ -1,29 +1,26 @@
 ---
-// @src/pages/proyectos/[slug].astro (VERSIÓN COMPLETA Y SEGURA)
+// @src/pages/proyectos/[slug].astro (VERSIÓN ACTUALIZADA Y COMPLETA)
+export const prerender = true;
+
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { mdToHtml } from '../../utils/markdown';
 
-// 1. Obtenemos todos los servicios una sola vez para tenerlos disponibles.
 const allServices = await getCollection('servicios');
 
-// ✅ CAMBIO 1: Modificamos getStaticPaths para que pase el proyecto completo como 'props'
 export async function getStaticPaths() {
   const projects = await getCollection('proyectos');
   return projects.map(project => ({
     params: { slug: project.slug },
-    props: { project }, // <-- ¡La pieza clave! Pasamos todos los datos del proyecto aquí.
+    props: { project },
   }));
 }
 
-// ✅ CAMBIO 2: Ya no necesitamos buscar el proyecto de nuevo. Lo recibimos directamente de Astro.props.
 const { project } = Astro.props;
 if (!project) {
-  // Esta comprobación se mantiene como una medida de seguridad.
   return new Response(null, { status: 404, statusText: 'No encontrado' });
 }
 
-// La lógica para buscar servicios se mantiene igual.
 const selectedServiceTitles = project.data.services_list ?? [];
 const relatedServices = allServices.filter(service => 
   selectedServiceTitles.includes(service.data.title)
@@ -50,15 +47,33 @@ const { title, summary, client_name, date, body, gallery } = project.data;
     <div class="max-w-4xl mx-auto p-8 md:p-12">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        <div class="lg:col-span-2 prose prose-xl max-w-none">
-          <h2 class="font-serif text-3xl font-bold text-primary mb-4">Detalles del Proyecto</h2>
-          {body && <div set:html={mdToHtml(body)} />}
+        <div class="lg:col-span-2">
+
+          {summary && (
+            <div class="prose prose-xl max-w-none mb-8">
+              <h2 class="font-serif text-3xl font-bold text-primary mb-4">Resumen</h2>
+              <div set:html={mdToHtml(summary)} />
+            </div>
+          )}
+
+          {body && (
+            <div class="prose prose-xl max-w-none">
+              <h2 class="font-serif text-3xl font-bold text-primary mb-4">Detalles del Proyecto</h2>
+              <div set:html={mdToHtml(body)} />
+            </div>
+          )}
+
+          {/* Mensaje si ambos campos están vacíos */}
+          {!summary && !body && (
+            <p class="text-gray-500">No hay más detalles disponibles para este proyecto.</p>
+          )}
+
         </div>
 
         <aside>
           <div class="bg-white p-6 shadow-lg rounded-lg sticky top-28">
             <h3 class="text-xl font-serif font-bold text-primary border-b-2 border-accent pb-2 mb-4">Servicios Realizados</h3>
-            
+            {/* ... (el resto de la barra lateral se queda igual) ... */}
             {relatedServices.length > 0 ? (
               <ul class="flex flex-wrap gap-2">
                 {relatedServices.map(service => (
@@ -76,7 +91,7 @@ const { title, summary, client_name, date, body, gallery } = project.data;
       </div>
 
       {gallery && gallery.length > 0 && (
-        <section class="mt-16">
+         <section class="mt-16">
           <h2 class="text-3xl font-serif font-bold text-primary text-center mb-8">Galería de Imágenes</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {gallery.map(item => (
