@@ -17,4 +17,8 @@ project_details: >-
   * **La Solución ELEVAWOD:** Realizamos un refresh de marca completo, diseñando un logo y una línea gráfica que transmitían confianza y profesionalismo. Simultáneamente, estructuramos una campaña de Publicidad Digital en LinkedIn, dirigida específicamente a tomadores de decisiones en sus industrias objetivo, ofreciendo un caso de estudio de alto valor a cambio de sus datos.
 
   * **El Resultado Cuantitativo:** La nueva estrategia generó un aumento del 70% en la recepción de leads calificados cada mes. La imagen de marca renovada fue un factor decisivo para cerrar dos de los contratos más grandes de su historia.
+gallery:
+  - image_path: /assets/uploads/gemini_generated_image_kat399kat399kat3.png
+  - image_path: /assets/uploads/gemini_generated_image_ciifi6ciifi6ciif.png
+  - image_path: /assets/uploads/gemini_generated_image_9k57k59k57k59k57.png
 ---
