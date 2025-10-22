@@ -1,5 +1,5 @@
 ---
-// @src/pages/proyectos/[slug].astro (VERSIÓN ACTUALIZADA Y COMPLETA)
+// @src/pages/proyectos/[slug].astro (VERSIÓN CON SINTAXIS CORREGIDA)
 export const prerender = true;
 
 import { getCollection, type CollectionEntry } from 'astro:content';
@@ -48,32 +48,28 @@ const { title, summary, client_name, date, body, gallery } = project.data;
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         <div class="lg:col-span-2">
-
           {summary && (
-            <div class="prose prose-xl max-w-none mb-8">
-              <h2 class="font-serif text-3xl font-bold text-primary mb-4">Resumen</h2>
-              <div set:html={mdToHtml(summary)} />
+            <div class="prose prose-xl max-w-none mb-12 border-b border-gray-300 pb-8">
+              <h2 class="font-serif text-3xl font-bold text-primary mb-4">Resumen del Desafío</h2>
+              <div set:html={mdToHtml(summary)}></div>
             </div>
           )}
 
           {body && (
             <div class="prose prose-xl max-w-none">
-              <h2 class="font-serif text-3xl font-bold text-primary mb-4">Detalles del Proyecto</h2>
-              <div set:html={mdToHtml(body)} />
+              <h2 class="font-serif text-3xl font-bold text-primary mb-4">Solución y Resultados</h2>
+              <div set:html={mdToHtml(body)}></div>
             </div>
           )}
 
-          {/* Mensaje si ambos campos están vacíos */}
           {!summary && !body && (
             <p class="text-gray-500">No hay más detalles disponibles para este proyecto.</p>
           )}
-
         </div>
 
         <aside>
           <div class="bg-white p-6 shadow-lg rounded-lg sticky top-28">
             <h3 class="text-xl font-serif font-bold text-primary border-b-2 border-accent pb-2 mb-4">Servicios Realizados</h3>
-            {/* ... (el resto de la barra lateral se queda igual) ... */}
             {relatedServices.length > 0 ? (
               <ul class="flex flex-wrap gap-2">
                 {relatedServices.map(service => (
@@ -87,7 +83,6 @@ const { title, summary, client_name, date, body, gallery } = project.data;
             )}
           </div>
         </aside>
-
       </div>
 
       {gallery && gallery.length > 0 && (
