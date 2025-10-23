@@ -68,7 +68,7 @@ const { titulo, summary, client_name, date, project_details, gallery } = project
         </div>
 
         <aside>
-          <div class="bg-white p-6 shadow-lg rounded-lg sticky top-28">
+          <div class="bg-white p-6 shadow-lg  sticky top-28">
             <h3 class="text-xl font-serif font-bold text-primary border-b-2 border-accent pb-2 mb-4">Servicios Realizados</h3>
             {relatedServices.length > 0 ? (
               <ul class="flex flex-wrap gap-2">
@@ -95,7 +95,7 @@ const { titulo, summary, client_name, date, project_details, gallery } = project
                   src={item.image_path} 
                   alt={`Imagen del proyecto ${titulo}`} 
                   loading="lazy" 
-                  class="w-full h-56 object-cover rounded-lg shadow-md transition-transform duration-300 hover:scale-105"
+                  class="w-full h-56 object-cover shadow-md transition-transform duration-300 hover:scale-105"
                 />
               </a>
             ))}
