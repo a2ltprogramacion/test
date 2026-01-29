@@ -1,0 +1,158 @@
+---
+// @src/pages/servicios/[slug].astro
+import { getCollection, getEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/organisms/Navbar.astro";
+import ContactFooter from "../../components/organisms/ContactFooter.astro";
+import { Image } from "astro:assets";
+
+// 1. Generación de Rutas Estáticas
+export async function getStaticPaths() {
+  const services = await getCollection("services");
+  return services.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const {
+  title,
+  main_image,
+  main_image_alt,
+  description,
+  content_blocks,
+  price,
+} = entry.data;
+
+// 2. Data Global
+const homePage = await getEntry("pages", "home");
+const contactData = homePage?.data.contact;
+const siteName = homePage?.data?.seo?.site_name || "A2LT Knowledge";
+const cleanPhone = contactData?.phone.replace(/[^0-9]/g, "") || "";
+const waLink = `https://wa.me/${cleanPhone}`;
+
+const seoData = {
+  meta_title: `${title} | Servicios | ${siteName}`,
+  meta_description: description,
+  social_image: main_image,
+  social_image_alt: main_image_alt, // SEO Social
+};
+---
+
+<Layout seo={seoData}>
+  <Navbar siteName={siteName} whatsappLink={waLink} />
+
+  <main>
+    {/* HERO DE SERVICIO */}
+    <section
+      class="relative h-[60vh] flex items-center justify-center overflow-hidden"
+    >
+      <Image
+        src={main_image}
+        alt={main_image_alt}
+        class="absolute inset-0 w-full h-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-black/60"></div>
+      <div class="relative z-10 text-center px-6">
+        <h1 class="text-4xl md:text-6xl font-heading font-bold text-white mb-4">
+          {title}
+        </h1>
+        {price && <span class="text-secondary font-bold text-xl">{price}</span>}
+      </div>
+    </section>
+
+    {/* RESUMEN */}
+    <section class="py-20 bg-background">
+      <div class="container mx-auto px-6 text-center max-w-3xl">
+        <p class="text-xl text-gray-300 leading-relaxed italic">
+          "{description}"
+        </p>
+      </div>
+    </section>
+
+    {/* DISEÑO EN Z - AHORA CON ALT DINÁMICO */}
+    {
+      content_blocks && (
+        <section class="py-10 space-y-24 bg-background">
+          {/* BLOQUE 1 */}
+          {content_blocks.p1_content && (
+            <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div class="prose prose-invert max-w-none text-gray-400">
+                <div set:html={content_blocks.p1_content} />
+              </div>
+              {content_blocks.p1_image && (
+                <div class="rounded-2xl overflow-hidden border border-white/10">
+                  <Image
+                    src={content_blocks.p1_image}
+                    alt={
+                      content_blocks.p1_image_alt ||
+                      `Detalle del servicio ${title} - Parte 1`
+                    }
+                    class="w-full h-auto"
+                  />
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* BLOQUE 2 */}
+          {content_blocks.p2_text && (
+            <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div class="order-2 md:order-1 rounded-2xl overflow-hidden border border-white/10">
+                {content_blocks.p2_image && (
+                  <Image
+                    src={content_blocks.p2_image}
+                    alt={
+                      content_blocks.p2_image_alt ||
+                      `Detalle del servicio ${title} - Parte 2`
+                    }
+                    class="w-full h-auto"
+                  />
+                )}
+              </div>
+              <div class="order-1 md:order-2 prose prose-invert max-w-none text-gray-400">
+                <div set:html={content_blocks.p2_text} />
+              </div>
+            </div>
+          )}
+
+          {/* BLOQUE 3 */}
+          {content_blocks.p3_text && (
+            <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div class="prose prose-invert max-w-none text-gray-400">
+                <div set:html={content_blocks.p3_text} />
+              </div>
+              {content_blocks.p3_image && (
+                <div class="rounded-2xl overflow-hidden border border-white/10">
+                  <Image
+                    src={content_blocks.p3_image}
+                    alt={
+                      content_blocks.p3_image_alt ||
+                      `Detalle del servicio ${title} - Parte 3`
+                    }
+                    class="w-full h-auto"
+                  />
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* CONCLUSIÓN */}
+          {content_blocks.conclusion && (
+            <div class="container mx-auto px-6 pt-10 text-center max-w-4xl">
+              <div class="prose prose-invert max-w-none text-gray-400 border-t border-white/5 pt-12">
+                <div set:html={content_blocks.conclusion} />
+              </div>
+            </div>
+          )}
+        </section>
+      )
+    }
+
+    <div class="mt-20">
+      {contactData && <ContactFooter data={contactData} />}
+    </div>
+  </main>
+</Layout>

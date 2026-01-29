@@ -1,0 +1,772 @@
+# @public/admin/config.yml
+# --------------------------------------------------------------------------------
+# CONFIGURACIÓN DEL GESTOR DE CONTENIDOS (DECAP CMS) - A2LT AUTHORITY
+# --------------------------------------------------------------------------------
+backend:
+  name: git-gateway
+  branch: main
+  squash_merges: true
+
+# Permite usar 'npx decap-server' sin errores 404.
+local_backend: true
+
+# Gestión de Archivos Multimedia
+media_folder: "src/assets/uploads" # Dónde se guardan en el repo
+public_folder: "../../assets/uploads" # Dónde los busca el navegador
+site_url: "https://a2lt-authority-prototype.netlify.app"
+
+# Branding del Panel Admin (Para el Cliente)
+display_url: "https://a2lt-authority-prototype.netlify.app"
+logo_url: "/images/logo-a2lt-soluciones.webp"
+locale: "es"
+
+# --------------------------------------------------------------------------------
+# COLECCIONES DE CONTENIDO
+# --------------------------------------------------------------------------------
+collections:
+  # -----------------------------------------------------------------
+  # COLECCIÓN 1: PÁGINAS ESTRUCTURALES (Archivos Únicos)
+  # -----------------------------------------------------------------
+  - name: "pages"
+    label: "⚙️ Páginas del Sitio"
+    files:
+      # --- 1.1 HOME (Authority) ---
+      - name: "home"
+        label: "🏠 Página de Inicio (Authority)"
+        file: "src/content/pages/home.md"
+        fields:
+          # PANEL DE CONTROL
+          - label: "🎛️ Panel de Control (Visibilidad)"
+            name: "modules"
+            widget: "object"
+            collapsed: false
+            hint: "Usa estos interruptores para ocultar secciones temporalmente sin borrar su contenido. Ideal para lanzar rápido e ir activando cosas luego."
+            fields:
+              - {
+                  label: "Mostrar Hero (Portada)",
+                  name: "show_hero",
+                  widget: "boolean",
+                  default: true,
+                }
+              - {
+                  label: "Mostrar Servicios",
+                  name: "show_services",
+                  widget: "boolean",
+                  default: true,
+                }
+              - {
+                  label: "Mostrar Knowledge Base",
+                  name: "show_knowledge",
+                  widget: "boolean",
+                  default: true,
+                }
+              - {
+                  label: "Mostrar Clientes",
+                  name: "show_clients",
+                  widget: "boolean",
+                  default: false,
+                }
+              - {
+                  label: "Mostrar Testimonios",
+                  name: "show_testimonials",
+                  widget: "boolean",
+                  default: false,
+                }
+              - {
+                  label: "Mostrar Nosotros",
+                  name: "show_about",
+                  widget: "boolean",
+                  default: true,
+                }
+              - {
+                  label: "Mostrar FAQ",
+                  name: "show_faq",
+                  widget: "boolean",
+                  default: true,
+                }
+
+          # IDENTIDAD & SEO
+          - label: "1. Identidad & SEO (Vital para Google)"
+            name: "seo"
+            widget: "object"
+            collapsed: false
+            hint: "Esta información es invisible en el diseño, pero es lo que Google lee para posicionarte. Llénalo con palabras clave."
+            fields:
+              - {
+                  label: "Nombre del Negocio / Marca",
+                  name: "site_name",
+                  widget: "string",
+                  hint: "El nombre oficial que aparecerá en la pestaña del navegador. Ej: A2LT Soluciones.",
+                }
+              - {
+                  label: "Meta Título (Título en Google)",
+                  name: "meta_title",
+                  widget: "string",
+                  hint: "El título azul que la gente ve en los resultados de búsqueda. Debe ser atractivo. Máx 60 caracteres.",
+                }
+              - {
+                  label: "Meta Descripción (Resumen)",
+                  name: "meta_description",
+                  widget: "text",
+                  hint: "El texto gris debajo del título en Google. Explica qué ofreces e invita al clic. Máx 160 caracteres.",
+                }
+              - {
+                  label: "Imagen Social (Vista Previa WhatsApp)",
+                  name: "social_image",
+                  widget: "image",
+                  hint: "Esta es la foto que sale cuando compartes tu link por WhatsApp o LinkedIn. Tamaño ideal: 1200x630px.",
+                }
+              - {
+                  label: "Alt Imagen Social",
+                  name: "social_image_alt",
+                  widget: "string",
+                  required: false,
+                  hint: "Describe la imagen social para accesibilidad.",
+                }
+              - {
+                  label: "Favicon (Icono Pestaña)",
+                  name: "favicon",
+                  widget: "image",
+                  required: false,
+                  hint: "El icono pequeño al lado del nombre en la pestaña. Formato ideal: PNG o SVG (32x32px).",
+                }
+
+          # HERO
+          - label: "2. Pantalla Principal (Hero)"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            hint: "La sección más importante. Tienes 3 segundos para captar la atención del visitante aquí."
+            fields:
+              - label: "🎨 Estilo del Fondo"
+                name: "bg_variant"
+                widget: "select"
+                options:
+                  - { label: "Imagen de Fondo", value: "image" }
+                  - { label: "Color Sólido", value: "color" }
+                default: "image"
+                hint: "Decide si quieres impactar con una fotografía o mantenerlo limpio con un color corporativo."
+              - {
+                  label: "Color (Solo si eligió Sólido)",
+                  name: "bg_color",
+                  widget: "color",
+                  required: false,
+                  default: "#111827",
+                  hint: "Haz clic para elegir el color de fondo.",
+                }
+              - {
+                  label: "Imagen de Fondo (Solo si eligió Imagen)",
+                  name: "image",
+                  widget: "image",
+                  required: false,
+                  hint: "Imagen de alta resolución para cubrir toda la pantalla. Rec: 1920x1080px. Peso <300KB.",
+                }
+              - {
+                  label: "Texto Alt de la Imagen",
+                  name: "image_alt",
+                  widget: "string",
+                  required: false,
+                  hint: "Descripción de la imagen para Google y ciegos.",
+                }
+              - {
+                  label: "Titular de Impacto (H1)",
+                  name: "title",
+                  widget: "string",
+                  hint: "Tu promesa principal. ¿Qué problema resuelves? Ej: 'Transformamos tu Infraestructura IT'.",
+                }
+              - {
+                  label: "Subtítulo / Bajada",
+                  name: "subtitle",
+                  widget: "text",
+                  required: false,
+                  hint: "Un breve párrafo que complementa el título. No excedas las 3 líneas.",
+                }
+              - {
+                  label: "Texto del Botón",
+                  name: "cta_text",
+                  widget: "string",
+                  default: "Cotizar Servicios",
+                  hint: "Una llamada a la acción clara. Ej: 'Ver Planes', 'Contactar Ahora'.",
+                }
+              - {
+                  label: "Enlace del Botón",
+                  name: "cta_link",
+                  widget: "string",
+                  hint: "A dónde lleva el botón. Puede ser un link a WhatsApp (https://wa.me/...) o a una sección (#contacto).",
+                }
+
+          # CLIENTES
+          - label: "3. Cartera de Clientes"
+            name: "clients"
+            widget: "list"
+            collapsed: true
+            hint: "La prueba social es clave. Muestra logos de empresas que confían en ti."
+            fields:
+              - {
+                  label: "Logo del Cliente",
+                  name: "logo",
+                  widget: "image",
+                  hint: "Sube el logo preferiblemente en formato PNG con fondo transparente. Ancho rec: 250px.",
+                }
+              - {
+                  label: "Descripción del Logo (Alt)",
+                  name: "logo_alt",
+                  widget: "string",
+                  hint: "Nombre de la empresa (Ej: Logo Coca-Cola).",
+                }
+              - { label: "Nombre Empresa", name: "name", widget: "string" }
+
+          # NOSOTROS
+          - label: "4. La Empresa / Propuesta"
+            name: "about"
+            widget: "object"
+            collapsed: true
+            hint: "Explica quién eres y por qué deberían elegirte a ti y no a la competencia."
+            fields:
+              - {
+                  label: "Título de Sección",
+                  name: "title",
+                  widget: "string",
+                  default: "Nuestra Propuesta",
+                }
+              - {
+                  label: "Imagen Descriptiva (Lateral)",
+                  name: "image",
+                  widget: "image",
+                  required: false,
+                  hint: "Foto del equipo, oficinas o trabajando. Formato vertical u horizontal funciona bien.",
+                }
+              - {
+                  label: "Alt Imagen Nosotros",
+                  name: "image_alt",
+                  widget: "string",
+                  required: false,
+                  hint: "Descripción de la foto para SEO.",
+                }
+              - {
+                  label: "Historia / Descripción del Negocio",
+                  name: "business_bio",
+                  widget: "markdown",
+                  hint: "Usa este espacio para contar tu experiencia, misión o metodología. Soporta negritas.",
+                }
+              - {
+                  label: "Dato Clave 1 (Ej: Años Exp)",
+                  name: "stat_1",
+                  widget: "string",
+                  required: false,
+                  hint: "Ej: '+10 Años de Experiencia'.",
+                }
+              - {
+                  label: "Dato Clave 2 (Ej: Garantía)",
+                  name: "stat_2",
+                  widget: "string",
+                  required: false,
+                  hint: "Ej: 'Soporte 24/7' o 'Certificación ISO'.",
+                }
+
+          # FAQ
+          - label: "5. Preguntas Frecuentes"
+            name: "faq"
+            widget: "list"
+            collapsed: true
+            hint: "Adelántate a las dudas de tus clientes para eliminar barreras de compra."
+            fields:
+              - {
+                  label: "Pregunta",
+                  name: "question",
+                  widget: "string",
+                  hint: "Ej: ¿Ofrecen factura fiscal? ¿Cuál es el tiempo de entrega?",
+                }
+              - {
+                  label: "Respuesta",
+                  name: "answer",
+                  widget: "text",
+                  hint: "Responde de forma clara y directa.",
+                }
+
+          # FOOTER
+          - label: "6. Contacto & Footer"
+            name: "contact"
+            widget: "object"
+            collapsed: true
+            hint: "Información final para cerrar el trato y redes sociales."
+            fields:
+              - {
+                  label: "Título de Cierre",
+                  name: "heading",
+                  widget: "string",
+                  default: "¿Listo para comenzar?",
+                }
+              - {
+                  label: "Subtítulo de Cierre",
+                  name: "subheading",
+                  widget: "text",
+                  default: "Hablemos sobre tu próximo proyecto.",
+                }
+              - {
+                  label: "Email Corporativo",
+                  name: "email",
+                  widget: "string",
+                  hint: "Correo donde recibirás las solicitudes.",
+                }
+              - {
+                  label: "Teléfono / WhatsApp",
+                  name: "phone",
+                  widget: "string",
+                  hint: "Número de contacto principal.",
+                }
+              - {
+                  label: "Dirección (Opcional)",
+                  name: "address",
+                  widget: "string",
+                  required: false,
+                }
+              - label: "Redes Sociales"
+                name: "social"
+                widget: "object"
+                collapsed: true
+                hint: "Pega aquí los enlaces completos (https://instagram.com/tuempresa)."
+                fields:
+                  - {
+                      label: "Facebook",
+                      name: "facebook",
+                      widget: "string",
+                      required: false,
+                    }
+                  - {
+                      label: "Instagram",
+                      name: "instagram",
+                      widget: "string",
+                      required: false,
+                    }
+                  - {
+                      label: "LinkedIn",
+                      name: "linkedin",
+                      widget: "string",
+                      required: false,
+                    }
+                  - {
+                      label: "X / Twitter",
+                      name: "twitter",
+                      widget: "string",
+                      required: false,
+                    }
+                  - {
+                      label: "YouTube",
+                      name: "youtube",
+                      widget: "string",
+                      required: false,
+                    }
+                  - {
+                      label: "TikTok",
+                      name: "tiktok",
+                      widget: "string",
+                      required: false,
+                    }
+              - {
+                  label: "Legal / Copyright",
+                  name: "copyright",
+                  widget: "string",
+                  default: "Todos los derechos reservados © 2026",
+                }
+              - {
+                  label: "Logo para Footer",
+                  name: "footer_logo",
+                  widget: "image",
+                  required: false,
+                  hint: "Logo para fondo oscuro (generalmente blanco).",
+                }
+              - {
+                  label: "Alt Logo Footer",
+                  name: "footer_logo_alt",
+                  widget: "string",
+                  required: false,
+                }
+
+      # --- 1.2 PÁGINA ÍNDICE DE SERVICIOS ---
+      - name: "services_index"
+        label: "🛠️ Config. Página Servicios"
+        file: "src/content/pages/services.md"
+        fields:
+          - {
+              label: "Título Principal (H1)",
+              name: "title",
+              widget: "string",
+              default: "Soluciones Tecnológicas",
+              hint: "El encabezado H1 de la página de servicios.",
+            }
+          - {
+              label: "Subtítulo / Bajada",
+              name: "subtitle",
+              widget: "text",
+              default: "Ingeniería de precisión.",
+              hint: "Frase de apoyo que explica la propuesta de valor.",
+            }
+          - {
+              label: "Imagen de Fondo Hero",
+              name: "hero_bg",
+              widget: "image",
+              required: false,
+              hint: "Fondo visual para la cabecera. Rec: 1920x600px.",
+            }
+          - label: "🚀 SEO Página Servicios"
+            name: "seo"
+            widget: "object"
+            collapsed: true
+            hint: "Optimización específica para esta página."
+            fields:
+              - {
+                  label: "Meta Título",
+                  name: "meta_title",
+                  widget: "string",
+                  default: "Nuestros Servicios | A2LT",
+                  hint: "Lo que se ve en la pestaña y Google.",
+                }
+              - {
+                  label: "Meta Descripción",
+                  name: "meta_description",
+                  widget: "text",
+                  hint: "Resumen persuasivo para Google.",
+                }
+              - {
+                  label: "Imagen Social",
+                  name: "social_image",
+                  widget: "image",
+                  required: false,
+                  hint: "Imagen para compartir en redes.",
+                }
+
+      # --- 1.3 PÁGINA ÍNDICE DE KNOWLEDGE BASE ---
+      - name: "knowledge_index"
+        label: "🧠 Config. Página Knowledge"
+        file: "src/content/pages/knowledge.md"
+        fields:
+          - {
+              label: "Título Principal (H1)",
+              name: "title",
+              widget: "string",
+              default: "Knowledge Base",
+              hint: "Título: Proyectos, Blog, Casos de Estudio...",
+            }
+          - {
+              label: "Subtítulo",
+              name: "subtitle",
+              widget: "text",
+              default: "Nuestra experiencia aplicada.",
+              hint: "Explica qué encontrará el usuario aquí.",
+            }
+          - {
+              label: "Imagen de Fondo Hero",
+              name: "hero_bg",
+              widget: "image",
+              required: false,
+              hint: "Imagen decorativa para el encabezado.",
+            }
+          - label: "🚀 SEO Página Knowledge"
+            name: "seo"
+            widget: "object"
+            collapsed: true
+            hint: "Optimización SEO para la base de conocimiento."
+            fields:
+              - {
+                  label: "Meta Título",
+                  name: "meta_title",
+                  widget: "string",
+                  default: "Proyectos y Artículos | A2LT",
+                }
+              - {
+                  label: "Meta Descripción",
+                  name: "meta_description",
+                  widget: "text",
+                  hint: "Describe el valor educativo de tu contenido.",
+                }
+              - {
+                  label: "Imagen Social",
+                  name: "social_image",
+                  widget: "image",
+                  required: false,
+                }
+
+  # -----------------------------------------------------------------
+  # COLECCIÓN 2: SERVICIOS (ITEMS INDIVIDUALES)
+  # -----------------------------------------------------------------
+  - name: "services"
+    label: "🛠️ Catálogo de Servicios"
+    label_singular: "Servicio"
+    folder: "src/content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {
+          label: "Nombre del Servicio",
+          name: "title",
+          widget: "string",
+          hint: "El nombre comercial de lo que vendes. Ej: 'Cableado Estructurado'.",
+        }
+      - {
+          label: "Imagen Principal (Hero/Card)",
+          name: "main_image",
+          widget: "image",
+          hint: "Esta imagen se usará de fondo en el Hero y como miniatura. Rec: 1920x1080px.",
+        }
+      - {
+          label: "Alt Imagen Principal",
+          name: "main_image_alt",
+          widget: "string",
+          hint: "Crucial para SEO. Describe la imagen.",
+        }
+      - {
+          label: "Resumen Comercial",
+          name: "description",
+          widget: "text",
+          hint: "Breve texto que invita al clic. Aparece en la tarjeta del servicio.",
+        }
+      # ESTRUCTURA EN Z
+      - label: "📖 Detalles y Contenido (Diseño en Z)"
+        name: "content_blocks"
+        widget: "object"
+        collapsed: false
+        hint: "Estructura el contenido alternando texto e imagen para una lectura fluida."
+        fields:
+          - {
+              label: "Bloque 1: Texto",
+              name: "p1_content",
+              widget: "markdown",
+              required: false,
+              hint: "Primer párrafo detallado. Describe el problema.",
+            }
+          - {
+              label: "Imagen Bloque 1",
+              name: "p1_image",
+              widget: "image",
+              required: false,
+              hint: "Se posicionará a la derecha del texto.",
+            }
+          - {
+              label: "Alt Imagen 1",
+              name: "p1_image_alt",
+              widget: "string",
+              required: false,
+            }
+          - {
+              label: "Bloque 2: Texto",
+              name: "p2_text",
+              widget: "markdown",
+              required: false,
+              hint: "Segundo párrafo. Describe tu solución.",
+            }
+          - {
+              label: "Imagen Bloque 2",
+              name: "p2_image",
+              widget: "image",
+              required: false,
+              hint: "Se posicionará a la izquierda del texto.",
+            }
+          - {
+              label: "Alt Imagen 2",
+              name: "p2_image_alt",
+              widget: "string",
+              required: false,
+            }
+          - {
+              label: "Bloque 3: Texto",
+              name: "p3_text",
+              widget: "markdown",
+              required: false,
+              hint: "Tercer párrafo. Beneficios o cierre.",
+            }
+          - {
+              label: "Imagen Bloque 3",
+              name: "p3_image",
+              widget: "image",
+              required: false,
+              hint: "Se posicionará a la derecha.",
+            }
+          - {
+              label: "Alt Imagen 3",
+              name: "p3_image_alt",
+              widget: "string",
+              required: false,
+            }
+          - {
+              label: "Conclusiones",
+              name: "conclusion",
+              widget: "markdown",
+              required: false,
+              hint: "Texto final de cierre sin imagen lateral.",
+            }
+      - {
+          label: "Precio / Desde",
+          name: "price",
+          widget: "string",
+          required: false,
+          hint: "Ej: 'Desde $100' o 'Consultar Precio'.",
+        }
+      - {
+          label: "Orden de Prioridad",
+          name: "order",
+          widget: "number",
+          default: 0,
+          value_type: "int",
+          hint: "Usa 1 para el primero, 2 para el segundo...",
+        }
+
+  # -----------------------------------------------------------------
+  # COLECCIÓN 3: KNOWLEDGE BASE (ITEMS INDIVIDUALES)
+  # -----------------------------------------------------------------
+  - name: "knowledge"
+    label: "🧠 Knowledge Base (Items)"
+    label_singular: "Contenido"
+    folder: "src/content/knowledge"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {
+          label: "Título del Contenido",
+          name: "title",
+          widget: "string",
+          hint: "Título del proyecto, artículo o asesoría.",
+        }
+      - {
+          label: "Imagen de Fondo",
+          name: "main_image",
+          widget: "image",
+          hint: "Fondo del Hero e imagen de tarjeta. Rec: 1920x1080px.",
+        }
+      - {
+          label: "Alt Imagen Principal",
+          name: "main_image_alt",
+          widget: "string",
+          hint: "Descripción SEO de la imagen.",
+        }
+      - {
+          label: "Resumen",
+          name: "description",
+          widget: "text",
+          hint: "Intro corta que aparece en el listado.",
+        }
+      # ESTRUCTURA EN Z
+      - label: "📖 Cuerpo del Contenido (Diseño en Z)"
+        name: "content_blocks"
+        widget: "object"
+        collapsed: false
+        hint: "Redacta tu caso de estudio o artículo aquí."
+        fields:
+          - { label: "Bloque 1: Título", name: "p1_title", widget: "string" }
+          - {
+              label: "Bloque 1: Contenido",
+              name: "p1_content",
+              widget: "markdown",
+            }
+          - label: "Bloque 1: Tipo de Media"
+            name: "p1_media_type"
+            widget: "select"
+            options: ["image", "video"]
+            default: "image"
+          - {
+              label: "Bloque 1: Imagen",
+              name: "p1_image",
+              widget: "image",
+              required: false,
+            }
+          - {
+              label: "Bloque 1: URL Video (YouTube)",
+              name: "p1_video_url",
+              widget: "string",
+              required: false,
+              hint: "Ej: https://www.youtube.com/watch?v=...",
+            }
+          - {
+              label: "Bloque 2: Texto",
+              name: "p2_text",
+              widget: "markdown",
+              required: false,
+            }
+          - {
+              label: "Imagen Bloque 2",
+              name: "p2_image",
+              widget: "image",
+              required: false,
+            }
+          - {
+              label: "Alt Imagen 2",
+              name: "p2_image_alt",
+              widget: "string",
+              required: false,
+            }
+          - {
+              label: "Bloque 3: Texto",
+              name: "p3_text",
+              widget: "markdown",
+              required: false,
+            }
+          - {
+              label: "Imagen Bloque 3",
+              name: "p3_image",
+              widget: "image",
+              required: false,
+            }
+          - {
+              label: "Alt Imagen 3",
+              name: "p3_image_alt",
+              widget: "string",
+              required: false,
+            }
+          - {
+              label: "Conclusiones",
+              name: "conclusion",
+              widget: "markdown",
+              required: false,
+            }
+      - {
+          label: "Categoría",
+          name: "category",
+          widget: "select",
+          options: ["Proyecto", "Artículo", "Asesoría"],
+          hint: "Ayuda a filtrar el contenido para el usuario.",
+        }
+      - {
+          label: "Orden",
+          name: "order",
+          widget: "number",
+          default: 0,
+          value_type: "int",
+        }
+
+  # -----------------------------------------------------------------
+  # COLECCIÓN 4: TESTIMONIOS
+  # -----------------------------------------------------------------
+  - name: "testimonials"
+    label: "⭐ Testimonios"
+    label_singular: "Testimonio"
+    folder: "src/content/testimonials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {
+          label: "Nombre del Cliente",
+          name: "author",
+          widget: "string",
+          hint: "Persona real que da el testimonio.",
+        }
+      - {
+          label: "Cargo / Empresa",
+          name: "role",
+          widget: "string",
+          required: false,
+          hint: "Ej: CEO de Tech Corp. Aporta credibilidad.",
+        }
+      - {
+          label: "Testimonio",
+          name: "content",
+          widget: "text",
+          hint: "Cita textual. Máx 600 caracteres.",
+        }
+      - {
+          label: "Orden",
+          name: "order",
+          widget: "number",
+          default: 0,
+          value_type: "int",
+          hint: "Orden de aparición en el carrusel.",
+        }

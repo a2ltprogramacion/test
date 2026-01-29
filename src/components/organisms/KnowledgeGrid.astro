@@ -1,0 +1,86 @@
+---
+// @src/components/organisms/KnowledgeGrid.astro
+import { Image } from "astro:assets";
+
+interface Props {
+  knowledge: any[];
+}
+
+const { knowledge } = Astro.props;
+
+// 1. Ordenar y Limitar (Solo 3 destacados)
+const sortedKnowledge = knowledge.sort(
+  (a: any, b: any) => a.data.order - b.data.order,
+);
+const featuredItems = sortedKnowledge.slice(0, 3);
+---
+
+<section id="knowledge" class="py-20 bg-background relative">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl lg:text-4xl font-heading font-bold text-white mb-4">
+        Consultorías Destacadas
+      </h2>
+      <p class="text-gray-400">
+        Programas diseñados para profesionales que buscan liderar en la era
+        digital
+      </p>
+    </div>
+
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 reveal"
+    >
+      {
+        featuredItems.map((item: any) => (
+          <a
+            href={`/knowledge/${item.slug}`}
+            class="relative h-64 rounded-2xl overflow-hidden group border border-white/5 block hover:shadow-[0_0_30px_rgba(20,184,166,0.1)] transition-all"
+          >
+            <Image
+              src={item.data.main_image}
+              alt={item.data.main_image_alt || item.data.title}
+              width={2816}
+              height={1536}
+              class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            />
+            <div class="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
+
+            <div class="absolute inset-x-0 bottom-0 p-8">
+              <span class="inline-block px-3 py-1 bg-primary text-white text-xs font-bold rounded mb-3 backdrop-blur-md">
+                {item.data.category || "Proyecto"}
+              </span>
+              <h3 class="text-2xl font-heading font-bold text-white mb-2 group-hover:text-secondary transition-colors">
+                {item.data.title}
+              </h3>
+              <p class="text-gray-300 text-sm line-clamp-2">
+                {item.data.description}
+              </p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+
+    {/* BOTÓN VER TODO */}
+    <div class="text-center">
+      <a
+        href="/knowledge"
+        class="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-secondary/30 text-secondary hover:bg-secondary hover:text-[#0f1115] transition-all duration-300 font-bold uppercase tracking-wider text-sm hover:shadow-[0_0_20px_rgba(20,184,166,0.4)]"
+      >
+        Ver toda la Base de Conocimiento
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 h-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg
+        >
+      </a>
+    </div>
+  </div>
+</section>

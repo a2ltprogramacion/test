@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A2LT Admin | Content Manager</title>
+    <style>
+      img[src*="logo-a2lt-soluciones"] {
+        max-width: 650px !important;
+        height: auto !important;
+        display: flex;
+      }
+      .css-dtjaez-CustomIconWrapper {
+        width: 650px !important;
+      }
+    </style>
+    <link rel="icon" type="image/png" href="/images/favicon-a2lt.png" />
+    <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Red+Hat+Display:wght@500;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+    <script>
+      // 1. Registrar Estilos del Sitio (CSS Global)
+      // Esto permite que Tailwind funcione dentro del preview
+      CMS.registerPreviewStyle("/styles/global.css");
+
+      // 2. Inyección de CSS Específico para el Admin (Hardening Visual)
+      // Forzamos el fondo oscuro en el preview para simular el sitio real
+      CMS.registerPreviewStyle(
+        `
+        body {
+          background-color: rgb(15, 23, 42) !important; /* Tu color-background */
+          color: rgb(245, 245, 245) !important;       /* Tu color-text */
+          font-family: 'Nunito', sans-serif;
+        }
+        h1, h2, h3 { font-family: 'Red Hat Display', sans-serif; }
+        
+        /* Ajuste para que el editor de texto sea legible en modo oscuro */
+        .editor-widget-markdown { color: #333; } 
+      `,
+        { raw: true },
+      );
+    </script>
+  </body>
+</html>

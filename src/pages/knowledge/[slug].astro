@@ -1,0 +1,204 @@
+---
+// @src/pages/knowledge/[slug].astro
+import { getCollection, getEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/organisms/Navbar.astro";
+import ContactFooter from "../../components/organisms/ContactFooter.astro";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  const knowledgeEntries = await getCollection("knowledge");
+  return knowledgeEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const {
+  title,
+  main_image,
+  main_image_alt,
+  description,
+  content_blocks,
+  category,
+} = entry.data;
+
+const homePage = await getEntry("pages", "home");
+const contactData = homePage?.data.contact;
+const siteName = homePage?.data?.seo?.site_name || "A2LT Knowledge";
+const cleanPhone = contactData?.phone.replace(/[^0-9]/g, "") || "";
+const waLink = `https://wa.me/${cleanPhone}`;
+
+const seoData = {
+  meta_title: `${title} | ${category} | ${siteName}`,
+  meta_description: description,
+  social_image: main_image,
+  social_image_alt: main_image_alt,
+};
+---
+
+<Layout seo={seoData}>
+  <Navbar siteName={siteName} whatsappLink={waLink} />
+
+  <main>
+    {/* HERO DINÁMICO */}
+    <section
+      class="relative h-[60vh] flex items-center justify-center overflow-hidden"
+    >
+      <Image
+        src={main_image}
+        alt={main_image_alt}
+        class="absolute inset-0 w-full h-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-black/70"></div>
+
+      <div class="relative z-10 text-center px-6 max-w-4xl">
+        <span
+          class="inline-block px-4 py-1 bg-primary text-white text-sm font-bold rounded-full mb-4"
+        >
+          {category}
+        </span>
+        <h1 class="text-4xl md:text-6xl font-heading font-bold text-white mb-4">
+          {title}
+        </h1>
+      </div>
+    </section>
+
+    {/* RESUMEN */}
+    <section class="py-20 bg-background border-b border-white/5">
+      <div class="container mx-auto px-6 text-center max-w-3xl">
+        <p class="text-xl text-gray-300 leading-relaxed font-light">
+          {description}
+        </p>
+      </div>
+    </section>
+
+    {/* DISEÑO EN Z - Knowledge Base */}
+    {
+      content_blocks && (
+        <section class="py-20 bg-background space-y-32">
+          {/* BLOQUE 1 */}
+          {/* BLOQUE 1: REESTRUCTURADO (Media arriba y centrado) */}
+          <section class="py-20 bg-background">
+            <div class="container mx-auto px-6 max-w-5xl">
+              {/* ÁREA DE MEDIA (Imagen o Video) */}
+              <div class="mb-12 reveal">
+                {content_blocks.p1_media_type === "video" &&
+                content_blocks.p1_video_url ? (
+                  <div class="aspect-video w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${content_blocks.p1_video_url.split("v=")[1]}`}
+                      class="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    />
+                  </div>
+                ) : (
+                  content_blocks.p1_image && (
+                    <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                      <Image
+                        src={content_blocks.p1_image}
+                        alt={
+                          content_blocks.p1_image_alt || "Imagen descriptiva"
+                        }
+                        class="w-full h-auto max-h-[500px] object-cover"
+                      />
+                    </div>
+                  )
+                )}
+              </div>
+
+              {/* TEXTO DEL BLOQUE */}
+              <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-6">
+                  {content_blocks.p1_title}
+                </h2>
+                <div class="prose prose-invert prose-lg max-w-none text-gray-400">
+                  <div set:html={content_blocks.p1_content} />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* BLOQUE 2 */}
+          {content_blocks.p2_text && (
+            <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+              <div class="order-2 md:order-1 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                {content_blocks.p2_image && (
+                  <Image
+                    src={content_blocks.p2_image}
+                    alt={
+                      content_blocks.p2_image_alt ||
+                      `Imagen descriptiva 2 - ${title}`
+                    }
+                    class="w-full h-auto object-cover"
+                  />
+                )}
+              </div>
+              <div class="order-1 md:order-2 prose prose-invert prose-orange max-w-none text-gray-400">
+                <div set:html={content_blocks.p2_text} />
+              </div>
+            </div>
+          )}
+
+          {/* BLOQUE 3 */}
+          {content_blocks.p3_text && (
+            <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+              <div class="prose prose-invert prose-orange max-w-none text-gray-400">
+                <div set:html={content_blocks.p3_text} />
+              </div>
+              {content_blocks.p3_image && (
+                <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                  <Image
+                    src={content_blocks.p3_image}
+                    alt={
+                      content_blocks.p3_image_alt ||
+                      `Imagen descriptiva 3 - ${title}`
+                    }
+                    class="w-full h-auto object-cover"
+                  />
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* CONCLUSIÓN */}
+          {content_blocks.conclusion && (
+            <div class="container mx-auto px-6 max-w-4xl">
+              <div class="prose prose-invert prose-orange max-w-none text-gray-400 bg-surface/30 p-10 rounded-3xl border border-white/5">
+                <div set:html={content_blocks.conclusion} />
+              </div>
+            </div>
+          )}
+        </section>
+      )
+    }
+  </main>
+</Layout>
+
+<style is:global>
+  /* Estilos específicos para que el Markdown se vea bien en el diseño en Z */
+  .prose h2,
+  .prose h3 {
+    color: white;
+    /* CORRECCIÓN: Usamos la variable CSS nativa de Tailwind v4 */
+    font-family: var(--font-heading);
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  .prose p {
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+  .prose strong {
+    /* CORRECCIÓN: Usamos la variable CSS nativa */
+    color: var(--color-secondary);
+  }
+  .prose ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+</style>

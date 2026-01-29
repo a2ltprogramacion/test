@@ -1,0 +1,89 @@
+---
+// @src/components/organisms/HeroSection.astro
+import { Image } from "astro:assets";
+import logoTransparency from "../../assets/uploads/logo-tranparency.webp";
+
+interface Props {
+  data: {
+    // Nuevos campos de control de fondo
+    bg_variant: "image" | "color";
+    bg_color?: string;
+
+    // Campos de contenido
+    image?: any;
+    image_alt?: string;
+    title: string;
+    subtitle?: string;
+    cta_text: string;
+    cta_link: string;
+  };
+}
+
+const { data } = Astro.props;
+
+// Lógica de visualización:
+const showImage = data.bg_variant === "image" && data.image;
+const solidColor = data.bg_color || "#020617"; // Fallback oscuro
+---
+
+<section
+  class="relative h-screen flex items-center justify-center overflow-hidden"
+  style={data.bg_variant === "color" ? `background-color: ${solidColor};` : ""}
+>
+  {/* CAPA DE FONDO: IMAGEN (Renderizado Condicional) */}
+  {
+    showImage && (
+      <div class="absolute inset-0 z-0">
+        <Image
+          src={data.image}
+          alt={data.image_alt || "Fondo del Hero"}
+          class="w-full h-full object-cover opacity-33"
+          loading="eager"
+        />
+        {/* --- CAMBIO 1: EFECTO TELA VERDE (Overlay) --- */}
+        {/* Usamos el Primary (Verde) con mezcla para que se vea la imagen detrás teñida */}
+        <div class="absolute inset-0 bg-primary/90 mix-blend-multiply" />
+      </div>
+    )
+  }
+
+  {/* CONTENIDO (Siempre visible) */}
+  <div class="container mx-auto px-6 relative z-10 text-center">
+    <div class="flex justify-center">
+      {/* Contenedor del Círculo Negro */}
+      <div
+        class="w-44 h-44 bg-primary-dark rounded-full flex items-center justify-center p-0 border border-white/10 shadow-2xl mb-6"
+      >
+        <Image
+          src={logoTransparency}
+          alt="Logo Rocketing"
+          class="w-auto h-auto object-contain"
+        />
+      </div>
+    </div>
+    {/* Título: Agregado [&_strong]:text-secondary para negrillas amarillas */}
+    <h1
+      class="text-5xl md:text-7xl font-heading font-bold mb-6 tracking-tight text-secondary text-gold-gradient animate-shine"
+    >
+      {/* Fragment permite renderizar HTML/Markdown básico si viene del CMS */}
+      <Fragment set:html={data.title} />
+    </h1>
+
+    {
+      data.subtitle && (
+        /* Subtítulo: Agregado [&_strong]:text-secondary */
+        <p class="text-xl md:text-2xl text-white mb-10 max-w-4xl mx-auto font-light [&_strong]:text-secondary">
+          {data.subtitle}
+        </p>
+      )
+    }
+
+    {/* --- CAMBIO 2: BOTÓN NARANJA (Accent) --- */}
+    <a
+      href={data.cta_link}
+      class="inline-block bg-accent hover:bg-accent/90 text-white font-bold py-4 px-8 rounded-full transition-all hover:scale-105 shadow-[0_0_20px_rgba(249,115,22,0.4)] reveal"
+    >
+      {data.cta_text}
+    </a>
+  </div>
+</section>

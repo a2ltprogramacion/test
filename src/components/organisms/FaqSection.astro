@@ -1,0 +1,53 @@
+---
+// @src/components/organisms/FaqSection.astro
+interface Props {
+  data: {
+    question: string;
+    answer: string;
+  }[];
+}
+
+const { data } = Astro.props;
+---
+
+{
+  data && data.length > 0 && (
+    <section id="faq" class="py-20 bg-background border-t border-white/5">
+      <div class="container mx-auto px-6 max-w-3xl">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-heading font-bold text-white mb-4">
+            Preguntas Frecuentes
+          </h2>
+        </div>
+
+        <div class="space-y-4">
+          {data.map((item) => (
+            <details class="group bg-surface rounded-xl border border-white/5 open:border-primary/50 transition-colors reveal">
+              <summary class="flex cursor-pointer items-center justify-between p-6 font-medium text-white select-none">
+                <span class="font-heading text-lg">{item.question}</span>
+                <span class="transition-transform group-open:rotate-180 text-primary text-xl">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </span>
+              </summary>
+              <div class="px-6 pb-6 text-gray-400 leading-relaxed border-t border-white/5 pt-4 mt-2">
+                {item.answer}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

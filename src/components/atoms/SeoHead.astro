@@ -1,0 +1,42 @@
+---
+// @src/components/atoms/SeoHead.astro
+interface Props {
+  title?: string;
+  description?: string;
+  image?: any;
+  image_alt?: string; // <--- Nuevo campo receptor
+  canonicalURL?: URL | string;
+  type?: "website" | "article";
+}
+
+const {
+  title = "A2LT Soluciones",
+  description = "Soluciones tecnológicas a tu medida.",
+  image,
+  image_alt = "Imagen representativa de A2LT Soluciones", // Fallback por defecto
+  canonicalURL = new URL(Astro.url.pathname, Astro.site),
+  type = "website",
+} = Astro.props;
+
+// Normalización de la imagen absoluta
+const imageURL = image ? new URL(image.src || image, Astro.site) : undefined;
+---
+
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+
+<meta property="og:type" content={type} />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+{imageURL && <meta property="og:image" content={imageURL} />}
+{image_alt && <meta property="og:image:alt" content={image_alt} />}
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+{imageURL && <meta property="twitter:image" content={imageURL} />}
+{image_alt && <meta property="twitter:image:alt" content={image_alt} />}

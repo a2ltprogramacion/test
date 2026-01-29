@@ -1,0 +1,126 @@
+---
+// @src/layouts/Layout.astro
+import { getEntry } from "astro:content";
+import SeoHead from "../components/atoms/SeoHead.astro";
+import Navbar from "../components/organisms/Navbar.astro"; // Confirma si es organisms o molecules
+import ContactFooter from "../components/organisms/ContactFooter.astro";
+import "../styles/global.css";
+
+interface Props {
+  // 1. Objeto SEO completo
+  seo?: {
+    site_name?: string;
+    meta_title?: string;
+    meta_description?: string;
+    social_image?: any;
+    social_image_alt?: string;
+    favicon?: any;
+  };
+  // 2. Retro-compatibilidad
+  title?: string;
+}
+
+const { seo, title } = Astro.props;
+
+// 1. OBTENER DATOS GLOBALES (Simulamos un "Singleton")
+// Buscamos los datos de la 'home' para reutilizar el Footer y Contacto en toda la web
+const homeData = await getEntry("pages", "home");
+const contactData = homeData?.data?.contact;
+const siteName = homeData?.data?.seo?.site_name || "A2LT Soluciones";
+
+// 2. PREPARAR DATOS DEL NAVBAR
+// Usamos el teléfono del footer para el botón "Hablemos" del menú
+const whatsappLink = contactData?.phone
+  ? `https://wa.me/${contactData.phone.replace(/[^0-9]/g, "")}`
+  : "#contacto";
+
+// Valores por defecto seguros
+const defaultSeo = {
+  meta_title: "A2LT Soluciones",
+  meta_description: "Expertos en desarrollo y consultoría tecnológica.",
+  social_image_alt: "A2LT Soluciones - Ingeniería y Desarrollo",
+};
+
+// Lógica de Prioridad:
+// 1. Intenta usar el SEO nuevo
+// 2. Si no existe, intenta usar el 'title' antiguo
+// 3. Si no, usa el valor por defecto
+const finalTitle = seo?.meta_title || title || defaultSeo.meta_title;
+const finalDescription = seo?.meta_description || defaultSeo.meta_description;
+const finalImage = seo?.social_image;
+const finalAlt = seo?.social_image_alt || defaultSeo.social_image_alt;
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href={seo?.favicon?.src || "/favicon.svg"}
+    />
+    <meta name="generator" content={Astro.generator} />
+
+    <SeoHead
+      title={finalTitle}
+      description={finalDescription}
+      image={finalImage}
+      image_alt={finalAlt}
+    />
+
+    <script
+      is:inline
+      src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body
+    class="bg-background min-h-screen text-white font-sans selection:bg-primary selection:text-white flex flex-col"
+  >
+    {/* HEADER GLOBAL */}
+    <Navbar siteName={siteName} whatsappLink={whatsappLink} />
+
+    {/* CONTENIDO DE LA PÁGINA */}
+    <main class="grow">
+      <slot />
+    </main>
+
+    {/* FOOTER GLOBAL (Con datos inyectados desde Home) */}
+    {contactData && <ContactFooter data={contactData} />}
+
+    <script is:inline>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user) => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
+    <script is:inline>
+      document.addEventListener("DOMContentLoaded", () => {
+        const observerOptions = {
+          root: null, // Relativo al viewport
+          threshold: 0.5, // Se activa cuando el 15% del elemento es visible
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              // Dejamos de observar para ejecutar la animación solo una vez
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        // Seleccionamos todos los elementos etiquetados
+        document
+          .querySelectorAll(".reveal")
+          .forEach((el) => observer.observe(el));
+      });
+    </script>
+  </body>
+</html>

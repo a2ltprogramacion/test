@@ -1,0 +1,51 @@
+---
+// @src/components/organisms/TestimonialsSection.astro
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  testimonials: CollectionEntry<"testimonials">[];
+}
+
+const { testimonials } = Astro.props;
+const sortedTestimonials = testimonials.sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<section class="py-20 bg-surface/30">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-heading font-bold text-white mb-4">
+        Lo Que Dicen Nuestros Socios
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
+      {
+        sortedTestimonials.map((item) => (
+          <div class="bg-surface p-8 rounded-2xl border border-white/5 relative">
+            <span class="absolute top-4 right-6 text-6xl text-primary/10 font-serif leading-none">
+              "
+            </span>
+
+            <p class="text-gray-300 italic mb-6 relative z-10 leading-relaxed">
+              "{item.data.content}"
+            </p>
+
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-full bg-linear-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-lg">
+                {item.data.author.charAt(0)}
+              </div>
+              <div>
+                <h4 class="text-white font-bold text-sm">{item.data.author}</h4>
+                {item.data.role && (
+                  <p class="text-primary text-xs">{item.data.role}</p>
+                )}
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

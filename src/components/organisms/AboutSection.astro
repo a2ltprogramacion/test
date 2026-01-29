@@ -1,0 +1,83 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  data: {
+    title: string;
+    business_bio: string;
+    image?: any;
+    image_alt?: string; // Nuevo campo
+    stat_1?: string;
+    stat_2?: string;
+  };
+}
+
+const { data } = Astro.props;
+---
+
+<section id="nosotros" class="py-24 bg-surface/30 border-y border-white/5">
+  <div
+    class="container mx-auto px-6 flex flex-col md:flex-row gap-8 lg:gap-12 items-center max-w-7xl"
+  >
+    <div class="relative group w-fit mx-auto lg:mx-0 align-center">
+      <div
+        class="absolute -inset-1 bg-linear-to-r from-primary to-secondary rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"
+      >
+      </div>
+
+      <div
+        class="relative rounded-2xl overflow-hidden border border-white/10 w-fit"
+      >
+        {
+          data.image && (
+            <Image
+              src={data.image}
+              alt={data.image_alt || "Imagen corporativa"}
+              width={800}
+              height={1000}
+              class="block w-auto h-auto max-h-[600px] object-contain"
+            />
+          )
+        }
+      </div>
+    </div>
+
+    <div class="flex-1 text-center md:text-left">
+      <h2 class="text-3xl lg:text-4xl font-heading font-bold text-white mb-6">
+        {data.title}
+      </h2>
+      <div class="prose prose-invert prose-lg text-gray-400 mb-8">
+        <div set:html={data.business_bio} />
+      </div>
+
+      <div class="grid grid-cols-2 gap-8 border-t border-white/10 pt-8">
+        {
+          data.stat_1 && (
+            <div>
+              <span class="block text-3xl font-bold text-secondary mb-1 text-gold-gradient animate-shine">
+                {data.stat_1}
+              </span>
+              <br />
+              <span class="text-sm text-gray-500 uppercase tracking-wider">
+                Experiencia
+              </span>
+            </div>
+          )
+        }
+        {
+          data.stat_2 && (
+            <div>
+              <span class="block text-3xl font-bold text-secondary mb-1 text-gold-gradient animate-shine">
+                {data.stat_2}
+              </span>
+              <br />
+              <span class="text-sm text-gray-500 uppercase tracking-wider">
+                Confianza
+              </span>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

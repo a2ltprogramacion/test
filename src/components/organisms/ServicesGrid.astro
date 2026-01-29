@@ -1,0 +1,59 @@
+---
+// @src/components/organisms/ServicesGrid.astro
+import { Image } from "astro:assets";
+
+interface Props {
+  services: any[];
+}
+
+const { services } = Astro.props;
+
+// 1. Ordenar y Limitar (Solo mostramos 3 en el Home)
+const sortedServices = services.sort(
+  (a: any, b: any) => a.data.order - b.data.order,
+);
+const featuredServices = sortedServices.slice(0, 3);
+---
+
+<section id="servicios" class="py-20 relative">
+  <div class="container mx-auto px-6">
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 reveal"
+    >
+      {
+        featuredServices.map((service: any) => (
+          <a
+            href={`/servicios/${service.slug}`}
+            class="bg-surface rounded-2xl p-8 border border-primary/50 transition-all group block"
+          >
+            <div class="w-16 h-16 bg-background rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform overflow-hidden relative">
+              <Image
+                src={service.data.main_image}
+                alt={service.data.main_image_alt || service.data.title}
+                width={64}
+                height={64}
+                class="w-full h-full object-cover"
+              />
+            </div>
+
+            <h3 class="text-xl font-heading font-bold text-white mb-3">
+              {service.data.title}
+            </h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-3">
+              {service.data.description}
+            </p>
+
+            <div class="pt-4 mt-4 border-t border-white/5 flex justify-between items-center">
+              <span class="text-secondary font-bold text-sm">
+                {service.data.price || "Ver detalles"}
+              </span>
+              <span class="text-primary group-hover:translate-x-2 transition-transform">
+                →
+              </span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

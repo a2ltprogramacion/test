@@ -1,0 +1,164 @@
+---
+// @src/pages/index.astro
+import { getEntry, getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+// Corrección de ruta: de pages/ subes a src/ con ../
+import miLogo from "../assets/uploads/logo-tranparency.webp";
+
+// --- IMPORTANTE: Eliminamos Navbar y ContactFooter de aquí ---
+// (El Layout se encarga de ellos ahora, evitando duplicidad)
+
+import HeroSection from "../components/organisms/HeroSection.astro";
+import ClientsSection from "../components/organisms/ClientsSection.astro";
+import AboutSection from "../components/organisms/AboutSection.astro";
+import ServicesGrid from "../components/organisms/ServicesGrid.astro";
+import KnowledgeGrid from "../components/organisms/KnowledgeGrid.astro";
+import TestimonialsSection from "../components/organisms/TestimonialsSection.astro";
+import FaqSection from "../components/organisms/FaqSection.astro";
+
+// 1. Obtener Datos del Home
+const homePage = await getEntry("pages", "home");
+const data = homePage?.data;
+const hasData = !!data;
+
+// 2. Obtener Colecciones
+const services = await getCollection("services");
+const testimonials = await getCollection("testimonials");
+
+// 3. Fallback seguro para Knowledge
+let knowledge: CollectionEntry<"knowledge">[] = [];
+try {
+  knowledge = await getCollection("knowledge");
+} catch (e) {
+  console.log("Knowledge collection not found or empty");
+}
+
+// 4. Control de Módulos (Feature Flags)
+const show = data?.modules || {
+  show_hero: true,
+  show_services: true,
+  show_knowledge: true,
+  show_clients: false,
+  show_testimonials: false,
+  show_about: true,
+  show_faq: true,
+};
+---
+
+<Layout seo={data?.seo}>
+  {
+    hasData ? (
+      <main class="overflow-hidden">
+        {/* --- SECCIONES DE CONTENIDO DINÁMICO (CMS) --- */}
+
+        {show.show_hero && data.hero && <HeroSection data={data.hero} />}
+
+        {show.show_clients && data.clients && (
+          <ClientsSection clients={data.clients} />
+        )}
+
+        {show.show_about && data.about && <AboutSection data={data.about} />}
+
+        {show.show_services && <ServicesGrid services={services} />}
+
+        {show.show_knowledge && knowledge.length > 0 && (
+          <KnowledgeGrid knowledge={knowledge} />
+        )}
+
+        {show.show_testimonials && (
+          <TestimonialsSection testimonials={testimonials} />
+        )}
+
+        {show.show_faq && data.faq && <FaqSection data={data.faq} />}
+
+        {/* NUEVA SECCIÓN: SUSCRIPCIÓN (HARDCODED) */}
+        <section class="py-24 bg-linear-to-b from-primary-dark to-primary relative overflow-hidden">
+          {/* Detalle Púrpura de fondo (Glow) */}
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-accent/10 rounded-full blur-[120px] pointer-events-none" />
+
+          <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-7xl mx-auto bg-surface/10 border border-white/10 rounded-3xl p-8 md:p-16 backdrop-blur-sm text-center">
+              {/* Logo Superior */}
+              <div class="flex justify-center">
+                <div class="flex items-center justify-center">
+                  <Image
+                    src={miLogo}
+                    alt="Logo de Rocketing"
+                    width={256}
+                    height={256}
+                    class="w-40 h-40 object-contain"
+                  />
+                </div>
+              </div>
+
+              <h2 class="text-4xl md:text-5xl font-heading font-black text-white mb-5">
+                Únete a{" "}
+                <strong class="text-gold-gradient animate-shine">
+                  Rocketing
+                </strong>{" "}
+                y transforma tu futuro digital
+              </h2>
+              <p class="text-lg text-gray-300 mb-12">
+                Accede a todos nuestros servicios con una membresía mensual
+                flexible y sin compromisos.
+              </p>
+
+              {/* Grid de Beneficios */}
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12 text-left">
+                {[
+                  "Acceso ilimitado a todos las asesorías",
+                  "Certificados verificables",
+                  "Soporte personalizado",
+                  "Material descargable",
+                  "Actualizaciones constantes",
+                  "Comunidad exclusiva",
+                ].map((benefit) => (
+                  <div class="flex items-center gap-3 bg-background/50 p-4 rounded-xl border border-white/5 reveal">
+                    <div class="shrink-0 w-6 h-6 bg-accent rounded-full flex items-center justify-center">
+                      <svg
+                        class="w-4 h-4 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="3"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    </div>
+                    <span class="text-gray-200 font-medium">{benefit}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA Único Naranja */}
+              <a
+                href="#"
+                class="inline-block bg-accent hover:bg-orange-600 text-white font-black py-5 px-12 rounded-2xl transition-all glow-emerald hover:scale-105"
+              >
+                Suscríbete a la membresía mensual →
+              </a>
+              <p class="mt-4 text-sm text-white">
+                Sin permanencia • Cancela cuando quieras
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+    ) : (
+      /* Fallback si no hay datos en CMS */
+      <div class="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-background">
+        <h1 class="text-3xl font-heading font-bold text-white mb-4">
+          🚀 Sistema Inicializando...
+        </h1>
+        <p class="text-gray-400">
+          Verifica que el contenido 'home' exista en el CMS.
+        </p>
+      </div>
+    )
+  }
+</Layout>

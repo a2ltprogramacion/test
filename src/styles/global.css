@@ -1,0 +1,102 @@
+/* @src/styles/global.css */
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Nunito", sans-serif;
+  --font-heading: "Red Hat Display", sans-serif;
+
+  /* --- PALETA ROCKETING CORE --- */
+  --color-primary: #075B44;        /* Esmeralda Principal */
+  --color-primary-dark: #022A21;
+  --color-accent: #F97316;         /* Naranja Cítrico */
+  --color-purple-accent: #A855F7;  /* Acento Púrpura */
+  
+  /* --- PALETA ORO PREMIUM (Liquid Gold) --- */
+  --color-gold-dark: #855E0B;
+  --color-gold-mid: #D4AF37;       /* Metallic Gold */
+  --color-gold-light: #F9E498;
+  --color-gold-shine: #FFFFFF;
+  
+  /* Mapeo de Secondary al tono medio del oro para compatibilidad */
+  --color-secondary: var(--color-gold-mid); 
+
+  /* Backgrounds: Profundidad Esmeralda Oscura */
+  --color-background: #070E1B; 
+  --color-surface: #1E293B;    
+  --color-text: #F8FAFC;       
+}
+
+@layer base {
+  /* Aplicación automática del efecto oro a todas las negritas */
+  strong, b {
+    background: linear-gradient(
+      135deg, 
+      #855E0B 0%, 
+      #D4AF37 45%, 
+      #F9E498 50%, 
+      #D4AF37 55%, 
+      #855E0B 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* Sombra sutil para mejorar legibilidad sobre fondos oscuros */
+    filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.3));
+  }
+}
+
+@layer utilities {
+  /* Clase para aplicar el degradado de oro a cualquier elemento (ej: Títulos) */
+  .text-gold-gradient {
+    background: linear-gradient(
+      135deg, 
+      var(--color-gold-dark) 0%, 
+      var(--color-gold-mid) 25%, 
+      var(--color-gold-light) 50%, 
+      var(--color-gold-mid) 75%, 
+      var(--color-gold-dark) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+
+  /* Animación de destello metálico */
+  .animate-shine {
+    animation: shine 8s linear infinite;
+  }
+
+  @keyframes shine {
+    to { background-position: 200% center; }
+  }
+
+  /* --- GLOWS & EFECTOS --- */
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+  }
+  .glow-emerald {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
+
+  /* --- ANIMACIÓN DE REVELACIÓN --- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+    visibility: hidden;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
+}
+
+/* Estilos específicos para Markdown en la base de conocimiento */
+.prose h2, .prose h3 {
+  color: white;
+  font-family: var(--font-heading);
+  font-weight: bold;
+}

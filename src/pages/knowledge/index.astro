@@ -1,0 +1,148 @@
+---
+// @src/pages/knowledge/index.astro
+import { getCollection, getEntry } from "astro:content";
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+
+// 1. Obtener Items (Artículos/Proyectos)
+const allKnowledge = await getCollection("knowledge");
+const items = allKnowledge.sort((a, b) => a.data.order - b.data.order);
+
+// 2. INTENTO DE CONEXIÓN CMS (Con Red de Seguridad)
+// Intentamos leer el archivo 'knowledge.md'.
+const pageEntry = await getEntry("pages", "knowledge");
+const cmsData = pageEntry?.data;
+
+// 3. DEFINICIÓN DE DATOS (Prioridad: CMS > Texto Fijo)
+const title = cmsData?.title || "Knowledge Base";
+const subtitle =
+  cmsData?.subtitle ||
+  "Nuestra experiencia aplicada: Proyectos reales y documentación técnica.";
+const heroBg = cmsData?.hero_bg;
+
+// 4. Configuración SEO
+const seoConfig = {
+  meta_title:
+    cmsData?.seo?.meta_title || "Base de Conocimiento | A2LT Soluciones",
+  meta_description:
+    cmsData?.seo?.meta_description ||
+    "Explora nuestros proyectos, casos de estudio y artículos técnicos.",
+  social_image: cmsData?.seo?.social_image,
+  social_image_alt: "Proyectos A2LT",
+};
+
+// Helper de Colores (Blindado contra undefined)
+const getCategoryColor = (category: string | undefined) => {
+  if (!category) return "bg-gray-500/20 text-gray-300 border-gray-500/30";
+
+  switch (category) {
+    case "Proyecto":
+      return "bg-blue-500/20 text-blue-300 border-blue-500/30";
+    case "Artículo":
+      return "bg-green-500/20 text-green-300 border-green-500/30";
+    case "Asesoría":
+      return "bg-purple-500/20 text-purple-300 border-purple-500/30";
+    default:
+      return "bg-gray-500/20 text-gray-300 border-gray-500/30";
+  }
+};
+---
+
+<Layout seo={seoConfig}>
+  {/* HEADER DE SECCIÓN DINÁMICO */}
+  <section class="relative py-24 bg-[#0f1115] overflow-hidden">
+    {/* Lógica de Fondo: Imagen CMS vs Neón Default */}
+    {
+      heroBg ? (
+        <div class="absolute inset-0 z-0">
+          <Image
+            src={heroBg}
+            alt="Background Knowledge"
+            class="w-full h-full object-cover opacity-90"
+            width={2816}
+            height={1536}
+          />
+          <div class="absolute inset-0 bg-linear-to-t from-[#0f1115] via-[#0f1115]/80 to-transparent" />
+        </div>
+      ) : (
+        <>
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-px bg-linear-to-r from-transparent via-secondary/50 to-transparent" />
+          <div class="absolute top-10 left-0 w-96 h-96 bg-secondary/5 blur-[100px] rounded-full pointer-events-none" />
+        </>
+      )
+    }
+
+    <div class="container mx-auto px-6 text-center relative z-10 pt-10">
+      <h1 class="text-4xl md:text-6xl font-heading font-bold text-white mb-6">
+        {title}
+      </h1>
+      <p class="text-xl text-gray-400 max-w-2xl mx-auto font-light">
+        {subtitle}
+      </p>
+    </div>
+  </section>
+
+  {/* LISTADO DE ITEMS */}
+  <section class="py-16 bg-background min-h-[50vh]">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {
+          items.map((item) => (
+            <a href={`/knowledge/${item.slug}`} class="group block h-full">
+              <article class="h-full flex flex-col bg-surface/30 border border-white/5 rounded-2xl overflow-hidden hover:border-secondary/40 transition-all duration-500 hover:shadow-[0_0_30px_rgba(20,184,166,0.1)]">
+                {/* Imagen con Zoom Effect */}
+                <div class="relative h-64 overflow-hidden">
+                  <Image
+                    src={item.data.main_image}
+                    alt={item.data.main_image_alt || item.data.title}
+                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                    width={2816}
+                    height={1536}
+                  />
+
+                  {/* Badge de Categoría */}
+                  <div class="absolute top-4 left-4">
+                    <span
+                      class={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border backdrop-blur-md ${getCategoryColor(item.data.category)}`}
+                    >
+                      {item.data.category || "General"}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Contenido */}
+                <div class="p-8 flex-1 flex flex-col">
+                  <h3 class="text-2xl font-heading font-bold text-white mb-3 group-hover:text-secondary transition-colors">
+                    {item.data.title}
+                  </h3>
+
+                  <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-1 line-clamp-3">
+                    {item.data.description}
+                  </p>
+
+                  <div class="flex items-center gap-2 text-secondary font-bold text-sm uppercase tracking-wider group-hover:gap-4 transition-all">
+                    Leer Más
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </article>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
