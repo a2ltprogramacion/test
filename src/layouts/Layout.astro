@@ -18,9 +18,19 @@ interface Props {
   };
   // 2. Retro-compatibilidad
   title?: string;
+  // 3. Control de Visibilidad
+  modules?: {
+    show_hero: boolean;
+    show_services: boolean;
+    show_knowledge: boolean;
+    show_clients: boolean;
+    show_testimonials: boolean;
+    show_about: boolean;
+    show_faq: boolean;
+  };
 }
 
-const { seo, title } = Astro.props;
+const { seo, title, modules } = Astro.props;
 
 // 1. OBTENER DATOS GLOBALES (Simulamos un "Singleton")
 // Buscamos los datos de la 'home' para reutilizar el Footer y Contacto en toda la web
@@ -78,7 +88,7 @@ const finalAlt = seo?.social_image_alt || defaultSeo.social_image_alt;
     class="bg-background min-h-screen text-white font-sans selection:bg-primary selection:text-white flex flex-col"
   >
     {/* HEADER GLOBAL */}
-    <Navbar siteName={siteName} whatsappLink={whatsappLink} />
+    <Navbar siteName={siteName} whatsappLink={whatsappLink} modules={modules} />
 
     {/* CONTENIDO DE LA PÁGINA */}
     <main class="grow">
@@ -86,7 +96,7 @@ const finalAlt = seo?.social_image_alt || defaultSeo.social_image_alt;
     </main>
 
     {/* FOOTER GLOBAL (Con datos inyectados desde Home) */}
-    {contactData && <ContactFooter data={contactData} />}
+    {contactData && <ContactFooter data={contactData} modules={modules} />}
 
     <script is:inline>
       if (window.netlifyIdentity) {

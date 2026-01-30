@@ -132,7 +132,9 @@ const pagesCollection = defineCollection({
       image_alt: z.string().optional(),
       business_bio: z.string(),
       stat_1: z.string().optional(),
+      stat_1_label: z.string().optional(),
       stat_2: z.string().optional(),
+      stat_2_label: z.string().optional(),
     }).optional(), // <-- AHORA OPCIONAL
 
     // 5. FAQ (Manejo de Objeciones)
@@ -180,10 +182,31 @@ const testimonialsCollection = defineCollection({
   }),
 });
 
+// -----------------------------------------------------------------
+// COLECCIÓN DE AJUSTES (Settings)
+// -----------------------------------------------------------------
+const settingsCollection = defineCollection({
+  type: 'data', // Formato JSON
+  schema: z.object({
+    links: z.array(z.object({
+      label: z.string(),
+      section_id: z.enum(['hero', 'servicios', 'knowledge', 'nosotros', 'faq', 'clients', 'testimonials', 'contact']),
+      is_external: z.boolean().default(false),
+      external_url: z.string().optional(),
+    })).optional(),
+    action_button: z.object({
+      label: z.string(),
+      url: z.string().optional(),
+      use_whatsapp: z.boolean().default(true),
+    }).optional(),
+  })
+});
+
 // Exportación Pública
 export const collections = {
   'pages': pagesCollection,
   'services': defineCollection({ type: 'content', schema: detailedContentSchema }),
   'knowledge': defineCollection({ type: 'content', schema: detailedContentSchema }),
-  'testimonials': testimonialsCollection, 
+  'testimonials': testimonialsCollection,
+  'settings': settingsCollection, 
 };

@@ -8,7 +8,9 @@ interface Props {
     image?: any;
     image_alt?: string; // Nuevo campo
     stat_1?: string;
+    stat_1_label?: string; // Nuevo
     stat_2?: string;
+    stat_2_label?: string; // Nuevo
   };
 }
 
@@ -59,7 +61,7 @@ const { data } = Astro.props;
               </span>
               <br />
               <span class="text-sm text-gray-500 uppercase tracking-wider">
-                Experiencia
+                {data.stat_1_label || "Experiencia"}
               </span>
             </div>
           )
@@ -72,7 +74,7 @@ const { data } = Astro.props;
               </span>
               <br />
               <span class="text-sm text-gray-500 uppercase tracking-wider">
-                Confianza
+                {data.stat_2_label || "Confianza"}
               </span>
             </div>
           )

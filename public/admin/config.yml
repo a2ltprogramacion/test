@@ -25,6 +25,77 @@ locale: "es"
 # --------------------------------------------------------------------------------
 collections:
   # -----------------------------------------------------------------
+  # COLECCIÓN 0: AJUSTES GLOBALES
+  # -----------------------------------------------------------------
+  - name: "settings"
+    label: "⚙️ Configuración Global"
+    files:
+      - name: "navigation"
+        label: "🧭 Menú de Navegación"
+        file: "src/content/settings/navigation.yml"
+        fields:
+          - label: "Enlaces del Menú Principal"
+            name: "links"
+            widget: "list"
+            hint: "Si dejas este campo vacío, se usarán los enlaces por defecto (Inicio, Servicios, etc.). Si agregas un enlace con un ID de sección existente, cambiarás su nombre. Si agregas uno 'externo', se sumará al menú."
+            fields:
+              - { label: "Texto del Enlace", name: "label", widget: "string" }
+              - {
+                  label: "Sección de Destino (ID)",
+                  name: "section_id",
+                  widget: "select",
+                  options:
+                    [
+                      { label: "Portada (Inicio)", value: "hero" },
+                      { label: "Servicios", value: "servicios" },
+                      { label: "Knowledge Base", value: "knowledge" },
+                      { label: "Nosotros", value: "nosotros" },
+                      { label: "Preguntas Frecuentes", value: "faq" },
+                      { label: "Clientes", value: "clients" },
+                      { label: "Testimonios", value: "testimonials" },
+                      { label: "Contacto (Footer)", value: "contact" },
+                    ],
+                  default: "hero",
+                }
+              - {
+                  label: "Es enlace externo?",
+                  name: "is_external",
+                  widget: "boolean",
+                  default: false,
+                }
+              - {
+                  label: "URL Externa (Solo si es externo)",
+                  name: "external_url",
+                  widget: "string",
+                  required: false,
+                }
+
+          - label: "Botón de Acción (Navbar)"
+            name: "action_button"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {
+                  label: "Texto",
+                  name: "label",
+                  widget: "string",
+                  default: "WhatsApp",
+                  required: false,
+                }
+              - {
+                  label: "Enlace",
+                  name: "url",
+                  widget: "string",
+                  required: false,
+                }
+              - {
+                  label: "Usar WhatsApp del Footer?",
+                  name: "use_whatsapp",
+                  widget: "boolean",
+                  default: true,
+                  required: false,
+                }
+  # -----------------------------------------------------------------
   # COLECCIÓN 1: PÁGINAS ESTRUCTURALES (Archivos Únicos)
   # -----------------------------------------------------------------
   - name: "pages"
@@ -262,6 +333,20 @@ collections:
                   widget: "string",
                   required: false,
                   hint: "Ej: 'Soporte 24/7' o 'Certificación ISO'.",
+                }
+              - {
+                  label: "Etiqueta Dato 1",
+                  name: "stat_1_label",
+                  widget: "string",
+                  default: "Experiencia",
+                  required: false,
+                }
+              - {
+                  label: "Etiqueta Dato 2",
+                  name: "stat_2_label",
+                  widget: "string",
+                  default: "Confianza",
+                  required: false,
                 }
 
           # SERVICIOS (SECCIÓN HOME)

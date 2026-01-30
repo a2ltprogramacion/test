@@ -21,25 +21,94 @@ interface Props {
     footer_logo_alt?: string;
     copyright: string;
   };
+  modules?: {
+    show_hero: boolean;
+    show_services: boolean;
+    show_knowledge: boolean;
+    show_clients: boolean;
+    show_testimonials: boolean;
+    show_about: boolean;
+    show_faq: boolean;
+  };
 }
 
-const { data } = Astro.props;
+import { getEntry } from "astro:content";
+
+const { data, modules } = Astro.props;
 const cleanPhone = data.phone.replace(/[^0-9]/g, "");
 const waHref = `https://wa.me/${cleanPhone}`;
 const brand_name = "A2LT Soluciones";
 
-// Links de navegación estáticos para la V-Card
-const navLinks = [
-  { text: "Inicio", href: "/" },
-  { text: "Servicios", href: "/servicios" }, // <--- Va a la página de catálogo completa
-  { text: "Consultorías", href: "/knowledge" }, // <--- Va a la página de blog/proyectos completa
-  { text: "Nosotros", href: "/#nosotros" }, // Sigue en home
-  { text: "Contacto", href: "/#contacto" }, // Sigue en home
+// 1. Obtener navegación desde CMS (Reutilizamos la lógica del Navbar)
+const navSettings = await getEntry("settings", "navigation");
+const customLinks = navSettings?.data?.links;
+
+// Fallback si no hay links configurados
+const defaultLinks = [
+  { label: "Inicio", section_id: "hero", is_external: false },
+  { label: "Servicios", section_id: "servicios", is_external: false },
+  { label: "Consultorías", section_id: "knowledge", is_external: false },
+  { label: "Nosotros", section_id: "nosotros", is_external: false },
+  { label: "Contacto", section_id: "contact", is_external: false },
 ];
+
+// Lógica de Fusión (Smart Merge)
+let linksToRender = [...defaultLinks];
+
+if (customLinks && customLinks.length > 0) {
+  customLinks.forEach((link: any) => {
+    // Si el ID existe en los defaults, actualizamos (ej: cambiar label)
+    const index = linksToRender.findIndex(
+      (defaultLink) => defaultLink.section_id === link.section_id,
+    );
+
+    if (index !== -1) {
+      linksToRender[index] = { ...linksToRender[index], ...link };
+    } else {
+      // Si es nuevo o externo, lo agregamos al final
+      linksToRender.push(link);
+    }
+  });
+}
+
+// 2. Filtrar enlaces según visibilidad (Feature Flagging)
+const activeLinks = linksToRender
+  .filter((link: any) => {
+    // Si es externo, siempre se muestra
+    if (link.is_external) return true;
+
+    // Si no hay configuración de módulos, todo se muestra
+    if (!modules) return true;
+
+    // Mapa de visibilidad
+    const visibilityMap: Record<string, keyof typeof modules> = {
+      hero: "show_hero",
+      servicios: "show_services",
+      knowledge: "show_knowledge",
+      nosotros: "show_about",
+      clients: "show_clients",
+      faq: "show_faq",
+      testimonials: "show_testimonials",
+      contact: "show_hero", // Contacto visible si el Hero (Home) está visible
+    };
+
+    // Excepción: Contacto siempre visible
+    if (link.section_id === "contact") return true;
+
+    const flagKey = visibilityMap[link.section_id];
+    return flagKey ? modules[flagKey] : true;
+  })
+  .map((link: any) => ({
+    text: link.label,
+    href:
+      link.is_external || link.external_url
+        ? link.external_url || "#"
+        : `/#${link.section_id}`,
+  }));
 ---
 
 <footer
-  id="contacto"
+  id="contact"
   class="bg-[#0f1115] relative pt-20 pb-10 px-6 overflow-hidden border-t border-white/5"
 >
   {/* Efectos Ambientales (Sello de Marca) */}
@@ -88,11 +157,12 @@ const navLinks = [
         </h3>
         <ul class="space-y-3">
           {
-            navLinks.map((link) => (
+            activeLinks.map((link: any) => (
               <li>
                 <a
                   href={link.href}
                   class="text-white/60 hover:text-white transition-colors text-sm flex items-center gap-2 group"
+                  target={link.href.startsWith("http") ? "_blank" : "_self"}
                 >
                   <span class="w-1.5 h-1.5 bg-white/20 rounded-full group-hover:bg-secondary transition-colors" />
                   {link.text}

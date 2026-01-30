@@ -5,15 +5,90 @@ interface Props {
   whatsappLink: string;
 }
 
-const { siteName, whatsappLink } = Astro.props;
+import { getEntry } from "astro:content";
 
-const navLinks = [
-  { name: "Inicio", href: "/" },
-  { name: "Servicios", href: "/#servicios" },
-  { name: "Consultorías", href: "/#knowledge" },
-  { name: "Nosotros", href: "/#nosotros" },
-  { name: "FAQ", href: "/#faq" },
+interface Props {
+  siteName: string;
+  whatsappLink: string;
+  modules?: {
+    show_hero: boolean;
+    show_services: boolean;
+    show_knowledge: boolean;
+    show_clients: boolean;
+    show_testimonials: boolean;
+    show_about: boolean;
+    show_faq: boolean;
+  };
+}
+
+const { siteName, whatsappLink, modules } = Astro.props;
+
+// 1. Obtener navegación desde CMS
+const navSettings = await getEntry("settings", "navigation");
+const customLinks = navSettings?.data?.links;
+
+// Fallback si no hay links configurados
+const defaultLinks = [
+  { label: "Inicio", section_id: "hero", is_external: false },
+  { label: "Servicios", section_id: "servicios", is_external: false },
+  { label: "Consultorías", section_id: "knowledge", is_external: false },
+  { label: "Nosotros", section_id: "nosotros", is_external: false },
+  { label: "FAQ", section_id: "faq", is_external: false },
 ];
+
+// Lógica de Fusión (Smart Merge)
+let linksToRender = [...defaultLinks];
+
+if (customLinks && customLinks.length > 0) {
+  customLinks.forEach((link: any) => {
+    // Si el ID existe en los defaults, actualizamos (ej: cambiar nombre)
+    const index = linksToRender.findIndex(
+      (defaultLink) => defaultLink.section_id === link.section_id,
+    );
+
+    if (index !== -1) {
+      linksToRender[index] = { ...linksToRender[index], ...link };
+    } else {
+      // Si es nuevo (ej: enlace externo), lo agregamos al final
+      linksToRender.push(link);
+    }
+  });
+}
+
+// 2. Filtrar enlaces según visibilidad (Feature Flagging)
+const activeLinks = linksToRender
+  .filter((link: any) => {
+    // Si es externo, siempre se muestra
+    if (link.is_external) return true;
+
+    // Si no hay configuración de módulos, todo se muestra
+    if (!modules) return true;
+
+    // Mapa de visibilidad
+    const visibilityMap: Record<string, keyof typeof modules> = {
+      hero: "show_hero",
+      servicios: "show_services",
+      knowledge: "show_knowledge",
+      nosotros: "show_about",
+      clients: "show_clients",
+      faq: "show_faq",
+      testimonials: "show_testimonials",
+      contact: "show_hero", // Contacto visible si el Hero (Home) está visible
+    };
+
+    // Excepción: Si es 'contact', siempre pasa (el footer es global)
+    if (link.section_id === "contact") return true;
+
+    const flagKey = visibilityMap[link.section_id];
+    return flagKey ? modules[flagKey] : true;
+  })
+  .map((link: any) => ({
+    name: link.label,
+    href:
+      link.is_external || link.external_url
+        ? link.external_url || "#"
+        : `/#${link.section_id}`, // Construcción dinámica simple
+  }));
 ---
 
 <header
@@ -35,10 +110,11 @@ const navLinks = [
     {/* MENÚ DE ESCRITORIO */}
     <nav class="hidden md:flex items-center gap-8">
       {
-        navLinks.map((link) => (
+        activeLinks.map((link: any) => (
           <a
             href={link.href}
             class="text-base font-medium text-gray-300 hover:text-white transition-colors relative group"
+            target={link.href.startsWith("http") ? "_blank" : "_self"}
           >
             {link.name}
             <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
@@ -105,10 +181,11 @@ const navLinks = [
     </button>
 
     {
-      navLinks.map((link) => (
+      activeLinks.map((link: any) => (
         <a
           href={link.href}
           class="mobile-link text-2xl font-heading font-bold text-white hover:text-primary"
+          target={link.href.startsWith("http") ? "_blank" : "_self"}
         >
           {link.name}
         </a>
@@ -168,7 +245,7 @@ const navLinks = [
   </button>
 
   {
-    navLinks.map((link) => (
+    activeLinks.map((link: any) => (
       <a
         href={link.href}
         class="mobile-link text-2xl font-heading font-bold text-white hover:text-primary"
