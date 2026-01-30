@@ -5,3 +5,6 @@ links:
   - section_id: knowledge
     is_external: false
     label: Proyectos
+action_button:
+  label: ¿que es esto?
+  url: a2lt.netlify.app
