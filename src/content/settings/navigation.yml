@@ -7,5 +7,5 @@ links:
     label: Proyectos
 action_button:
   label: ¿que es esto?
-  url: a2lt.netlify.app
+  url: https://a2lt.netlify.app
   use_whatsapp: false
