@@ -1,0 +1,51 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const seo = {
+  meta_title: "404: Página no encontrada | A2LT Soluciones",
+  meta_description:
+    "La página que buscas no se encuentra disponible. Regresa al inicio para continuar navegando.",
+};
+---
+
+<Layout seo={seo}>
+  <section
+    class="min-h-screen flex items-center justify-center p-6 relative overflow-hidden pt-24"
+  >
+    {/* Fondo decorativo sutil */}
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full pointer-events-none -z-10"
+    >
+    </div>
+
+    <div class="text-center max-w-2xl reveal">
+      <h1
+        class="text-404-hero font-heading font-black text-gold-gradient animate-shine"
+      >
+        404
+      </h1>
+
+      <h2
+        class="text-3xl md:text-5xl font-serif text-white mb-6 mt-8 tracking-wide"
+      >
+        Ups, parece que te has desviado del camino.
+      </h2>
+
+      <p
+        class="text-gray-300 text-xl md:text-2xl mb-12 leading-relaxed font-light"
+      >
+        La página que buscas no existe o ha sido movida. <br
+          class="hidden md:block"
+        />
+        Pero no te preocupes, el centro de mando sigue operativo.
+      </p>
+
+      <a
+        href="/"
+        class="inline-block bg-accent hover:bg-accent/90 text-white font-bold py-3 px-8 rounded-full transition-all hover:scale-105 shadow-[0_0_20px_rgba(249,115,22,0.4)]"
+      >
+        Volver al Inicio
+      </a>
+    </div>
+  </section>
+</Layout>

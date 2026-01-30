@@ -89,6 +89,15 @@
     transform: translateY(0);
     visibility: visible;
   }
+
+  /* Utilidad extrema para el 404 */
+  .text-404-hero {
+    /* Usamos clamp para que sea responsivo pero masivo */
+    font-size: clamp(8rem, 20vw, 15rem) !important;
+    line-height: 1 !important;
+    display: block !important;
+    margin-bottom: 1rem;
+  }
 }
 
 /* Estilos específicos para Markdown en la base de conocimiento */
