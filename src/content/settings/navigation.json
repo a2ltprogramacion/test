@@ -1,9 +1,3 @@
 {
-  "links": [
-    {
-      "section_id": "hero",
-      "is_external": false,
-      "label": "Homming"
-    }
-  ]
+  "links": []
 }
