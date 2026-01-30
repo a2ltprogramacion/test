@@ -3,7 +3,7 @@ modules:
   show_hero: true
   show_services: true
   show_knowledge: true
-  show_clients: false
+  show_clients: true
   show_testimonials: true
   show_about: true
   show_faq: true
@@ -33,18 +33,28 @@ about:
   image: ../../assets/uploads/socios.webp
   image_alt: Fotografía profesional de los socios fundadores de Rocketing
     Consulting, proyectando confianza, experiencia y liderazgo.
-  business_bio:
-    Rocketing Consulting nace en Venezuela con la misión de elevar el
+  business_bio: Rocketing Consulting nace en Venezuela con la misión de elevar el
     estándar de la ejecución digital. No solo asesoramos; nos integramos en la
     estructura de nuestros clientes para resolver problemas complejos de
     visibilidad, tecnología y posicionamiento de marca, convirtiendo desafíos
     técnicos en ventajas competitivas.
   stat_1: Excelencia Operativa
   stat_2: Visión Disruptiva
+services_section:
+  highlighted_list:
+    - Innovación Continua.
+  title: Servicios
+  subtitle: Nuestros Servicios
+knowledge_section:
+  title: Proyectos
+  subtitle: Nuestros proyectos
+  highlighted_list:
+    - Asesoría de Branding e Identidad
+    - Consultoría Técnica en Programación y Arquitectura Web
+    - Consultoría Estratégica en Marketing Digital
 faq:
   - question: ¿Cómo inician el proceso de consultoría?
-    answer:
-      Realizamos un diagnóstico inicial de 360° para identificar cuellos de
+    answer: Realizamos un diagnóstico inicial de 360° para identificar cuellos de
       botella y oportunidades de mejora antes de proponer una hoja de ruta.
   - question: ¿Trabajan con proyectos internacionales?
     answer: Sí, nuestra metodología de trabajo remoto nos permite asesorar a
