@@ -2,7 +2,7 @@
 modules:
   show_hero: true
   show_services: true
-  show_knowledge: true
+  show_knowledge: false
   show_clients: true
   show_testimonials: true
   show_about: true
