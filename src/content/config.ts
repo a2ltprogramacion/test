@@ -111,6 +111,20 @@ const pagesCollection = defineCollection({
       name: z.string(),
     })).optional(),
 
+    // 4. Servicios (Home Section)
+    services_section: z.object({
+      title: z.string().optional(),
+      subtitle: z.string().optional(),
+      highlighted_list: z.array(z.string()).optional(),
+    }).optional(),
+
+    // 5. Knowledge (Home Section)
+    knowledge_section: z.object({
+      title: z.string().optional(),
+      subtitle: z.string().optional(),
+      highlighted_list: z.array(z.string()).optional(),
+    }).optional(),
+
     // 4. About (Autoridad)
     about: z.object({
       title: z.string(),

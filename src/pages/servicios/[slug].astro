@@ -5,6 +5,7 @@ import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/organisms/Navbar.astro";
 import ContactFooter from "../../components/organisms/ContactFooter.astro";
 import { Image } from "astro:assets";
+import { mdToHtml } from "../../utils/markdown";
 
 // 1. Generación de Rutas Estáticas
 export async function getStaticPaths() {
@@ -80,7 +81,7 @@ const seoData = {
           {content_blocks.p1_content && (
             <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div class="prose prose-invert max-w-none text-gray-400">
-                <div set:html={content_blocks.p1_content} />
+                <div set:html={await mdToHtml(content_blocks.p1_content)} />
               </div>
               {content_blocks.p1_image && (
                 <div class="rounded-2xl overflow-hidden border border-white/10">
@@ -113,7 +114,7 @@ const seoData = {
                 )}
               </div>
               <div class="order-1 md:order-2 prose prose-invert max-w-none text-gray-400">
-                <div set:html={content_blocks.p2_text} />
+                <div set:html={await mdToHtml(content_blocks.p2_text)} />
               </div>
             </div>
           )}
@@ -122,7 +123,7 @@ const seoData = {
           {content_blocks.p3_text && (
             <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div class="prose prose-invert max-w-none text-gray-400">
-                <div set:html={content_blocks.p3_text} />
+                <div set:html={await mdToHtml(content_blocks.p3_text)} />
               </div>
               {content_blocks.p3_image && (
                 <div class="rounded-2xl overflow-hidden border border-white/10">
@@ -143,7 +144,7 @@ const seoData = {
           {content_blocks.conclusion && (
             <div class="container mx-auto px-6 pt-10 text-center max-w-4xl">
               <div class="prose prose-invert max-w-none text-gray-400 border-t border-white/5 pt-12">
-                <div set:html={content_blocks.conclusion} />
+                <div set:html={await mdToHtml(content_blocks.conclusion)} />
               </div>
             </div>
           )}

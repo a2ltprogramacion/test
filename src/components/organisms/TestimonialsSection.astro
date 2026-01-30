@@ -20,32 +20,161 @@ const sortedTestimonials = testimonials.sort(
       </h2>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
+    <div
+      class="relative w-full max-w-4xl mx-auto min-h-[400px] md:min-h-[300px]"
+    >
       {
-        sortedTestimonials.map((item) => (
-          <div class="bg-surface p-8 rounded-2xl border border-white/5 relative">
-            <span class="absolute top-4 right-6 text-6xl text-primary/10 font-serif leading-none">
-              "
-            </span>
+        sortedTestimonials.map((item, index) => (
+          <div
+            class={`testimonio-slide absolute inset-0 transition-opacity duration-1000 flex items-center justify-center ${index === 0 ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"}`}
+            data-index={index}
+          >
+            <div class="bg-surface p-8 md:p-12 rounded-2xl border border-white/5 relative max-w-2xl w-full mx-auto">
+              <span class="absolute top-4 right-6 text-6xl text-primary/10 font-serif leading-none">
+                "
+              </span>
 
-            <p class="text-gray-300 italic mb-6 relative z-10 leading-relaxed">
-              "{item.data.content}"
-            </p>
+              <p class="text-gray-300 italic mb-6 relative z-10 leading-relaxed text-lg md:text-xl text-center">
+                "{item.data.content}"
+              </p>
 
-            <div class="flex items-center gap-4">
-              <div class="w-10 h-10 rounded-full bg-linear-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-lg">
-                {item.data.author.charAt(0)}
-              </div>
-              <div>
-                <h4 class="text-white font-bold text-sm">{item.data.author}</h4>
-                {item.data.role && (
-                  <p class="text-primary text-xs">{item.data.role}</p>
-                )}
+              <div class="flex flex-col items-center gap-2">
+                <div class="w-12 h-12 rounded-full bg-linear-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xl mb-2">
+                  {item.data.author.charAt(0)}
+                </div>
+                <div class="text-center">
+                  <h4 class="text-white font-bold text-base">
+                    {item.data.author}
+                  </h4>
+                  {item.data.role && (
+                    <p class="text-primary text-sm">{item.data.role}</p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         ))
       }
     </div>
+
+    {/* NAVEGACIÓN */}
+    <div class="flex justify-center items-center gap-4 mt-8">
+      <button
+        id="prev-btn"
+        class="p-2 rounded-full bg-surface border border-white/10 hover:bg-primary/20 text-white transition-all"
+      >
+        &larr;
+      </button>
+      <div class="flex gap-2" id="dots-container">
+        {
+          sortedTestimonials.map((_, index) => (
+            <button
+              class={`w-3 h-3 rounded-full transition-all ${index === 0 ? "bg-accent scale-110" : "bg-gray-600 hover:bg-gray-400"}`}
+              data-index={index}
+              aria-label={`Ir al testimonio ${index + 1}`}
+            />
+          ))
+        }
+      </div>
+      <button
+        id="next-btn"
+        class="p-2 rounded-full bg-surface border border-white/10 hover:bg-primary/20 text-white transition-all"
+      >
+        &rarr;
+      </button>
+    </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    initSlider();
+  });
+
+  // Fallback por si no hay ViewTransitions
+  if (document.readyState === "complete") {
+    initSlider();
+  } else {
+    document.addEventListener("DOMContentLoaded", initSlider);
+  }
+
+  function initSlider() {
+    const slides = document.querySelectorAll(".testimonio-slide");
+    const dots = document.querySelectorAll("#dots-container button");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+
+    if (!slides.length) return;
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    let interval: any;
+
+    function showSlide(index: number) {
+      if (index >= totalSlides) currentIndex = 0;
+      else if (index < 0) currentIndex = totalSlides - 1;
+      else currentIndex = index;
+
+      // Update Slides
+      slides.forEach((slide, i) => {
+        if (i === currentIndex) {
+          slide.classList.remove("opacity-0", "pointer-events-none", "z-0");
+          slide.classList.add("opacity-100", "z-10");
+        } else {
+          slide.classList.remove("opacity-100", "z-10");
+          slide.classList.add("opacity-0", "pointer-events-none", "z-0");
+        }
+      });
+
+      // Update Dots
+      dots.forEach((dot, i) => {
+        if (i === currentIndex) {
+          dot.classList.remove("bg-gray-600", "hover:bg-gray-400");
+          dot.classList.add("bg-accent", "scale-110");
+        } else {
+          dot.classList.remove("bg-accent", "scale-110");
+          dot.classList.add("bg-gray-600", "hover:bg-gray-400");
+        }
+      });
+    }
+
+    function nextSlide() {
+      showSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+      showSlide(currentIndex - 1);
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      interval = setInterval(nextSlide, 8000);
+    }
+
+    function stopAutoPlay() {
+      if (interval) clearInterval(interval);
+    }
+
+    // Event Listeners
+    nextBtn?.addEventListener("click", () => {
+      nextSlide();
+      startAutoPlay();
+    });
+
+    prevBtn?.addEventListener("click", () => {
+      prevSlide();
+      startAutoPlay();
+    });
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", (e) => {
+        const index = parseInt((e.target as HTMLElement).dataset.index || "0");
+        showSlide(index);
+        startAutoPlay();
+      });
+    });
+
+    // Iniciar
+    startAutoPlay();
+  }
+</script>

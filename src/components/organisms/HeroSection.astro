@@ -1,7 +1,6 @@
 ---
 // @src/components/organisms/HeroSection.astro
 import { Image } from "astro:assets";
-import logoTransparency from "../../assets/uploads/logo-tranparency.webp";
 
 interface Props {
   data: {
@@ -37,7 +36,7 @@ const solidColor = data.bg_color || "#020617"; // Fallback oscuro
         <Image
           src={data.image}
           alt={data.image_alt || "Fondo del Hero"}
-          class="w-full h-full object-cover opacity-33"
+          class="w-full h-full object-cover opacity-99"
           loading="eager"
         />
         {/* --- CAMBIO 1: EFECTO TELA VERDE (Overlay) --- */}
@@ -49,18 +48,6 @@ const solidColor = data.bg_color || "#020617"; // Fallback oscuro
 
   {/* CONTENIDO (Siempre visible) */}
   <div class="container mx-auto px-6 relative z-10 text-center">
-    <div class="flex justify-center">
-      {/* Contenedor del Círculo Negro */}
-      <div
-        class="w-44 h-44 bg-primary-dark rounded-full flex items-center justify-center p-0 border border-white/10 shadow-2xl mb-6"
-      >
-        <Image
-          src={logoTransparency}
-          alt="Logo Rocketing"
-          class="w-auto h-auto object-contain"
-        />
-      </div>
-    </div>
     {/* Título: Agregado [&_strong]:text-secondary para negrillas amarillas */}
     <h1
       class="text-5xl md:text-7xl font-heading font-bold mb-6 tracking-tight text-secondary text-gold-gradient animate-shine"

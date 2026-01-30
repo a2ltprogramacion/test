@@ -5,11 +5,11 @@
   --font-sans: "Nunito", sans-serif;
   --font-heading: "Red Hat Display", sans-serif;
 
-  /* --- PALETA ROCKETING CORE --- */
-  --color-primary: #075B44;        /* Esmeralda Principal */
-  --color-primary-dark: #022A21;
-  --color-accent: #F97316;         /* Naranja Cítrico */
-  --color-purple-accent: #A855F7;  /* Acento Púrpura */
+  /* --- PALETA A2LT AUTHORITY CORE --- */
+  --color-primary: #0D0D1F;        /* Azul Noche Profundo (Original A2LT) */
+  --color-primary-dark: #050510;   /* Negro Profundidad */
+  --color-accent: #F97316;         /* Naranja A2LT */
+  --color-purple-accent: #6366F1;  /* Indigo (Acento secundario) */
   
   /* --- PALETA ORO PREMIUM (Liquid Gold) --- */
   --color-gold-dark: #855E0B;
@@ -20,10 +20,9 @@
   /* Mapeo de Secondary al tono medio del oro para compatibilidad */
   --color-secondary: var(--color-gold-mid); 
 
-  /* Backgrounds: Profundidad Esmeralda Oscura */
-  --color-background: #070E1B; 
+  --color-background: #0D0D1F; 
   --color-surface: #1E293B;    
-  --color-text: #F8FAFC;       
+  --color-text: #F8FAFC; 
 }
 
 @layer base {
@@ -75,9 +74,7 @@
   .glow-purple {
     box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
   }
-  .glow-emerald {
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
-  }
+
 
   /* --- ANIMACIÓN DE REVELACIÓN --- */
   .reveal {

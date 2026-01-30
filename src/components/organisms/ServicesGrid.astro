@@ -4,19 +4,48 @@ import { Image } from "astro:assets";
 
 interface Props {
   services: any[];
+  sectionData?: {
+    title?: string;
+    subtitle?: string;
+    highlighted_list?: string[];
+  };
 }
 
-const { services } = Astro.props;
+const { services, sectionData } = Astro.props;
 
-// 1. Ordenar y Limitar (Solo mostramos 3 en el Home)
-const sortedServices = services.sort(
-  (a: any, b: any) => a.data.order - b.data.order,
-);
-const featuredServices = sortedServices.slice(0, 3);
+// LOGICA DE FILTRADO
+let featuredServices = [];
+
+if (sectionData?.highlighted_list && sectionData.highlighted_list.length > 0) {
+  // Filtrar por selección manual
+  featuredServices = services.filter((s) =>
+    sectionData.highlighted_list?.includes(s.data.title),
+  );
+  // Ordenar según el orden de la lista manual si es posible, o mantener orden por defecto
+} else {
+  // Fallback: Primeros 3 por orden
+  const sortedServices = services.sort(
+    (a: any, b: any) => a.data.order - b.data.order,
+  );
+  featuredServices = sortedServices.slice(0, 3);
+}
+
+const title = sectionData?.title || "Nuestros Servicios";
+const subtitle =
+  sectionData?.subtitle || "Soluciones tecnológicas de alto nivel";
 ---
 
 <section id="servicios" class="py-20 relative">
   <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl lg:text-4xl font-heading font-bold text-white mb-4">
+        {title}
+      </h2>
+      <p class="text-gray-400">
+        {subtitle}
+      </p>
+    </div>
+
     <div
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 reveal"
     >

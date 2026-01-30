@@ -264,6 +264,68 @@ collections:
                   hint: "Ej: 'Soporte 24/7' o 'Certificación ISO'.",
                 }
 
+          # SERVICIOS (SECCIÓN HOME)
+          - label: "5. Sección Servicios (Home)"
+            name: "services_section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {
+                  label: "Título",
+                  name: "title",
+                  widget: "string",
+                  default: "Nuestros Servicios",
+                }
+              - {
+                  label: "Subtítulo",
+                  name: "subtitle",
+                  widget: "text",
+                  default: "Soluciones a medida para tu empresa.",
+                }
+              - {
+                  label: "Servicios Destacados (Manual)",
+                  name: "highlighted_list",
+                  widget: "relation",
+                  collection: "services",
+                  search_fields: ["title"],
+                  value_field: "title",
+                  display_fields: ["title"],
+                  multiple: true,
+                  required: false,
+                  hint: "Selecciona qué servicios mostrar. Si lo dejas vacío, se muestran los primeros 3.",
+                }
+
+          # KNOWLEDGE BASE (SECCIÓN HOME)
+          - label: "6. Sección Knowledge (Home)"
+            name: "knowledge_section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {
+                  label: "Título",
+                  name: "title",
+                  widget: "string",
+                  default: "Consultorías Destacadas",
+                }
+              - {
+                  label: "Subtítulo",
+                  name: "subtitle",
+                  widget: "text",
+                  default: "Recursos para liderar en la era digital.",
+                }
+              - {
+                  label: "Artículos Destacados (Manual)",
+                  name: "highlighted_list",
+                  widget: "relation",
+                  collection: "knowledge",
+                  search_fields: ["title"],
+                  value_field: "title",
+                  display_fields: ["title"],
+                  multiple: true,
+                  required: false,
+                  hint: "Selecciona qué artículos mostrar. Si lo dejas vacío, se muestran los primeros 3.",
+                }
+
           # FAQ
           - label: "5. Preguntas Frecuentes"
             name: "faq"

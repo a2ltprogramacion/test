@@ -5,6 +5,7 @@ import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/organisms/Navbar.astro";
 import ContactFooter from "../../components/organisms/ContactFooter.astro";
 import { Image } from "astro:assets";
+import { mdToHtml } from "../../utils/markdown";
 
 export async function getStaticPaths() {
   const knowledgeEntries = await getCollection("knowledge");
@@ -116,7 +117,7 @@ const seoData = {
                   {content_blocks.p1_title}
                 </h2>
                 <div class="prose prose-invert prose-lg max-w-none text-gray-400">
-                  <div set:html={content_blocks.p1_content} />
+                  <div set:html={await mdToHtml(content_blocks.p1_content)} />
                 </div>
               </div>
             </div>
@@ -138,7 +139,7 @@ const seoData = {
                 )}
               </div>
               <div class="order-1 md:order-2 prose prose-invert prose-orange max-w-none text-gray-400">
-                <div set:html={content_blocks.p2_text} />
+                <div set:html={await mdToHtml(content_blocks.p2_text)} />
               </div>
             </div>
           )}
@@ -147,7 +148,7 @@ const seoData = {
           {content_blocks.p3_text && (
             <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
               <div class="prose prose-invert prose-orange max-w-none text-gray-400">
-                <div set:html={content_blocks.p3_text} />
+                <div set:html={await mdToHtml(content_blocks.p3_text)} />
               </div>
               {content_blocks.p3_image && (
                 <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
@@ -168,7 +169,7 @@ const seoData = {
           {content_blocks.conclusion && (
             <div class="container mx-auto px-6 max-w-4xl">
               <div class="prose prose-invert prose-orange max-w-none text-gray-400 bg-surface/30 p-10 rounded-3xl border border-white/5">
-                <div set:html={content_blocks.conclusion} />
+                <div set:html={await mdToHtml(content_blocks.conclusion)} />
               </div>
             </div>
           )}
