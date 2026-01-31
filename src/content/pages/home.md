@@ -10,4 +10,7 @@ seo:
     desarrollo de ecosistemas digitales de alta autoridad para profesionales y
     PyMEs."
   favicon: ../../assets/uploads/favicon.png
+hero:
+  bg_variant: color
+  bg_color: "#ff0000"
 ---
