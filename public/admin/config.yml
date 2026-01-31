@@ -12,7 +12,7 @@ local_backend: true
 
 # Gestión de Archivos Multimedia
 media_folder: "../../src/assets/uploads" # Dónde se guardan en el repo
-# public_folder: "/assets/uploads" # Dónde los busca el navegador
+public_folder: "/assets/uploads" # Dónde los busca el navegador
 site_url: "https://a2lt-authority-prototype.netlify.app"
 
 # Branding del Panel Admin (Para el Cliente)
