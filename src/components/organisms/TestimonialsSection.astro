@@ -12,73 +12,94 @@ const sortedTestimonials = testimonials.sort(
 );
 ---
 
-<section id="testimonials" class="py-20 bg-surface/30">
+<section id="testimonials" class="py-20 section-gradient">
   <div class="container mx-auto px-6">
     <div class="text-center mb-16">
-      <h2 class="text-3xl font-heading font-bold text-white mb-4">
+      <h2 class="text-3xl lg:text-5xl font-heading font-bold text-white mb-4">
         Lo Que Dicen Nuestros Socios
       </h2>
     </div>
 
-    <div
-      class="relative w-full max-w-4xl mx-auto min-h-[400px] md:min-h-[300px]"
-    >
-      {
-        sortedTestimonials.map((item, index) => (
-          <div
-            class={`testimonio-slide absolute inset-0 transition-opacity duration-1000 flex items-center justify-center ${index === 0 ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"}`}
-            data-index={index}
-          >
-            <div class="bg-surface p-8 md:p-12 rounded-2xl border border-white/5 relative max-w-2xl w-full mx-auto">
-              <span class="absolute top-4 right-6 text-6xl text-primary/10 font-serif leading-none">
-                "
-              </span>
+    {/* CONTENEDOR PRINCIPAL CON FLECHAS LATERALES */}
+    <div class="relative flex items-center justify-center gap-4 lg:gap-12">
+      {/* BOTÓN PREV - IZQUIERDA */}
+      <button
+        id="prev-btn"
+        class="hidden md:flex p-3 rounded-full bg-surface border border-white/10 hover:bg-primary/20 text-white z-20 btn-neon-glow group"
+        aria-label="Anterior"
+      >
+        <span class="text-2xl group-hover:-translate-x-1 transition-transform"
+          >&larr;</span
+        >
+      </button>
 
-              <p class="text-gray-300 italic mb-6 relative z-10 leading-relaxed text-lg md:text-xl text-center">
-                "{item.data.content}"
-              </p>
+      {/* SLIDER WINDOW */}
+      <div
+        class="relative w-full md:w-[85%] lg:w-[80%] min-h-[400px] md:min-h-[350px]"
+      >
+        {
+          sortedTestimonials.map((item, index) => (
+            <div
+              class={`testimonio-slide absolute inset-0 transition-opacity duration-700 flex items-center justify-center ${index === 0 ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"}`}
+              data-index={index}
+            >
+              <div class="glass-card w-full h-full flex flex-col justify-center p-8 md:p-16 rounded-3xl relative mx-auto border border-white/5">
+                <span class="absolute top-6 right-8 text-8xl text-primary/10 font-serif leading-none select-none">
+                  "
+                </span>
 
-              <div class="flex flex-col items-center gap-2">
-                <div class="w-12 h-12 rounded-full bg-linear-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xl mb-2">
-                  {item.data.author.charAt(0)}
-                </div>
-                <div class="text-center">
-                  <h4 class="text-white font-bold text-base">
-                    {item.data.author}
-                  </h4>
-                  {item.data.role && (
-                    <p class="text-primary text-sm">{item.data.role}</p>
-                  )}
+                <div class="relative z-10 flex flex-col items-center">
+                  <p class="text-gray-300 italic mb-10 leading-relaxed text-xl md:text-2xl text-center max-w-4xl mx-auto">
+                    "{item.data.content}"
+                  </p>
+
+                  <div class="flex flex-col items-center gap-3">
+                    <div class="w-16 h-16 rounded-full bg-linear-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-2xl mb-2 shadow-lg border border-white/10">
+                      {item.data.author.charAt(0)}
+                    </div>
+                    <div class="text-center">
+                      <h4 class="text-white font-bold text-lg tracking-wide">
+                        {item.data.author}
+                      </h4>
+                      {item.data.role && (
+                        <p class="text-gray-300 text-base font-medium tracking-wide">
+                          {item.data.role}
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))
-      }
-    </div>
-
-    {/* NAVEGACIÓN */}
-    <div class="flex justify-center items-center gap-4 mt-8">
-      <button
-        id="prev-btn"
-        class="p-2 rounded-full bg-surface border border-white/10 hover:bg-primary/20 text-white transition-all"
-      >
-        &larr;
-      </button>
-      <div class="flex gap-2" id="dots-container">
-        {
-          sortedTestimonials.map((_, index) => (
-            <button
-              class={`w-3 h-3 rounded-full transition-all ${index === 0 ? "bg-accent scale-110" : "bg-gray-600 hover:bg-gray-400"}`}
-              data-index={index}
-              aria-label={`Ir al testimonio ${index + 1}`}
-            />
           ))
         }
       </div>
+
+      {/* BOTÓN NEXT - DERECHA */}
       <button
         id="next-btn"
-        class="p-2 rounded-full bg-surface border border-white/10 hover:bg-primary/20 text-white transition-all"
+        class="hidden md:flex p-3 rounded-full bg-surface border border-white/10 hover:bg-primary/20 text-white z-20 btn-neon-glow group"
+        aria-label="Siguiente"
+      >
+        <span class="text-2xl group-hover:translate-x-1 transition-transform"
+          >&rarr;</span
+        >
+      </button>
+    </div>
+
+    {
+      /* NAVEGACIÓN MÓVIL (Solo visible en pantallas pequeñas debajo de la card) */
+    }
+    <div class="flex md:hidden justify-center items-center gap-8 mt-8">
+      <button
+        id="prev-btn-mobile"
+        class="p-3 rounded-full bg-surface border border-white/10 hover:bg-primary/20 text-white transition-all"
+      >
+        &larr;
+      </button>
+      <button
+        id="next-btn-mobile"
+        class="p-3 rounded-full bg-surface border border-white/10 hover:bg-primary/20 text-white transition-all"
       >
         &rarr;
       </button>
@@ -100,9 +121,10 @@ const sortedTestimonials = testimonials.sort(
 
   function initSlider() {
     const slides = document.querySelectorAll(".testimonio-slide");
-    const dots = document.querySelectorAll("#dots-container button");
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
+    const prevBtnMobile = document.getElementById("prev-btn-mobile");
+    const nextBtnMobile = document.getElementById("next-btn-mobile");
 
     if (!slides.length) return;
 
@@ -125,17 +147,6 @@ const sortedTestimonials = testimonials.sort(
           slide.classList.add("opacity-0", "pointer-events-none", "z-0");
         }
       });
-
-      // Update Dots
-      dots.forEach((dot, i) => {
-        if (i === currentIndex) {
-          dot.classList.remove("bg-gray-600", "hover:bg-gray-400");
-          dot.classList.add("bg-accent", "scale-110");
-        } else {
-          dot.classList.remove("bg-accent", "scale-110");
-          dot.classList.add("bg-gray-600", "hover:bg-gray-400");
-        }
-      });
     }
 
     function nextSlide() {
@@ -155,7 +166,7 @@ const sortedTestimonials = testimonials.sort(
       if (interval) clearInterval(interval);
     }
 
-    // Event Listeners
+    // Event Listeners Desktop
     nextBtn?.addEventListener("click", () => {
       nextSlide();
       startAutoPlay();
@@ -166,12 +177,15 @@ const sortedTestimonials = testimonials.sort(
       startAutoPlay();
     });
 
-    dots.forEach((dot) => {
-      dot.addEventListener("click", (e) => {
-        const index = parseInt((e.target as HTMLElement).dataset.index || "0");
-        showSlide(index);
-        startAutoPlay();
-      });
+    // Event Listeners Mobile
+    nextBtnMobile?.addEventListener("click", () => {
+      nextSlide();
+      startAutoPlay();
+    });
+
+    prevBtnMobile?.addEventListener("click", () => {
+      prevSlide();
+      startAutoPlay();
     });
 
     // Iniciar

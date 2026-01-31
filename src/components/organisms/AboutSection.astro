@@ -17,7 +17,7 @@ interface Props {
 const { data } = Astro.props;
 ---
 
-<section id="nosotros" class="py-24 bg-surface/30 border-y border-white/5">
+<section id="nosotros" class="py-24 bg-surface/30 section-gradient">
   <div
     class="container mx-auto px-6 flex flex-col md:flex-row gap-8 lg:gap-12 items-center max-w-7xl"
   >
@@ -45,7 +45,7 @@ const { data } = Astro.props;
     </div>
 
     <div class="flex-1 text-center md:text-left">
-      <h2 class="text-3xl lg:text-4xl font-heading font-bold text-white mb-6">
+      <h2 class="text-3xl lg:text-5xl font-heading font-bold text-white mb-6">
         {data.title}
       </h2>
       <div class="prose prose-invert prose-lg text-gray-400 mb-8">
@@ -56,7 +56,7 @@ const { data } = Astro.props;
         {
           data.stat_1 && (
             <div>
-              <span class="block text-3xl font-bold text-secondary mb-1 text-gold-gradient animate-shine">
+              <span class="block text-3xl font-bold text-secondary mb-1 text-platinum-gradient animate-shine">
                 {data.stat_1}
               </span>
               <br />
@@ -69,7 +69,7 @@ const { data } = Astro.props;
         {
           data.stat_2 && (
             <div>
-              <span class="block text-3xl font-bold text-secondary mb-1 text-gold-gradient animate-shine">
+              <span class="block text-3xl font-bold text-secondary mb-1 text-platinum-gradient animate-shine">
                 {data.stat_2}
               </span>
               <br />

@@ -35,13 +35,16 @@ const subtitle =
   sectionData?.subtitle || "Soluciones tecnológicas de alto nivel";
 ---
 
-<section id="servicios" class="py-20 relative">
+<section
+  id="servicios"
+  class="py-20 relative section-gradient-45 border-t border-white/5"
+>
   <div class="container mx-auto px-6">
     <div class="text-center mb-16">
-      <h2 class="text-3xl lg:text-4xl font-heading font-bold text-white mb-4">
+      <h2 class="text-3xl lg:text-5xl font-heading font-bold text-white mb-4">
         {title}
       </h2>
-      <p class="text-gray-400">
+      <p class="text-gray-400 text-xl lg:text-2xl">
         {subtitle}
       </p>
     </div>
@@ -53,22 +56,28 @@ const subtitle =
         featuredServices.map((service: any) => (
           <a
             href={`/servicios/${service.slug}`}
-            class="bg-surface rounded-2xl p-8 border border-primary/50 transition-all group block"
+            class="glass-card rounded-2xl p-8 card-hover-glow group block relative overflow-hidden"
           >
-            <div class="w-16 h-16 bg-background rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform overflow-hidden relative">
+            <div class="absolute top-8 right-8 w-24 h-24 bg-background/50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border border-white/10 backdrop-blur-sm shadow-lg">
               <Image
                 src={service.data.main_image}
                 alt={service.data.main_image_alt || service.data.title}
-                width={64}
-                height={64}
-                class="w-full h-full object-cover"
+                width={96}
+                height={96}
+                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
               />
             </div>
 
-            <h3 class="text-xl font-heading font-bold text-white mb-3">
-              {service.data.title}
-            </h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-3">
+            {/* Spacer to push title down to align with image bottom */}
+            <div class="h-14" />
+
+            <div class="relative z-10 flex flex-col justify-end min-h-16">
+              <h3 class="text-xl font-heading font-bold text-white mb-6 pr-28 leading-tight">
+                {service.data.title}
+              </h3>
+            </div>
+
+            <p class="text-gray-400 text-base leading-relaxed mb-8 line-clamp-3 relative z-10">
               {service.data.description}
             </p>
 
@@ -76,13 +85,35 @@ const subtitle =
               <span class="text-secondary font-bold text-sm">
                 {service.data.price || "Ver detalles"}
               </span>
-              <span class="text-primary group-hover:translate-x-2 transition-transform">
+              <span class="text-white/50 group-hover:text-white group-hover:translate-x-3 transition-all duration-500 inline-block font-bold text-xl mr-4">
                 →
               </span>
             </div>
           </a>
         ))
       }
+    </div>
+
+    {/* BOTÓN VER TODOS */}
+    <div class="text-center">
+      <a
+        href="/servicios"
+        class="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-primary/30 text-primary bg-[#F8FAFC] hover:bg-white btn-neon-glow font-bold uppercase tracking-wider text-sm hover:border-neon group"
+      >
+        Ver todos los servicios
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 h-4 group-hover:translate-x-1 transition-transform"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg
+        >
+      </a>
     </div>
   </div>
 </section>

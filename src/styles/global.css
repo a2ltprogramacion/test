@@ -5,65 +5,138 @@
   --font-sans: "Nunito", sans-serif;
   --font-heading: "Red Hat Display", sans-serif;
 
-  /* --- PALETA A2LT AUTHORITY CORE --- */
-  --color-primary: #0D0D1F;        /* Azul Noche Profundo (Original A2LT) */
-  --color-primary-dark: #050510;   /* Negro Profundidad */
-  --color-accent: #F97316;         /* Naranja A2LT */
-  --color-purple-accent: #6366F1;  /* Indigo (Acento secundario) */
+  /* FONDO: Obsidiana Profunda */
+  --color-primary: #020617;        
+  --color-background: #020205; 
+  --color-surface: #0F172A; /* Azul Pizarra (Superficies) */
+  --color-footer: #0f1115;      
   
-  /* --- PALETA ORO PREMIUM (Liquid Gold) --- */
-  --color-gold-dark: #855E0B;
-  --color-gold-mid: #D4AF37;       /* Metallic Gold */
-  --color-gold-light: #F9E498;
-  --color-gold-shine: #FFFFFF;
-  
-  /* Mapeo de Secondary al tono medio del oro para compatibilidad */
-  --color-secondary: var(--color-gold-mid); 
+  /* TEXTO: Máxima Legibilidad */
+  --color-text: #F1F5F9;          /* Blanco Humo */
+  --color-text-muted: #94A3B8;    /* Gris Acero */
 
-  --color-background: #0D0D1F; 
-  --color-surface: #1E293B;    
-  --color-text: #F8FAFC; 
+  /* LA FIRMA: Neón Cobalto (Confianza) */
+  --color-neon: #6366F1;          /* Indigo Eléctrico */
+  --color-neon-glow: rgba(59, 130, 246, 0.5); /* Azul de confianza ajustable */
+
+  /* ACENTO: Platino */
+  --color-platinum: #E2E8F0;
+  --color-accent: #E2E8F0;        /* Alias para compatibilidad de botones */
+  
+  /* Compatibilidad Legacy */
+  --color-silver-dark: #475569;
+  --color-silver-mid: #94A3B8;
+  --color-silver-light: #F1F5F9;
+  --color-secondary: #94A3B8;
 }
 
 @layer base {
-  /* Aplicación automática del efecto oro a todas las negritas */
+  html, body {
+    font-size: 18px; /* Base aumentada */
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  h1, h2, h3 {
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+  }
+
+  h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+  h2 { font-size: clamp(2rem, 4vw, 3rem); }
+  h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
+
+  /* Footer specific text scaling handling via class mostly, but ensuring minimums */
+  footer p, footer li, footer a {
+    font-size: max(16px, 1rem);
+  }
+  
+  /* Negritas de Autoridad: Platino Sólido para legibilidad */
   strong, b {
-    background: linear-gradient(
-      135deg, 
-      #855E0B 0%, 
-      #D4AF37 45%, 
-      #F9E498 50%, 
-      #D4AF37 55%, 
-      #855E0B 100%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    /* Sombra sutil para mejorar legibilidad sobre fondos oscuros */
-    filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.3));
+    color: var(--color-platinum);
+    font-weight: 700;
+  }
+  
+  /* Global Hover Glow for Links */
+  a:hover {
+    color: white;
+    /* text-shadow removido globalmente para evitar conflictos con cards */
+    transition: all 0.3s ease;
   }
 }
 
 @layer utilities {
-  /* Clase para aplicar el degradado de oro a cualquier elemento (ej: Títulos) */
-  .text-gold-gradient {
+  /* Clase Maestra Glow */
+  .btn-neon-glow {
+    transition: all 0.3s ease;
+  }
+  .btn-neon-glow:hover {
+    box-shadow: 0 0 33px var(--color-neon-glow);
+    transform: scale(1.05);
+  }
+
+  /* Clase Glow para Tarjetas */
+  .card-hover-glow {
+    transition: all 0.3s ease;
+  }
+  .card-hover-glow:hover {
+    /* Usamos la misma variable global pero con el spread de la tarjeta */
+    box-shadow: 0 0 20px var(--color-neon-glow);
+    transform: scale(1.02);
+  }
+
+  /* Clase para aplicar el degradado de platino a cualquier elemento (ej: Títulos) */
+  .text-platinum-gradient {
     background: linear-gradient(
       135deg, 
-      var(--color-gold-dark) 0%, 
-      var(--color-gold-mid) 25%, 
-      var(--color-gold-light) 50%, 
-      var(--color-gold-mid) 75%, 
-      var(--color-gold-dark) 100%
+      var(--color-silver-dark) 0%, 
+      var(--color-silver-light) 50%, 
+      var(--color-silver-dark) 100%
     );
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
   }
+  
+  /* --- FIRMA VISUAL NEON & PLATINUM --- */
+  .neon-border {
+    border: 1px solid var(--color-neon);
+    box-shadow: 0 0 15px var(--color-neon-glow);
+  }
+
+  .neon-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-neon);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--color-neon);
+    display: inline-block;
+  }
+
+  /* Actualizado a Sólido Opaco por petición del usuario */
+  .glass-card {
+    background-color: var(--color-surface); 
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    /* Mantenemos el nombre glass-card por compatibilidad pero el estilo es sólido */
+  }
 
   /* Animación de destello metálico */
   .animate-shine {
     animation: shine 8s linear infinite;
+  }
+
+  .section-gradient-45 {
+  background: linear-gradient(45deg, #1E293B 0%, #020617 50%, #000000 100%);
+  }
+
+  .section-gradient-135 {
+  background: linear-gradient(135deg, #1E293B 0%, #020617 50%, #000000 100%);
+  }
+
+  .section-gradient {
+  background: linear-gradient(0deg, #020205 0%, #020617 15%, #1E293B 50%, #020617 85%, #020205 100%);
   }
 
   @keyframes shine {
@@ -72,7 +145,8 @@
 
   /* --- GLOWS & EFECTOS --- */
   .glow-purple {
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s ease;
   }
 
 

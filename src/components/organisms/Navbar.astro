@@ -107,7 +107,7 @@ const showActionButton = !modules || modules.show_hero; // Vinculado a visibilid
   id="main-header"
   class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent"
 >
-  <div class="absolute inset-0 bg-background/80 backdrop-blur-md -z-10"></div>
+  <div class="absolute inset-0 -z-10"></div>
 
   <div class="container mx-auto px-6 h-24 flex items-center justify-between">
     {/* LOGO DEL SITIO */}
@@ -125,11 +125,11 @@ const showActionButton = !modules || modules.show_hero; // Vinculado a visibilid
         activeLinks.map((link: any) => (
           <a
             href={link.href}
-            class="text-base font-medium text-gray-300 hover:text-white transition-colors relative group"
+            class="text-lg font-medium text-gray-300 hover:text-white transition-colors relative group"
             target={link.href.startsWith("http") ? "_blank" : "_self"}
           >
             {link.name}
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-neon transition-all group-hover:w-full group-hover:shadow-[0_0_10px_var(--color-neon)]" />
           </a>
         ))
       }
@@ -141,7 +141,9 @@ const showActionButton = !modules || modules.show_hero; // Vinculado a visibilid
             <a
               href={finalActionLink}
               target="_blank"
-              class="ml-4 bg-accent hover:bg-accent/90 text-white px-6 py-2 rounded-full font-bold transition-all hover:scale-105 shadow-[0_0_15px_rgba(249,115,22,0.4)] text-sm uppercase tracking-wider"
+              href={finalActionLink}
+              target="_blank"
+              class="ml-4 bg-[#F8FAFC] text-primary px-6 py-2 rounded-full font-bold btn-neon-glow text-sm uppercase tracking-wider border border-transparent hover:border-neon"
             >
               {actionLabel}
             </a>
@@ -266,10 +268,10 @@ const showActionButton = !modules || modules.show_hero; // Vinculado a visibilid
       <a
         href={finalActionLink}
         target="_blank"
-        class={`mt-4 text-white px-8 py-3 rounded-full font-bold text-lg flex items-center gap-2 transition-all ${
+        class={`mt-4 px-8 py-3 rounded-full font-bold text-lg flex items-center gap-2 transition-all ${
           isCustomAction
-            ? "bg-accent hover:bg-accent/90 shadow-[0_0_15px_rgba(249,115,22,0.4)]"
-            : "bg-[#25D366] shadow-[0_0_20px_rgba(37,211,102,0.4)]"
+            ? "bg-[#F8FAFC] text-primary btn-neon-glow hover:border-neon border border-transparent"
+            : "bg-[#25D366] text-white shadow-[0_0_20px_rgba(37,211,102,0.4)]"
         }`}
       >
         <span>{actionLabel}</span>

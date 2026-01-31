@@ -49,32 +49,19 @@ const show = data?.modules || {
 <Layout seo={data?.seo} modules={show}>
   {
     hasData ? (
-      <main class="overflow-hidden">
+      <main
+        class="overflow-hidden"
+        style="background: radial-gradient(circle at center, #0F172A 0%, #020617 100%);"
+      >
         {/* --- SECCIONES DE CONTENIDO DINÁMICO (CMS) --- */}
 
         {show.show_hero && data.hero && <HeroSection data={data.hero} />}
 
-        {show.show_clients && data.clients && (
-          <ClientsSection clients={data.clients} />
-        )}
-
-        {show.show_about && data.about && <AboutSection data={data.about} />}
-
         {show.show_services && (
-          <>
-            <ServicesGrid
-              services={services}
-              sectionData={data.services_section}
-            />
-            <div class="text-center mt-12 mb-20">
-              <a
-                href="/servicios"
-                class="text-accent font-bold text-lg hover:underline transition-all"
-              >
-                Ver todos los servicios &rarr;
-              </a>
-            </div>
-          </>
+          <ServicesGrid
+            services={services}
+            sectionData={data.services_section}
+          />
         )}
 
         {show.show_knowledge && knowledge.length > 0 && (
@@ -84,9 +71,17 @@ const show = data?.modules || {
           />
         )}
 
+        {show.show_clients && data.clients && (
+          <ClientsSection clients={data.clients} />
+        )}
+
         {show.show_testimonials && (
           <TestimonialsSection testimonials={testimonials} />
         )}
+
+        <div class="py-5 bg-background" />
+
+        {show.show_about && data.about && <AboutSection data={data.about} />}
 
         {show.show_faq && data.faq && <FaqSection data={data.faq} />}
       </main>

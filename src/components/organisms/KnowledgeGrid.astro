@@ -35,13 +35,16 @@ const subtitle =
   "Programas diseñados para profesionales que buscan liderar en la era digital";
 ---
 
-<section id="knowledge" class="py-20 bg-background relative">
+<section
+  id="knowledge"
+  class="py-20 relative section-gradient-135 border-b border-white/5"
+>
   <div class="container mx-auto px-6">
     <div class="text-center mb-16">
-      <h2 class="text-3xl lg:text-4xl font-heading font-bold text-white mb-4">
+      <h2 class="text-3xl lg:text-5xl font-heading font-bold text-white mb-4">
         {title}
       </h2>
-      <p class="text-gray-400">
+      <p class="text-gray-400 text-xl lg:text-2xl">
         {subtitle}
       </p>
     </div>
@@ -53,27 +56,29 @@ const subtitle =
         featuredItems.map((item: any) => (
           <a
             href={`/knowledge/${item.slug}`}
-            class="relative h-64 rounded-2xl overflow-hidden group border border-white/5 block hover:shadow-[0_0_30px_rgba(20,184,166,0.1)] transition-all"
+            class="relative h-64 rounded-2xl overflow-hidden group border border-white/5 block card-hover-glow"
           >
             <Image
               src={item.data.main_image}
               alt={item.data.main_image_alt || item.data.title}
               width={2816}
               height={1536}
-              class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 group-hover:opacity-33"
             />
             <div class="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
 
-            <div class="absolute inset-x-0 bottom-0 p-8">
-              <span class="inline-block px-3 py-1 bg-primary text-white text-xs font-bold rounded mb-3 backdrop-blur-md">
-                {item.data.category || "Proyecto"}
-              </span>
-              <h3 class="text-2xl font-heading font-bold text-white mb-2 group-hover:text-secondary transition-colors">
+            <div class="absolute inset-x-0 bottom-0 pt-8 px-8">
+              <h3 class="text-2xl font-heading font-bold text-white mb-2 group-hover:scale-110 transition-transform">
                 {item.data.title}
               </h3>
               <p class="text-gray-300 text-sm line-clamp-2">
                 {item.data.description}
               </p>
+              <div class="flex justify-end mt-4">
+                <span class="inline-block px-3 py-1 bg-primary/70 group-hover:bg-secondary/70 text-white text-xs font-bold rounded mb-3">
+                  {item.data.category || "Proyecto"}
+                </span>
+              </div>
             </div>
           </a>
         ))
@@ -84,12 +89,12 @@ const subtitle =
     <div class="text-center">
       <a
         href="/knowledge"
-        class="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-secondary/30 text-secondary hover:bg-secondary hover:text-[#0f1115] transition-all duration-300 font-bold uppercase tracking-wider text-sm hover:shadow-[0_0_20px_rgba(20,184,166,0.4)]"
+        class="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-secondary/30 text-secondary hover:bg-secondary hover:text-[#0f1115] transition-all duration-300 font-bold uppercase tracking-wider text-sm hover:shadow-[0_0_20px_rgba(20,184,166,0.4)] group"
       >
         Ver toda la Base de Conocimiento
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="w-4 h-4"
+          class="w-4 h-4 group-hover:translate-y-1 transition-transform"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

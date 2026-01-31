@@ -41,8 +41,11 @@ const solidColor = data.bg_color || "#020617"; // Fallback oscuro
           loading="eager"
         />
         {/* --- CAMBIO 1: EFECTO TELA VERDE (Overlay) --- */}
-        {/* Usamos el Primary (Verde) con mezcla para que se vea la imagen detrás teñida */}
+        {/* Usamos el Primary con mezcla para oscurecer */}
         <div class="absolute inset-0 bg-primary/90 mix-blend-multiply" />
+
+        {/* NUEVO: Interactive Neon Glow central */}
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--color-neon-glow)_0%,transparent_60%)] opacity-40 mix-blend-screen pointer-events-none" />
       </div>
     )
   }
@@ -51,7 +54,7 @@ const solidColor = data.bg_color || "#020617"; // Fallback oscuro
   <div class="container mx-auto px-6 relative z-10 text-center">
     {/* Título: Agregado [&_strong]:text-secondary para negrillas amarillas */}
     <h1
-      class="text-5xl md:text-7xl font-heading font-bold mb-6 tracking-tight text-secondary text-gold-gradient animate-shine"
+      class="text-5xl md:text-7xl font-heading font-bold mb-6 tracking-tight text-secondary text-platinum-gradient animate-shine"
     >
       {/* Fragment permite renderizar HTML/Markdown básico si viene del CMS */}
       <Fragment set:html={data.title} />
@@ -66,10 +69,10 @@ const solidColor = data.bg_color || "#020617"; // Fallback oscuro
       )
     }
 
-    {/* --- CAMBIO 2: BOTÓN NARANJA (Accent) --- */}
+    {/* --- CAMBIO 2: BOTÓN PLATINUM/NEON --- */}
     <a
       href={data.cta_link}
-      class="inline-block bg-accent hover:bg-accent/90 text-white font-bold py-4 px-8 rounded-full transition-all hover:scale-105 shadow-[0_0_20px_rgba(249,115,22,0.4)] reveal"
+      class="inline-block bg-[#F8FAFC] text-primary font-bold py-4 px-8 rounded-full btn-neon-glow border border-transparent reveal"
     >
       {data.cta_text}
     </a>
