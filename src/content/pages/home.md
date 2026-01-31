@@ -28,6 +28,11 @@ hero:
   cta_text: Explorar Servicios de Consultoría
   cta_link: "#contacto"
 clients: []
+clients_section:
+  subtitle: Clientes
+testimonials_section:
+  title: los que dicen
+  subtitle: de Nosotros
 about:
   title: Aliados Estratégicos en la Era de la Innovación
   image: ../../assets/uploads/socios.webp
@@ -53,6 +58,9 @@ knowledge_section:
     - Asesoría de Branding e Identidad
     - Consultoría Técnica en Programación y Arquitectura Web
     - Consultoría Estratégica en Marketing Digital
+faq_section:
+  title: Preguntas
+  subtitle: Frecuentes
 faq:
   - question: ¿Cómo inician el proceso de consultoría?
     answer:
