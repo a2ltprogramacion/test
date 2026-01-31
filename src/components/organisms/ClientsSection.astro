@@ -3,9 +3,13 @@ import { Image } from "astro:assets";
 
 interface Props {
   clients: any[];
+  sectionData?: {
+    subtitle?: string;
+  };
 }
 
-const { clients } = Astro.props;
+const { clients, sectionData } = Astro.props;
+const subtitle = sectionData?.subtitle || "Empresas que confían en nosotros";
 ---
 
 <section id="clients" class="py-12 bg-background">
@@ -13,7 +17,7 @@ const { clients } = Astro.props;
     <p
       class="text-center text-gray-500 text-xl lg:text-2xl font-bold uppercase tracking-widest mb-8"
     >
-      Empresas que confían en nosotros
+      {subtitle}
     </p>
 
     <div

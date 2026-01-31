@@ -267,7 +267,7 @@ collections:
                 }
 
           # CLIENTES
-          - label: "3. Cartera de Clientes"
+          - label: "3. Cartera de Clientes (Datos)"
             name: "clients"
             widget: "list"
             collapsed: true
@@ -286,6 +286,36 @@ collections:
                   hint: "Nombre de la empresa (Ej: Logo Coca-Cola).",
                 }
               - { label: "Nombre Empresa", name: "name", widget: "string" }
+
+          - label: "3.1 Config. Sección Clientes"
+            name: "clients_section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {
+                  label: "Subtítulo / Encabezado",
+                  name: "subtitle",
+                  widget: "string",
+                  default: "Empresas que confían en nosotros",
+                }
+
+          - label: "3.2 Config. Sección Testimonios"
+            name: "testimonials_section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {
+                  label: "Título",
+                  name: "title",
+                  widget: "string",
+                  default: "Lo Que Dicen Nuestros Socios",
+                }
+              - {
+                  label: "Subtítulo",
+                  name: "subtitle",
+                  widget: "string",
+                  required: false,
+                }
 
           # NOSOTROS
           - label: "4. La Empresa / Propuesta"
@@ -413,6 +443,24 @@ collections:
 
           # FAQ
           - label: "5. Preguntas Frecuentes"
+            name: "faq_section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {
+                  label: "Título",
+                  name: "title",
+                  widget: "string",
+                  default: "Preguntas Frecuentes",
+                }
+              - {
+                  label: "Subtítulo",
+                  name: "subtitle",
+                  widget: "string",
+                  required: false,
+                }
+
+          - label: "5.1 Listado de Preguntas"
             name: "faq"
             widget: "list"
             collapsed: true

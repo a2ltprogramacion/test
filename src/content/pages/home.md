@@ -33,7 +33,8 @@ about:
   image: ../../assets/uploads/socios.webp
   image_alt: Fotografía profesional de los socios fundadores de Rocketing
     Consulting, proyectando confianza, experiencia y liderazgo.
-  business_bio: Rocketing Consulting nace en Venezuela con la misión de elevar el
+  business_bio:
+    Rocketing Consulting nace en Venezuela con la misión de elevar el
     estándar de la ejecución digital. No solo asesoramos; nos integramos en la
     estructura de nuestros clientes para resolver problemas complejos de
     visibilidad, tecnología y posicionamiento de marca, convirtiendo desafíos
@@ -54,7 +55,8 @@ knowledge_section:
     - Consultoría Estratégica en Marketing Digital
 faq:
   - question: ¿Cómo inician el proceso de consultoría?
-    answer: Realizamos un diagnóstico inicial de 360° para identificar cuellos de
+    answer:
+      Realizamos un diagnóstico inicial de 360° para identificar cuellos de
       botella y oportunidades de mejora antes de proponer una hoja de ruta.
   - question: ¿Trabajan con proyectos internacionales?
     answer: Sí, nuestra metodología de trabajo remoto nos permite asesorar a
@@ -62,6 +64,12 @@ faq:
   - question: ¿Qué tiempo dura una asesoría estratégica?
     answer: Depende de la complejidad, pero típicamente establecemos ciclos de
       optimización mensual para asegurar resultados sostenibles.
+testimonials_section:
+  title: Lo Que Dicen Nuestros Socios
+faq_section:
+  title: Preguntas Frecuentes
+clients_section:
+  subtitle: Empresas que confían en nosotros
 contact:
   heading: ¿Listo para escalar tu modelo de negocio?
   subheading: Agenda una sesión estratégica con nuestros expertos y toma el

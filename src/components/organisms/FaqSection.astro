@@ -5,9 +5,14 @@ interface Props {
     question: string;
     answer: string;
   }[];
+  sectionData?: {
+    title?: string;
+    subtitle?: string;
+  };
 }
 
-const { data } = Astro.props;
+const { data, sectionData } = Astro.props;
+const title = sectionData?.title || "Preguntas Frecuentes";
 ---
 
 {
@@ -16,7 +21,7 @@ const { data } = Astro.props;
       <div class="container mx-auto px-6 max-w-3xl">
         <div class="text-center mb-12">
           <h2 class="text-3xl lg:text-5xl font-heading font-bold text-white mb-4">
-            Preguntas Frecuentes
+            {title}
           </h2>
         </div>
 

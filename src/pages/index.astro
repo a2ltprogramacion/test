@@ -72,18 +72,26 @@ const show = data?.modules || {
         )}
 
         {show.show_clients && data.clients && (
-          <ClientsSection clients={data.clients} />
+          <ClientsSection
+            clients={data.clients}
+            sectionData={data.clients_section}
+          />
         )}
 
         {show.show_testimonials && (
-          <TestimonialsSection testimonials={testimonials} />
+          <TestimonialsSection
+            testimonials={testimonials}
+            sectionData={data.testimonials_section}
+          />
         )}
 
         <div class="py-5 bg-background" />
 
         {show.show_about && data.about && <AboutSection data={data.about} />}
 
-        {show.show_faq && data.faq && <FaqSection data={data.faq} />}
+        {show.show_faq && data.faq && (
+          <FaqSection data={data.faq} sectionData={data.faq_section} />
+        )}
       </main>
     ) : (
       /* Fallback si no hay datos en CMS */

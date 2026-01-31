@@ -125,6 +125,21 @@ const pagesCollection = defineCollection({
       highlighted_list: z.array(z.string()).optional(),
     }).optional(),
 
+    // [NUEVO] Configuración de Texto para Secciones Adicionales
+    clients_section: z.object({
+        subtitle: z.string().optional(),
+    }).optional(),
+
+    testimonials_section: z.object({
+        title: z.string().optional(),
+        subtitle: z.string().optional(),
+    }).optional(),
+
+    faq_section: z.object({
+        title: z.string().optional(),
+        subtitle: z.string().optional(),
+    }).optional(),
+
     // 4. About (Autoridad)
     about: z.object({
       title: z.string(),
