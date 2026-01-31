@@ -2,6 +2,7 @@
 modules:
   show_hero: true
   show_clients: true
+  show_faq: true
 seo:
   site_name: A2LT Soluciones "Authority"
   meta_title: A2LT Authority | Presencia Digital y Autoridad para Expertos
@@ -52,4 +53,40 @@ about:
   stat_2: LCP Optimizado
   stat_1_label: Dependencias Innecesarias
   stat_2_label: Código Limpio
+faq:
+  - question: ¿Por qué elegir A2LT "Authority" en lugar de un constructor web
+      convencional (Wix, WordPress genérico)?
+    answer: "La mayoría de los constructores visuales sacrifican el rendimiento por
+      la facilidad, llenando tu sitio de código basura que ralentiza la carga y
+      penaliza tu SEO. A2LT Authority es una pieza de ingeniería: cada línea de
+      código tiene un propósito. Es la diferencia entre un producto de consumo
+      masivo y una infraestructura de alto rendimiento diseñada para cargar en
+      milisegundos y proyectar solvencia técnica."
+  - question: ¿Cómo garantiza esta infraestructura que mi negocio gane autoridad en
+      Google?
+    answer: El SEO no es solo poner palabras clave; es estructura y semántica.
+      Nuestra arquitectura está optimizada bajo los estándares más estrictos de
+      Core Web Vitals. Esto significa que Google rastrea tu contenido con mayor
+      facilidad y lo prioriza por su velocidad y limpieza técnica. No solo te
+      verás profesional ante tus clientes, sino también ante los algoritmos de
+      búsqueda.
+  - question: ¿Es difícil de gestionar si no tengo conocimientos técnicos avanzados?
+    answer: Al contrario. Hemos aplicado el principio de eficiencia operativa. La
+      gestión de contenidos es intuitiva y directa, diseñada para que el dueño
+      de negocio o el profesional pueda actualizar su blog y servicios sin
+      depender de un programador. Tú te encargas de la estrategia, la
+      infraestructura se encarga del resto.
+  - question: ¿Puedo escalar mi sitio si mi negocio crece en el futuro?
+    answer: Absolutamente. A diferencia de las soluciones cerradas, esta plantilla
+      está construida sobre bases sólidas de ingeniería. Es totalmente
+      compatible con integraciones avanzadas como flujos de Inteligencia
+      Artificial, automatización en GoHighLevel o desarrollos a medida en
+      Python/Django. Tu inversión inicial está protegida porque el sistema está
+      diseñado para evolucionar contigo.
+  - question: ¿Qué significa realmente "ganancia por línea de código"?
+    answer: Significa rentabilidad. En el desarrollo web tradicional, el código
+      pesado es un "gasto" que ralentiza la conversión. En A2LT, tratamos el
+      código como un activo. Una web más ligera convierte más, una estructura
+      más limpia posiciona mejor y una interfaz profesional cierra más ventas.
+      Cada línea está optimizada para maximizar tu Retorno de Inversión (ROI).
 ---
