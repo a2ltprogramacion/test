@@ -54,6 +54,17 @@ about:
   stat_2: LCP Optimizado
   stat_1_label: Dependencias Innecesarias
   stat_2_label: Código Limpio
+services_section:
+  title: Infraestructuras de **Crecimiento Digital**
+  subtitle: "**No diseñamos páginas; configuramos ecosistemas de alto
+    rendimiento.** Desde marcas personales hasta estructuras institucionales,
+    desplegamos la ingeniería necesaria para que tu presencia en la red sea
+    sinónimo de liderazgo y solvencia."
+knowledge_section:
+  title: Inteligencia Digital y Estrategia de Mercado
+  subtitle: Recursos técnicos y estratégicos para entender el nuevo paradigma de
+    la autoridad en internet. **Aprende a convertir tu infraestructura web en
+    una ventaja competitiva real.**
 faq:
   - question: ¿Por qué elegir A2LT "Authority" en lugar de un constructor web
       convencional (Wix, WordPress genérico)?
