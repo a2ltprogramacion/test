@@ -101,7 +101,7 @@ collections:
                   label: "Usar WhatsApp del Footer?",
                   name: "use_whatsapp",
                   widget: "boolean",
-                  default: true,
+                  default: false,
                   required: false,
                 }
   # -----------------------------------------------------------------
@@ -127,21 +127,21 @@ collections:
                   label: "Mostrar Hero (Portada)",
                   name: "show_hero",
                   widget: "boolean",
-                  default: true,
+                  default: false,
                   required: false,
                 }
               - {
                   label: "Mostrar Servicios",
                   name: "show_services",
                   widget: "boolean",
-                  default: true,
+                  default: false,
                   required: false,
                 }
               - {
                   label: "Mostrar Knowledge Base",
                   name: "show_knowledge",
                   widget: "boolean",
-                  default: true,
+                  default: false,
                   required: false,
                 }
               - {
@@ -162,14 +162,14 @@ collections:
                   label: "Mostrar Nosotros",
                   name: "show_about",
                   widget: "boolean",
-                  default: true,
+                  default: false,
                   required: false,
                 }
               - {
                   label: "Mostrar FAQ",
                   name: "show_faq",
                   widget: "boolean",
-                  default: true,
+                  default: false,
                   required: false,
                 }
 

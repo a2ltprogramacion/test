@@ -18,6 +18,12 @@ interface Props {
   };
 }
 
+import { mdToHtml } from "../../utils/markdown";
+
+// ... existing imports ...
+
+// ... Props ...
+
 const { data } = Astro.props;
 
 // Lógica de visualización:
@@ -54,18 +60,18 @@ const solidColor = data.bg_color || "#020617"; // Fallback oscuro
   <div class="container mx-auto px-6 relative z-10 text-center">
     {/* Título: Agregado [&_strong]:text-secondary para negrillas amarillas */}
     <h1
-      class="text-5xl md:text-7xl font-heading font-bold mb-6 tracking-tight text-secondary text-platinum-gradient animate-shine"
+      class="text-5xl md:text-7xl font-heading font-bold mb-6 tracking-tight text-secondary text-platinum-gradient animate-shine [&_p]:inline [&_p]:m-0"
     >
       {/* Fragment permite renderizar HTML/Markdown básico si viene del CMS */}
-      <Fragment set:html={data.title} />
+      <Fragment set:html={await mdToHtml(data.title)} />
     </h1>
 
     {
       data.subtitle && (
         /* Subtítulo: Agregado [&_strong]:text-secondary */
-        <p class="text-xl md:text-2xl text-white mb-10 max-w-4xl mx-auto font-light [&_strong]:text-secondary">
-          {data.subtitle}
-        </p>
+        <div class="text-xl md:text-2xl text-white mb-10 max-w-4xl mx-auto font-light [&_strong]:text-secondary [&_p]:inline [&_p]:m-0">
+          <Fragment set:html={await mdToHtml(data.subtitle)} />
+        </div>
       )
     }
 

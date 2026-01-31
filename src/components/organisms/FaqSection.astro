@@ -13,20 +13,33 @@ interface Props {
 
 const { data, sectionData } = Astro.props;
 const title = sectionData?.title || "Preguntas Frecuentes";
+
+import { mdToHtml } from "../../utils/markdown";
+
+type FaqItemWithHtml = (typeof data)[number] & { answerHtml: string };
+let processedData: FaqItemWithHtml[] = [];
+if (data && data.length > 0) {
+  processedData = await Promise.all(
+    data.map(async (item) => ({
+      ...item,
+      answerHtml: await mdToHtml(item.answer),
+    })),
+  );
+}
 ---
 
 {
-  data && data.length > 0 && (
+  processedData.length > 0 && (
     <section id="faq" class="py-20 bg-background">
       <div class="container mx-auto px-6 max-w-3xl">
         <div class="text-center mb-12">
           <h2 class="text-3xl lg:text-5xl font-heading font-bold text-white mb-4">
-            {title}
+            <Fragment set:html={await mdToHtml(title)} />
           </h2>
         </div>
 
         <div class="space-y-4">
-          {data.map((item) => (
+          {processedData.map((item) => (
             <details class="group glass-card rounded-sm border border-white/5 open:border-primary/50 transition-colors reveal">
               <summary class="flex cursor-pointer items-center justify-between p-6 font-medium text-white select-none section-gradient-45">
                 <span class="font-heading text-lg">{item.question}</span>
@@ -47,7 +60,7 @@ const title = sectionData?.title || "Preguntas Frecuentes";
                 </span>
               </summary>
               <div class="px-6 pb-6 text-gray-400 leading-relaxed border-t border-white/5 pt-4 mt-2">
-                {item.answer}
+                <Fragment set:html={item.answerHtml} />
               </div>
             </details>
           ))}

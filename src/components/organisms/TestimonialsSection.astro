@@ -16,13 +16,22 @@ const sortedTestimonials = testimonials.sort(
 );
 
 const title = sectionData?.title || "Lo Que Dicen Nuestros Socios";
+
+import { mdToHtml } from "../../utils/markdown";
+
+const processedTestimonials = await Promise.all(
+  sortedTestimonials.map(async (item) => ({
+    ...item,
+    renderedContent: await mdToHtml(item.data.content),
+  })),
+);
 ---
 
 <section id="testimonials" class="py-20 section-gradient">
   <div class="container mx-auto px-6">
     <div class="text-center mb-16">
       <h2 class="text-3xl lg:text-5xl font-heading font-bold text-white mb-4">
-        {title}
+        <Fragment set:html={await mdToHtml(title)} />
       </h2>
     </div>
 
@@ -44,7 +53,7 @@ const title = sectionData?.title || "Lo Que Dicen Nuestros Socios";
         class="relative w-full md:w-[85%] lg:w-[80%] min-h-[400px] md:min-h-[350px]"
       >
         {
-          sortedTestimonials.map((item, index) => (
+          processedTestimonials.map((item, index) => (
             <div
               class={`testimonio-slide absolute inset-0 transition-opacity duration-700 flex items-center justify-center ${index === 0 ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"}`}
               data-index={index}
@@ -55,9 +64,9 @@ const title = sectionData?.title || "Lo Que Dicen Nuestros Socios";
                 </span>
 
                 <div class="relative z-10 flex flex-col items-center">
-                  <p class="text-gray-300 italic mb-10 leading-relaxed text-xl md:text-2xl text-center max-w-4xl mx-auto">
-                    "{item.data.content}"
-                  </p>
+                  <div class="text-gray-300 italic mb-10 leading-relaxed text-xl md:text-2xl text-center max-w-4xl mx-auto [&_p]:inline [&_p]:m-0">
+                    <Fragment set:html={item.renderedContent} />
+                  </div>
 
                   <div class="flex flex-col items-center gap-3">
                     <div class="w-16 h-16 rounded-full bg-linear-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-2xl mb-2 shadow-lg border border-white/10">
