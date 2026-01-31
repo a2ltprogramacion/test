@@ -1,6 +1,7 @@
 ---
 // @src/components/organisms/ContactFooter.astro
 import { Image } from "astro:assets";
+import { mdToHtml } from "../../utils/markdown";
 
 interface Props {
   data: {
@@ -140,15 +141,23 @@ const activeLinks = linksToRender
     >
       {/* COLUMNA 1: CONTENIDO */}
       <div class="space-y-4 text-center">
-        <h2 class="text-2xl font-heading font-bold text-white">
-          {data.heading || "¿Listo para empezar?"}
+        <h2
+          class="prose-unsize text-xl md:text-3xl font-heading font-bold text-white"
+        >
+          <Fragment
+            set:html={await mdToHtml(data.heading || "¿Listo para empezar?")}
+          />
         </h2>
-        <p class="text-white/60 leading-relaxed text-base">
-          {
-            data.subheading ||
-              "Innovación digital para empresas que buscan trascender los límites convencionales."
-          }
-        </p>
+        <div
+          class="prose-unsize text-white/60 leading-relaxed text-base text-justify"
+        >
+          <Fragment
+            set:html={await mdToHtml(
+              data.subheading ||
+                "Innovación digital para empresas que buscan trascender los límites convencionales.",
+            )}
+          />
+        </div>
       </div>
 
       {/* COLUMNA 2: NAVEGACIÓN */}
@@ -179,7 +188,7 @@ const activeLinks = linksToRender
       {/* COLUMNA 3: BRANDING + SOCIALES (NEÓN) */}
       <div class="flex flex-col items-center">
         {/* Bloque Logo */}
-        <div>
+        <div class="pb-2">
           {
             data.footer_logo ? (
               <Image
@@ -405,7 +414,10 @@ const activeLinks = linksToRender
       class="pt-8 flex flex-col md:flex-row justify-between items-center text-sm font-sans text-white/40 border-t border-white/5"
     >
       <p>{data.copyright}</p>
-      <p class="mt-2 md:mt-0 opacity-50">Desarrollado ⚡ por A2LT Soluciones</p>
+      <p class="mt-2 md:mt-0 opacity-50">
+        Ingeniería de Software ⚡por A2LT Soluciones | Maximizando la ganancia
+        por cada línea de código.
+      </p>
     </div>
   </div>
 </footer>

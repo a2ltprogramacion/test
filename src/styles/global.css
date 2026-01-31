@@ -172,6 +172,25 @@
     display: block !important;
     margin-bottom: 1rem;
   }
+
+  /* --- INTEGRACIÓN PROSE-AUTHORITY --- */
+  .prose-unsize h1, .prose-unsize h2, .prose-unsize h3, 
+  .prose-unsize h4, .prose-unsize p, .prose-unsize span {
+    font-size: revert !important;
+    font-family: inherit;
+  }
+
+  .prose-invert {
+    --tw-prose-body: var(--color-text);
+    --tw-prose-headings: white;
+    --tw-prose-links: var(--color-neon);
+    --tw-prose-bold: var(--color-platinum);
+    --tw-prose-bullets: var(--color-neon);
+    --tw-prose-quotes: var(--color-text-muted);
+    --tw-prose-quote-borders: var(--color-neon);
+    --tw-prose-code: var(--color-platinum);
+    --tw-prose-pre-bg: var(--color-surface);
+  }
 }
 
 /* Estilos específicos para Markdown en la base de conocimiento */

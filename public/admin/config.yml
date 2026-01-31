@@ -489,14 +489,14 @@ collections:
               - {
                   label: "Título de Cierre",
                   name: "heading",
-                  widget: "string",
+                  widget: "markdown",
                   default: "¿Listo para comenzar?",
                   required: false,
                 }
               - {
                   label: "Subtítulo de Cierre",
                   name: "subheading",
-                  widget: "text",
+                  widget: "markdown",
                   default: "Hablemos sobre tu próximo proyecto.",
                   required: false,
                 }
