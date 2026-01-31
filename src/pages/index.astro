@@ -2,9 +2,6 @@
 // @src/pages/index.astro
 import { getEntry, getCollection, type CollectionEntry } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
-// Corrección de ruta: de pages/ subes a src/ con ../
-import miLogo from "../assets/uploads/logo-tranparency.webp";
 
 // --- IMPORTANTE: Eliminamos Navbar y ContactFooter de aquí ---
 // (El Layout se encarga de ellos ahora, evitando duplicidad)
@@ -57,7 +54,7 @@ const show = data?.modules || {
 
         {show.show_hero && data.hero && <HeroSection data={data.hero} />}
 
-        {show.show_services && (
+        {show.show_services && services.length > 0 && (
           <ServicesGrid
             services={services}
             sectionData={data.services_section}

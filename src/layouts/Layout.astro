@@ -32,6 +32,49 @@ interface Props {
 
 const { seo, title, modules } = Astro.props;
 
+// Lógica de Favicon Dinámico
+const rawFavicon = seo?.favicon;
+
+// Función auxiliar para extraer el string real
+const getFaviconUrl = (input: any): string => {
+  if (!input) return "/favicon.svg";
+  // Si es un objeto de imagen de Astro (tiene propiedad .src), úsala
+  if (typeof input === "object" && input.src) {
+    return input.src;
+  }
+  // Si es string, úsalo directo
+  if (typeof input === "string") {
+    return input;
+  }
+  return "/favicon.svg";
+};
+
+const finalFaviconUrl = getFaviconUrl(rawFavicon);
+
+const getImageMimeType = (url: string) => {
+  if (!url) return "image/svg+xml";
+
+  // Seguridad extra: Si por alguna razón sigue sin ser string, devolvemos SVG
+  if (typeof url !== "string") return "image/svg+xml";
+
+  // Eliminamos parámetros de URL (?v=123) que a veces ensucian la extensión
+  const cleanUrl = url.split("?")[0];
+  const ext = cleanUrl.split(".").pop()?.toLowerCase() || "";
+
+  const mimeTypes: Record<string, string> = {
+    png: "image/png",
+    ico: "image/x-icon",
+    jpg: "image/jpeg",
+    jpeg: "image/jpeg",
+    svg: "image/svg+xml",
+    webp: "image/webp",
+  };
+
+  return mimeTypes[ext] || "image/svg+xml";
+};
+
+const faviconType = getImageMimeType(finalFaviconUrl);
+
 // 1. OBTENER DATOS GLOBALES (Simulamos un "Singleton")
 // Buscamos los datos de la 'home' para reutilizar el Footer y Contacto en toda la web
 const homeData = await getEntry("pages", "home");
@@ -66,11 +109,7 @@ const finalAlt = seo?.social_image_alt || defaultSeo.social_image_alt;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href={seo?.favicon || "/favicon.svg"}
-    />
+    <link rel="icon" type={faviconType} href={finalFaviconUrl} />
     <meta name="generator" content={Astro.generator} />
 
     <SeoHead

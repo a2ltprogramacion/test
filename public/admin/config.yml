@@ -323,7 +323,7 @@ collections:
                 }
 
           # NOSOTROS
-          - label: "4. La Empresa / Propuesta"
+          - label: "4. La Empresa / Propuesta / Nosotros"
             name: "about"
             widget: "object"
             required: false
