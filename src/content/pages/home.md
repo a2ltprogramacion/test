@@ -31,4 +31,22 @@ clients:
   - logo: ../../assets/uploads/logo-body-blanco.png
     logo_alt: "Logo A2LT Soluciones, Asesorías Tecnológicas "
     name: A2LT Soluciones
+about:
+  image_alt: Logo oficial de A2LT Soluciones - Expertos en Ingeniería de Software
+    y Ecosistemas Digitales de Alta Autoridad.
+  image: ../../assets/uploads/logo-body-blanco.png
+  title: "**Ingeniería de Software** al Servicio de tu Marca."
+  business_bio: >-
+    Esta plataforma es el resultado de una década gestionando infraestructuras
+    críticas y sistemas de alto nivel, ahora sintetizados en un ecosistema
+    diseñado para profesionales y PyMEs. No es solo una plantilla; es una pieza
+    de ingeniería optimizada para quienes no se conforman con "estar en
+    internet" y exigen liderar su mercado.
+
+
+    > En A2LT Soluciones, hemos eliminado la burocracia del código pesado para entregarte una infraestructura donde cada línea está programada para cargar en milisegundos y posicionar tu conocimiento como la autoridad indiscutible en tu nicho. Si buscas una ganancia real por cada línea de código invertida, has llegado al lugar correcto.
+  stat_1: Velocidad de Despliegue
+  stat_2: LCP Optimizado
+  stat_1_label: Dependencias Innecesarias
+  stat_2_label: Código Limpio
 ---
