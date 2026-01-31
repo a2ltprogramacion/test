@@ -107,9 +107,8 @@ faq:
 contact:
   heading: Domina tu nicho. Asegura tu autoridad.
   subheading: >-
-    No permitas que tu reputación dependa de plataformas genéricas. 
+    No permitas que tu reputación dependa de plataformas genéricas.  
 
-      
     Despliega hoy una infraestructura de ingeniería diseñada para convertir tu conocimiento en un activo digital inamovible.
   copyright: © 2026 A2LT Soluciones Authority. Todos los derechos reservados.
   social:
