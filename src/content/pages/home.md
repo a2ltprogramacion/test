@@ -105,7 +105,7 @@ faq:
       más limpia posiciona mejor y una interfaz profesional cierra más ventas.
       Cada línea está optimizada para maximizar tu Retorno de Inversión (ROI).
 contact:
-  heading: "#### Domina tu nicho. **Asegura tu autoridad**."
+  heading: "### Domina tu nicho. **Asegura tu autoridad**."
   subheading: >-
     No permitas que tu reputación dependa de plataformas genéricas.  
 
