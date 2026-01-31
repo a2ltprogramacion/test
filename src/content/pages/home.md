@@ -13,6 +13,6 @@ seo:
     PyMEs."
   favicon: ../../assets/uploads/favicon.png
 hero:
-  bg_variant: color
-  bg_color: "#ff0000"
+  bg_variant: image
+  bg_color: ""
 ---
