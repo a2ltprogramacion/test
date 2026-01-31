@@ -89,4 +89,19 @@ faq:
       código como un activo. Una web más ligera convierte más, una estructura
       más limpia posiciona mejor y una interfaz profesional cierra más ventas.
       Cada línea está optimizada para maximizar tu Retorno de Inversión (ROI).
+contact:
+  heading: Domina tu nicho. Asegura tu autoridad.
+  subheading: No permitas que tu reputación dependa de plataformas genéricas.
+    Despliega hoy una infraestructura de ingeniería diseñada para convertir tu
+    conocimiento en un activo digital inamovible.
+  copyright: © 2026 A2LT Soluciones Authority. Todos los derechos reservados.
+  social:
+    instagram: https://www.instagram.com/a2ltsoluciones
+  phone: "+584244691920"
+  footer_logo: ../../assets/uploads/logo-header-blanco-removebg.png
+  address: San Diego, Carabobo, Venezuela
+  footer_logo_alt: "Logotipo oficial de A2LT Soluciones Authority: El sello de
+    calidad en ingeniería de software y arquitectura web para profesionales de
+    alto impacto."
+  email: a2lt.soluciones@gmail.com
 ---
