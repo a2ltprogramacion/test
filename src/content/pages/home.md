@@ -28,11 +28,6 @@ hero:
   cta_text: Explorar Servicios de Consultoría
   cta_link: "#contacto"
 clients: []
-clients_section:
-  subtitle: Clientes
-testimonials_section:
-  title: los que dicen
-  subtitle: de Nosotros
 about:
   title: Aliados Estratégicos en la Era de la Innovación
   image: ../../assets/uploads/socios.webp
@@ -47,20 +42,13 @@ about:
   stat_1: Excelencia Operativa
   stat_2: Visión Disruptiva
 services_section:
-  highlighted_list:
-    - Innovación Continua.
+  highlighted_list: []
   title: Servicios
   subtitle: Nuestros Servicios
 knowledge_section:
   title: Proyectos
   subtitle: Nuestros proyectos
-  highlighted_list:
-    - Asesoría de Branding e Identidad
-    - Consultoría Técnica en Programación y Arquitectura Web
-    - Consultoría Estratégica en Marketing Digital
-faq_section:
-  title: Preguntas
-  subtitle: Frecuentes
+  highlighted_list: []
 faq:
   - question: ¿Cómo inician el proceso de consultoría?
     answer:
@@ -72,12 +60,6 @@ faq:
   - question: ¿Qué tiempo dura una asesoría estratégica?
     answer: Depende de la complejidad, pero típicamente establecemos ciclos de
       optimización mensual para asegurar resultados sostenibles.
-testimonials_section:
-  title: Lo Que Dicen Nuestros Socios
-faq_section:
-  title: Preguntas Frecuentes
-clients_section:
-  subtitle: Empresas que confían en nosotros
 contact:
   heading: ¿Listo para escalar tu modelo de negocio?
   subheading: Agenda una sesión estratégica con nuestros expertos y toma el
