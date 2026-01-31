@@ -23,4 +23,11 @@ hero:
   image_alt: Panorama urbano futurista con rascacielos y redes de datos luminosas,
     representando el alcance global y la infraestructura tecnológica de A2LT
     Soluciones Authority.
+clients:
+  - logo: ../../assets/uploads/logo-elevawod.jpg
+    logo_alt: Logo Elevawod, Marketing Digital en el sur de Chile
+    name: Elevawod
+  - logo: ../../assets/uploads/logo-body-blanco.png
+    logo_alt: "Logo A2LT Soluciones, Asesorías Tecnológicas "
+    name: A2LT Soluciones
 ---
