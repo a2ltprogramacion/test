@@ -94,13 +94,13 @@ const pagesCollection = defineCollection({
       // 0. Control de Módulos (Feature Flags)
       modules: z
         .object({
-          show_hero: z.boolean().default(true).optional(),
-          show_services: z.boolean().default(true).optional(),
-          show_knowledge: z.boolean().default(true).optional(),
-          show_clients: z.boolean().default(false).optional(),
-          show_testimonials: z.boolean().default(false).optional(),
-          show_about: z.boolean().default(true).optional(),
-          show_faq: z.boolean().default(true).optional(),
+          show_hero: z.boolean().default(true),
+          show_services: z.boolean().default(true),
+          show_knowledge: z.boolean().default(true),
+          show_clients: z.boolean().default(false),
+          show_testimonials: z.boolean().default(false),
+          show_about: z.boolean().default(true),
+          show_faq: z.boolean().default(true),
         })
         .optional(),
 
@@ -119,14 +119,14 @@ const pagesCollection = defineCollection({
       // 2. Hero Section (Home)
       hero: z
         .object({
-          bg_variant: z.enum(["image", "color"]).default("image").optional(),
+          bg_variant: z.enum(["image", "color"]).default("image"),
           bg_color: z.string().optional(),
           image: image().optional(),
           image_alt: z.string().optional(),
-          title: z.string().optional(),
+          title: z.string(),
           subtitle: z.string().optional(),
-          cta_text: z.string().default("Más Información").optional(),
-          cta_link: z.string().optional(),
+          cta_text: z.string().default("Más Información"),
+          cta_link: z.string(),
         })
         .optional(),
 
@@ -183,10 +183,10 @@ const pagesCollection = defineCollection({
       // 4. About (Autoridad)
       about: z
         .object({
-          title: z.string().optional(),
+          title: z.string().default("Nuestra Propuesta"),
           image: image().optional(),
           image_alt: z.string().optional(),
-          business_bio: z.string().optional(),
+          business_bio: z.string(),
           stat_1: z.string().optional(),
           stat_1_label: z.string().optional(),
           stat_2: z.string().optional(),
@@ -198,8 +198,8 @@ const pagesCollection = defineCollection({
       faq: z
         .array(
           z.object({
-            question: z.string().optional(),
-            answer: z.string().optional(),
+            question: z.string(),
+            answer: z.string(),
           }),
         )
         .optional(),
