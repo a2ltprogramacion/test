@@ -99,7 +99,7 @@ contact:
   social:
     instagram: https://www.instagram.com/a2ltsoluciones
   phone: "+584244691920"
-  footer_logo: ../../assets/uploads/logo-header-blanco-removebg.png
+  footer_logo: ../../assets/uploads/favicon-big.png
   address: San Diego, Carabobo, Venezuela
   footer_logo_alt: "Logotipo oficial de A2LT Soluciones Authority: El sello de
     calidad en ingeniería de software y arquitectura web para profesionales de
