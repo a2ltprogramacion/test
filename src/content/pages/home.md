@@ -1,4 +1,6 @@
 ---
+modules:
+  show_hero: true
 seo:
   site_name: A2LT Soluciones "Authority"
   meta_title: A2LT Authority | Presencia Digital y Autoridad para Expertos
