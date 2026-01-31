@@ -17,7 +17,7 @@ site_url: "https://a2lt-authority-prototype.netlify.app"
 
 # Branding del Panel Admin (Para el Cliente)
 display_url: "https://a2lt-authority-prototype.netlify.app"
-logo_url: "/images/logo-a2lt-soluciones.webp"
+logo_url: "/images/logo-a2lt-soluciones.png"
 locale: "es"
 
 # --------------------------------------------------------------------------------
@@ -27,74 +27,83 @@ collections:
   # -----------------------------------------------------------------
   # COLECCIÓN 0: AJUSTES GLOBALES
   # -----------------------------------------------------------------
-  # - name: "settings"
-  #   label: "⚙️ Configuración Global"
-  #   files:
-  #     - name: "navigation"
-  #       label: "🧭 Menú de Navegación"
-  #       file: "src/content/settings/navigation.yml"
-  #       fields:
-  #         - label: "Enlaces del Menú Principal"
-  #           name: "links"
-  #           widget: "list"
-  #           hint: "Si dejas este campo vacío, se usarán los enlaces por defecto (Inicio, Servicios, etc.). Si agregas un enlace con un ID de sección existente, cambiarás su nombre. Si agregas uno 'externo', se sumará al menú."
-  #           fields:
-  #             - { label: "Texto del Enlace", name: "label", widget: "string" }
-  #             - {
-  #                 label: "Sección de Destino (ID)",
-  #                 name: "section_id",
-  #                 widget: "select",
-  #                 options:
-  #                   [
-  #                     { label: "Portada (Inicio)", value: "hero" },
-  #                     { label: "Servicios", value: "servicios" },
-  #                     { label: "Knowledge Base", value: "knowledge" },
-  #                     { label: "Nosotros", value: "nosotros" },
-  #                     { label: "Preguntas Frecuentes", value: "faq" },
-  #                     { label: "Clientes", value: "clients" },
-  #                     { label: "Testimonios", value: "testimonials" },
-  #                     { label: "Contacto (Footer)", value: "contact" },
-  #                   ],
-  #                 default: "hero",
-  #               }
-  #             - {
-  #                 label: "Es enlace externo?",
-  #                 name: "is_external",
-  #                 widget: "boolean",
-  #                 default: false,
-  #               }
-  #             - {
-  #                 label: "URL Externa (Solo si es externo)",
-  #                 name: "external_url",
-  #                 widget: "string",
-  #                 required: false,
-  #               }
-  #
-  #         - label: "Botón de Acción (Navbar)"
-  #           name: "action_button"
-  #           widget: "object"
-  #           collapsed: true
-  #           fields:
-  #             - {
-  #                 label: "Texto",
-  #                 name: "label",
-  #                 widget: "string",
-  #                 default: "WhatsApp",
-  #                 required: false,
-  #               }
-  #             - {
-  #                 label: "Enlace",
-  #                 name: "url",
-  #                 widget: "string",
-  #                 required: false,
-  #               }
-  #             - {
-  #                 label: "Usar WhatsApp del Footer?",
-  #                 name: "use_whatsapp",
-  #                 widget: "boolean",
-  #                 default: true,
-  #                 required: false,
-  #               }
+  - name: "settings"
+    label: "⚙️ Configuración Global"
+    files:
+      - name: "navigation"
+        label: "🧭 Menú de Navegación"
+        file: "src/content/settings/navigation.yml"
+        fields:
+          - label: "Enlaces del Menú Principal"
+            name: "links"
+            widget: "list"
+            required: false
+            hint: "Si dejas este campo vacío, se usarán los enlaces por defecto (Inicio, Servicios, etc.). Si agregas un enlace con un ID de sección existente, cambiarás su nombre. Si agregas uno 'externo', se sumará al menú."
+            fields:
+              - {
+                  label: "Texto del Enlace",
+                  name: "label",
+                  widget: "string",
+                  required: false,
+                }
+              - {
+                  label: "Sección de Destino (ID)",
+                  name: "section_id",
+                  widget: "select",
+                  required: false,
+                  options:
+                    [
+                      { label: "Portada (Inicio)", value: "hero" },
+                      { label: "Servicios", value: "servicios" },
+                      { label: "Knowledge Base", value: "knowledge" },
+                      { label: "Nosotros", value: "nosotros" },
+                      { label: "Preguntas Frecuentes", value: "faq" },
+                      { label: "Clientes", value: "clients" },
+                      { label: "Testimonios", value: "testimonials" },
+                      { label: "Contacto (Footer)", value: "contact" },
+                    ],
+                  default: "hero",
+                }
+              - {
+                  label: "Es enlace externo?",
+                  name: "is_external",
+                  widget: "boolean",
+                  default: false,
+                  required: false,
+                }
+              - {
+                  label: "URL Externa (Solo si es externo)",
+                  name: "external_url",
+                  widget: "string",
+                  required: false,
+                }
+
+          - label: "Botón de Acción (Navbar)"
+            name: "action_button"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - {
+                  label: "Texto",
+                  name: "label",
+                  widget: "string",
+                  default: "WhatsApp",
+                  required: false,
+                }
+              - {
+                  label: "Enlace",
+                  name: "url",
+                  widget: "string",
+                  required: false,
+                }
+              - {
+                  label: "Usar WhatsApp del Footer?",
+                  name: "use_whatsapp",
+                  widget: "boolean",
+                  default: true,
+                  required: false,
+                }
   # -----------------------------------------------------------------
   # COLECCIÓN 1: PÁGINAS ESTRUCTURALES (Archivos Únicos)
   # -----------------------------------------------------------------
@@ -110,6 +119,7 @@ collections:
           - label: "🎛️ Panel de Control (Visibilidad)"
             name: "modules"
             widget: "object"
+            required: false
             collapsed: false
             hint: "Usa estos interruptores para ocultar secciones temporalmente sin borrar su contenido. Ideal para lanzar rápido e ir activando cosas luego."
             fields:
@@ -118,48 +128,56 @@ collections:
                   name: "show_hero",
                   widget: "boolean",
                   default: true,
+                  required: false,
                 }
               - {
                   label: "Mostrar Servicios",
                   name: "show_services",
                   widget: "boolean",
                   default: true,
+                  required: false,
                 }
               - {
                   label: "Mostrar Knowledge Base",
                   name: "show_knowledge",
                   widget: "boolean",
                   default: true,
+                  required: false,
                 }
               - {
                   label: "Mostrar Clientes",
                   name: "show_clients",
                   widget: "boolean",
                   default: false,
+                  required: false,
                 }
               - {
                   label: "Mostrar Testimonios",
                   name: "show_testimonials",
                   widget: "boolean",
                   default: false,
+                  required: false,
                 }
               - {
                   label: "Mostrar Nosotros",
                   name: "show_about",
                   widget: "boolean",
                   default: true,
+                  required: false,
                 }
               - {
                   label: "Mostrar FAQ",
                   name: "show_faq",
                   widget: "boolean",
                   default: true,
+                  required: false,
                 }
 
           # IDENTIDAD & SEO
           - label: "1. Identidad & SEO (Vital para Google)"
             name: "seo"
             widget: "object"
+            required: false
             collapsed: false
             hint: "Esta información es invisible en el diseño, pero es lo que Google lee para posicionarte. Llénalo con palabras clave."
             fields:
@@ -167,24 +185,28 @@ collections:
                   label: "Nombre del Negocio / Marca",
                   name: "site_name",
                   widget: "string",
+                  required: false,
                   hint: "El nombre oficial que aparecerá en la pestaña del navegador. Ej: A2LT Soluciones.",
                 }
               - {
                   label: "Meta Título (Título en Google)",
                   name: "meta_title",
                   widget: "string",
+                  required: false,
                   hint: "El título azul que la gente ve en los resultados de búsqueda. Debe ser atractivo. Máx 60 caracteres.",
                 }
               - {
                   label: "Meta Descripción (Resumen)",
                   name: "meta_description",
                   widget: "text",
+                  required: false,
                   hint: "El texto gris debajo del título en Google. Explica qué ofreces e invita al clic. Máx 160 caracteres.",
                 }
               - {
                   label: "Imagen Social (Vista Previa WhatsApp)",
                   name: "social_image",
                   widget: "image",
+                  required: false,
                   hint: "Esta es la foto que sale cuando compartes tu link por WhatsApp o LinkedIn. Tamaño ideal: 1200x630px.",
                 }
               - {
@@ -206,12 +228,14 @@ collections:
           - label: "2. Pantalla Principal (Hero)"
             name: "hero"
             widget: "object"
+            required: false
             collapsed: true
             hint: "La sección más importante. Tienes 3 segundos para captar la atención del visitante aquí."
             fields:
               - label: "🎨 Estilo del Fondo"
                 name: "bg_variant"
                 widget: "select"
+                required: false
                 options:
                   - { label: "Imagen de Fondo", value: "image" }
                   - { label: "Color Sólido", value: "color" }
@@ -243,6 +267,7 @@ collections:
                   label: "Titular de Impacto (H1)",
                   name: "title",
                   widget: "string",
+                  required: false,
                   hint: "Tu promesa principal. ¿Qué problema resuelves? Ej: 'Transformamos tu Infraestructura IT'.",
                 }
               - {
@@ -257,12 +282,14 @@ collections:
                   name: "cta_text",
                   widget: "string",
                   default: "Cotizar Servicios",
+                  required: false,
                   hint: "Una llamada a la acción clara. Ej: 'Ver Planes', 'Contactar Ahora'.",
                 }
               - {
                   label: "Enlace del Botón",
                   name: "cta_link",
                   widget: "string",
+                  required: false,
                   hint: "A dónde lleva el botón. Puede ser un link a WhatsApp (https://wa.me/...) o a una sección (#contacto).",
                 }
 
@@ -270,6 +297,7 @@ collections:
           - label: "3. Cartera de Clientes"
             name: "clients"
             widget: "list"
+            required: false
             collapsed: true
             hint: "La prueba social es clave. Muestra logos de empresas que confían en ti."
             fields:
@@ -277,20 +305,28 @@ collections:
                   label: "Logo del Cliente",
                   name: "logo",
                   widget: "image",
+                  required: false,
                   hint: "Sube el logo preferiblemente en formato PNG con fondo transparente. Ancho rec: 250px.",
                 }
               - {
                   label: "Descripción del Logo (Alt)",
                   name: "logo_alt",
                   widget: "string",
+                  required: false,
                   hint: "Nombre de la empresa (Ej: Logo Coca-Cola).",
                 }
-              - { label: "Nombre Empresa", name: "name", widget: "string" }
+              - {
+                  label: "Nombre Empresa",
+                  name: "name",
+                  widget: "string",
+                  required: false,
+                }
 
           # NOSOTROS
           - label: "4. La Empresa / Propuesta"
             name: "about"
             widget: "object"
+            required: false
             collapsed: true
             hint: "Explica quién eres y por qué deberían elegirte a ti y no a la competencia."
             fields:
@@ -299,6 +335,7 @@ collections:
                   name: "title",
                   widget: "string",
                   default: "Nuestra Propuesta",
+                  required: false,
                 }
               - {
                   label: "Imagen Descriptiva (Lateral)",
@@ -318,6 +355,7 @@ collections:
                   label: "Historia / Descripción del Negocio",
                   name: "business_bio",
                   widget: "markdown",
+                  required: false,
                   hint: "Usa este espacio para contar tu experiencia, misión o metodología. Soporta negritas.",
                 }
               - {
@@ -353,6 +391,7 @@ collections:
           - label: "5. Sección Servicios (Home)"
             name: "services_section"
             widget: "object"
+            required: false
             collapsed: true
             fields:
               - {
@@ -360,12 +399,14 @@ collections:
                   name: "title",
                   widget: "string",
                   default: "Nuestros Servicios",
+                  required: false,
                 }
               - {
                   label: "Subtítulo",
                   name: "subtitle",
                   widget: "text",
                   default: "Soluciones a medida para tu empresa.",
+                  required: false,
                 }
               - {
                   label: "Servicios Destacados (Manual)",
@@ -384,6 +425,7 @@ collections:
           - label: "6. Sección Knowledge (Home)"
             name: "knowledge_section"
             widget: "object"
+            required: false
             collapsed: true
             fields:
               - {
@@ -391,12 +433,14 @@ collections:
                   name: "title",
                   widget: "string",
                   default: "Consultorías Destacadas",
+                  required: false,
                 }
               - {
                   label: "Subtítulo",
                   name: "subtitle",
                   widget: "text",
                   default: "Recursos para liderar en la era digital.",
+                  required: false,
                 }
               - {
                   label: "Artículos Destacados (Manual)",
@@ -415,6 +459,7 @@ collections:
           - label: "5. Preguntas Frecuentes"
             name: "faq"
             widget: "list"
+            required: false
             collapsed: true
             hint: "Adelántate a las dudas de tus clientes para eliminar barreras de compra."
             fields:
@@ -422,12 +467,14 @@ collections:
                   label: "Pregunta",
                   name: "question",
                   widget: "string",
+                  required: false,
                   hint: "Ej: ¿Ofrecen factura fiscal? ¿Cuál es el tiempo de entrega?",
                 }
               - {
                   label: "Respuesta",
                   name: "answer",
                   widget: "text",
+                  required: false,
                   hint: "Responde de forma clara y directa.",
                 }
 
@@ -435,6 +482,7 @@ collections:
           - label: "6. Contacto & Footer"
             name: "contact"
             widget: "object"
+            required: false
             collapsed: true
             hint: "Información final para cerrar el trato y redes sociales."
             fields:
@@ -443,23 +491,27 @@ collections:
                   name: "heading",
                   widget: "string",
                   default: "¿Listo para comenzar?",
+                  required: false,
                 }
               - {
                   label: "Subtítulo de Cierre",
                   name: "subheading",
                   widget: "text",
                   default: "Hablemos sobre tu próximo proyecto.",
+                  required: false,
                 }
               - {
                   label: "Email Corporativo",
                   name: "email",
                   widget: "string",
+                  required: false,
                   hint: "Correo donde recibirás las solicitudes.",
                 }
               - {
                   label: "Teléfono / WhatsApp",
                   name: "phone",
                   widget: "string",
+                  required: false,
                   hint: "Número de contacto principal.",
                 }
               - {
@@ -471,6 +523,7 @@ collections:
               - label: "Redes Sociales"
                 name: "social"
                 widget: "object"
+                required: false
                 collapsed: true
                 hint: "Pega aquí los enlaces completos (https://instagram.com/tuempresa)."
                 fields:
@@ -515,6 +568,7 @@ collections:
                   name: "copyright",
                   widget: "string",
                   default: "Todos los derechos reservados © 2026",
+                  required: false,
                 }
               - {
                   label: "Logo para Footer",
@@ -540,6 +594,7 @@ collections:
               name: "title",
               widget: "string",
               default: "Soluciones Tecnológicas",
+              required: false,
               hint: "El encabezado H1 de la página de servicios.",
             }
           - {
@@ -547,6 +602,7 @@ collections:
               name: "subtitle",
               widget: "text",
               default: "Ingeniería de precisión.",
+              required: false,
               hint: "Frase de apoyo que explica la propuesta de valor.",
             }
           - {
@@ -559,6 +615,7 @@ collections:
           - label: "🚀 SEO Página Servicios"
             name: "seo"
             widget: "object"
+            required: false
             collapsed: true
             hint: "Optimización específica para esta página."
             fields:
@@ -567,12 +624,14 @@ collections:
                   name: "meta_title",
                   widget: "string",
                   default: "Nuestros Servicios | A2LT",
+                  required: false,
                   hint: "Lo que se ve en la pestaña y Google.",
                 }
               - {
                   label: "Meta Descripción",
                   name: "meta_description",
                   widget: "text",
+                  required: false,
                   hint: "Resumen persuasivo para Google.",
                 }
               - {
@@ -593,6 +652,7 @@ collections:
               name: "title",
               widget: "string",
               default: "Knowledge Base",
+              required: false,
               hint: "Título: Proyectos, Blog, Casos de Estudio...",
             }
           - {
@@ -600,6 +660,7 @@ collections:
               name: "subtitle",
               widget: "text",
               default: "Nuestra experiencia aplicada.",
+              required: false,
               hint: "Explica qué encontrará el usuario aquí.",
             }
           - {
@@ -612,6 +673,7 @@ collections:
           - label: "🚀 SEO Página Knowledge"
             name: "seo"
             widget: "object"
+            required: false
             collapsed: true
             hint: "Optimización SEO para la base de conocimiento."
             fields:
@@ -620,11 +682,13 @@ collections:
                   name: "meta_title",
                   widget: "string",
                   default: "Proyectos y Artículos | A2LT",
+                  required: false,
                 }
               - {
                   label: "Meta Descripción",
                   name: "meta_description",
                   widget: "text",
+                  required: false,
                   hint: "Describe el valor educativo de tu contenido.",
                 }
               - {
@@ -648,30 +712,35 @@ collections:
           label: "Nombre del Servicio",
           name: "title",
           widget: "string",
+          required: false,
           hint: "El nombre comercial de lo que vendes. Ej: 'Cableado Estructurado'.",
         }
       - {
           label: "Imagen Principal (Hero/Card)",
           name: "main_image",
           widget: "image",
+          required: false,
           hint: "Esta imagen se usará de fondo en el Hero y como miniatura. Rec: 1920x1080px.",
         }
       - {
           label: "Alt Imagen Principal",
           name: "main_image_alt",
           widget: "string",
+          required: false,
           hint: "Crucial para SEO. Describe la imagen.",
         }
       - {
           label: "Resumen Comercial",
           name: "description",
           widget: "text",
+          required: false,
           hint: "Breve texto que invita al clic. Aparece en la tarjeta del servicio.",
         }
       # ESTRUCTURA EN Z
       - label: "📖 Detalles y Contenido (Diseño en Z)"
         name: "content_blocks"
         widget: "object"
+        required: false
         collapsed: false
         hint: "Estructura el contenido alternando texto e imagen para una lectura fluida."
         fields:
@@ -755,6 +824,7 @@ collections:
           widget: "number",
           default: 0,
           value_type: "int",
+          required: false,
           hint: "Usa 1 para el primero, 2 para el segundo...",
         }
 
@@ -772,44 +842,56 @@ collections:
           label: "Título del Contenido",
           name: "title",
           widget: "string",
+          required: false,
           hint: "Título del proyecto, artículo o asesoría.",
         }
       - {
           label: "Imagen de Fondo",
           name: "main_image",
           widget: "image",
+          required: false,
           hint: "Fondo del Hero e imagen de tarjeta. Rec: 1920x1080px.",
         }
       - {
           label: "Alt Imagen Principal",
           name: "main_image_alt",
           widget: "string",
+          required: false,
           hint: "Descripción SEO de la imagen.",
         }
       - {
           label: "Resumen",
           name: "description",
           widget: "text",
+          required: false,
           hint: "Intro corta que aparece en el listado.",
         }
       # ESTRUCTURA EN Z
       - label: "📖 Cuerpo del Contenido (Diseño en Z)"
         name: "content_blocks"
         widget: "object"
+        required: false
         collapsed: false
         hint: "Redacta tu caso de estudio o artículo aquí."
         fields:
-          - { label: "Bloque 1: Título", name: "p1_title", widget: "string" }
+          - {
+              label: "Bloque 1: Título",
+              name: "p1_title",
+              widget: "string",
+              required: false,
+            }
           - {
               label: "Bloque 1: Contenido",
               name: "p1_content",
               widget: "markdown",
+              required: false,
             }
           - label: "Bloque 1: Tipo de Media"
             name: "p1_media_type"
             widget: "select"
             options: ["image", "video"]
             default: "image"
+            required: false
           - {
               label: "Bloque 1: Imagen",
               name: "p1_image",
@@ -870,6 +952,7 @@ collections:
           name: "category",
           widget: "select",
           options: ["Proyecto", "Artículo", "Asesoría"],
+          required: false,
           hint: "Ayuda a filtrar el contenido para el usuario.",
         }
       - {
@@ -878,6 +961,7 @@ collections:
           widget: "number",
           default: 0,
           value_type: "int",
+          required: false,
         }
 
   # -----------------------------------------------------------------
@@ -894,6 +978,7 @@ collections:
           label: "Nombre del Cliente",
           name: "author",
           widget: "string",
+          required: false,
           hint: "Persona real que da el testimonio.",
         }
       - {
@@ -907,6 +992,7 @@ collections:
           label: "Testimonio",
           name: "content",
           widget: "text",
+          required: false,
           hint: "Cita textual. Máx 600 caracteres.",
         }
       - {
@@ -915,5 +1001,6 @@ collections:
           widget: "number",
           default: 0,
           value_type: "int",
+          required: false,
           hint: "Orden de aparición en el carrusel.",
         }
