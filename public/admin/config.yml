@@ -11,8 +11,8 @@ backend:
 local_backend: true
 
 # Gestión de Archivos Multimedia
-media_folder: "../../src/assets/uploads" # Dónde se guardan en el repo
-public_folder: "/assets/uploads" # Dónde los busca el navegador
+media_folder: "src/assets/uploads" # Dónde se guardan en el repo
+public_folder: "../../assets/uploads" # Dónde los busca el navegador
 site_url: "https://a2lt-authority-prototype.netlify.app"
 
 # Branding del Panel Admin (Para el Cliente)
@@ -266,14 +266,14 @@ collections:
               - {
                   label: "Titular de Impacto (H1)",
                   name: "title",
-                  widget: "string",
+                  widget: "markdown",
                   required: false,
                   hint: "Tu promesa principal. ¿Qué problema resuelves? Ej: 'Transformamos tu Infraestructura IT'.",
                 }
               - {
                   label: "Subtítulo / Bajada",
                   name: "subtitle",
-                  widget: "text",
+                  widget: "markdown",
                   required: false,
                   hint: "Un breve párrafo que complementa el título. No excedas las 3 líneas.",
                 }
@@ -333,7 +333,7 @@ collections:
               - {
                   label: "Título de Sección",
                   name: "title",
-                  widget: "string",
+                  widget: "markdown",
                   default: "Nuestra Propuesta",
                   required: false,
                 }
@@ -397,14 +397,14 @@ collections:
               - {
                   label: "Título",
                   name: "title",
-                  widget: "string",
+                  widget: "markdown",
                   default: "Nuestros Servicios",
                   required: false,
                 }
               - {
                   label: "Subtítulo",
                   name: "subtitle",
-                  widget: "text",
+                  widget: "markdown",
                   default: "Soluciones a medida para tu empresa.",
                   required: false,
                 }
@@ -431,14 +431,14 @@ collections:
               - {
                   label: "Título",
                   name: "title",
-                  widget: "string",
+                  widget: "markdown",
                   default: "Consultorías Destacadas",
                   required: false,
                 }
               - {
                   label: "Subtítulo",
                   name: "subtitle",
-                  widget: "text",
+                  widget: "markdown",
                   default: "Recursos para liderar en la era digital.",
                   required: false,
                 }
