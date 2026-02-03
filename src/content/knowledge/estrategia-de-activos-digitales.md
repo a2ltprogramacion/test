@@ -21,8 +21,7 @@ content_blocks:
     <br>
 
     La propiedad de la inteligencia. La verdadera autoridad se construye sobre datos propios. Al centralizar tu actividad en una infraestructura de ingeniería, eres el dueño absoluto de la información y del comportamiento de tus usuarios. Esta inteligencia te permite personalizar la experiencia del cliente y fortalecer tu embudo de ventas sin las limitaciones técnicas ni las distracciones constantes de las plataformas de terceros.
-  p1_video_url: Interfaz digital inestable desintegrándose, simbolizando la
-    fragilidad de depender de algoritmos externos.
+  p1_video_url: ""
   p1_media_type: image
   p1_title: El Espejismo de la Visibilidad Gratuita
   p1_content: "Dependencia vs. Control. Las redes sociales ofrecen un alcance
