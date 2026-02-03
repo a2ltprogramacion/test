@@ -2,9 +2,8 @@
 title: Ecosistema de Autoridad Profesional
 main_image_alt: Centro de comando digital premium que representa el Ecosistema
   de Autoridad Profesional de A2LT Soluciones.
-description: No construimos una página de presentación; diseñamos tu centro de
-  comando. Este ecosistema transforma tu trayectoria en una estructura digital
-  de alto impacto, diseñada bajo estándares de ingeniería para proyectar la
+description: No es una web; es tu centro de comando. Transformamos tu
+  trayectoria en una estructura digital de ingeniería para proyectar la
   solvencia y el liderazgo que los clientes de alto perfil exigen antes de la
   primera llamada.
 content_blocks:
