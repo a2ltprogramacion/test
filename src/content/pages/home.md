@@ -70,6 +70,8 @@ knowledge_section:
     una ventaja competitiva real.**
   highlighted_list:
     - Estrategia de Activos Digitales
+    - Auditoría de Rendimiento y ROI Digital
+    - Ingeniería de Visibilidad Orgánica
 faq:
   - question: ¿Por qué elegir A2LT "Authority" en lugar de un constructor web
       convencional (Wix, WordPress genérico)?
