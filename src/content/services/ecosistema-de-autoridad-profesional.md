@@ -36,5 +36,6 @@ content_blocks:
     infraestructura de reputación. Al eliminar la deuda técnica y la mediocridad
     visual, garantizamos que cada línea de código trabaje para cerrar la brecha
     entre tu genialidad y la percepción de tu mercado.
+  p1_image: ../../assets/uploads/bloque-1-el-impacto-de-la-primera-impresión-velocidad-y-precisión-.jpg
 order: 0
 ---
