@@ -5,7 +5,7 @@ modules:
   show_faq: true
   show_about: true
   show_services: true
-  show_knowledge: true
+  show_knowledge: false
   show_testimonials: true
 seo:
   site_name: A2LT Soluciones "Authority"
