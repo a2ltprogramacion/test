@@ -17,6 +17,7 @@ content_blocks:
   p3_text: >-
     #### Control Estratégico y Escalabilidad (Tu Activo Inamovible)  
 
+      
 
     Autonomía total sobre tu marca. Tu ecosistema está diseñado en Nunito para una lectura humana y cercana, pero con un núcleo técnico robusto que te permite gestionar tu contenido sin depender de terceros. Centraliza tu presencia y escala tu influencia con la tranquilidad de que tu plataforma es un activo que te pertenece al 100%.
   p2_text: >-
