@@ -13,11 +13,11 @@ seo:
   meta_description: ¿Eres invisible en la red? Transformamos tu marca en una
     autoridad digital. Ecosistemas web para PyMEs y expertos con el respaldo
     técnico de A2LT Soluciones.
-  social_image: ../../assets/uploads/logo-body-negro.png
+  social_image: ../../assets/uploads/logo-body-negro.webp
   social_image_alt: "Logo de A2LT Soluciones Authority: Innovación tecnológica y
     desarrollo de ecosistemas digitales de alta autoridad para profesionales y
     PyMEs."
-  favicon: ../../assets/uploads/favicon.png
+  favicon: ../../assets/uploads/favicon.webp
 hero:
   bg_variant: image
   title: Transforma tu conocimiento en una **institución digital**.
@@ -25,21 +25,23 @@ hero:
     **autoridad** para profesionales y PyMEs que exigen liderar su mercado.
   cta_text: Despliega tu Autoridad Ahora
   cta_link: https://wa.me/584244691920?text=Hola%20A2LT,%20estoy%20listo%20para%20desplegar%20mi%20infraestructura%20de%20autoridad.
-  image: ../../assets/uploads/glowing-cityscape-dusk-modern-abstract.jpg
-  image_alt: Panorama urbano futurista con rascacielos y redes de datos luminosas,
+  image: ../../assets/uploads/glowing-cityscape-dusk-modern-abstract.webp
+  image_alt:
+    Panorama urbano futurista con rascacielos y redes de datos luminosas,
     representando el alcance global y la infraestructura tecnológica de A2LT
     Soluciones Authority.
 clients:
-  - logo: ../../assets/uploads/logo-elevawod.jpg
+  - logo: ../../assets/uploads/logo-elevawod.webp
     logo_alt: Logo Elevawod, Marketing Digital en el sur de Chile
     name: Elevawod
-  - logo: ../../assets/uploads/logo-body-blanco.png
+  - logo: ../../assets/uploads/logo-body-blanco.webp
     logo_alt: "Logo A2LT Soluciones, Asesorías Tecnológicas "
     name: A2LT Soluciones
 about:
-  image_alt: Logo oficial de A2LT Soluciones - Expertos en Ingeniería de Software
+  image_alt:
+    Logo oficial de A2LT Soluciones - Expertos en Ingeniería de Software
     y Ecosistemas Digitales de Alta Autoridad.
-  image: ../../assets/uploads/logo-body-blanco.png
+  image: ../../assets/uploads/logo-body-blanco.webp
   title: "**Ingeniería de Software** al Servicio de tu Marca."
   business_bio: >-
     Esta plataforma es el resultado de una década gestionando infraestructuras
@@ -75,13 +77,15 @@ knowledge_section:
 faq:
   - question: ¿Por qué elegir A2LT "Authority" en lugar de un constructor web
       convencional (Wix, WordPress genérico)?
-    answer: "La mayoría de los constructores visuales sacrifican el rendimiento por
+    answer:
+      "La mayoría de los constructores visuales sacrifican el rendimiento por
       la facilidad, llenando tu sitio de código basura que ralentiza la carga y
       penaliza tu SEO. A2LT Authority es una pieza de ingeniería: cada línea de
       código tiene un propósito. Es la diferencia entre un producto de consumo
       masivo y una infraestructura de alto rendimiento diseñada para cargar en
       milisegundos y proyectar solvencia técnica."
-  - question: ¿Cómo garantiza esta infraestructura que mi negocio gane autoridad en
+  - question:
+      ¿Cómo garantiza esta infraestructura que mi negocio gane autoridad en
       Google?
     answer: El SEO no es solo poner palabras clave; es estructura y semántica.
       Nuestra arquitectura está optimizada bajo los estándares más estrictos de
@@ -90,13 +94,15 @@ faq:
       verás profesional ante tus clientes, sino también ante los algoritmos de
       búsqueda.
   - question: ¿Es difícil de gestionar si no tengo conocimientos técnicos avanzados?
-    answer: Al contrario. Hemos aplicado el principio de eficiencia operativa. La
+    answer:
+      Al contrario. Hemos aplicado el principio de eficiencia operativa. La
       gestión de contenidos es intuitiva y directa, diseñada para que el dueño
       de negocio o el profesional pueda actualizar su blog y servicios sin
       depender de un programador. Tú te encargas de la estrategia, la
       infraestructura se encarga del resto.
   - question: ¿Puedo escalar mi sitio si mi negocio crece en el futuro?
-    answer: Absolutamente. A diferencia de las soluciones cerradas, esta plantilla
+    answer:
+      Absolutamente. A diferencia de las soluciones cerradas, esta plantilla
       está construida sobre bases sólidas de ingeniería. Es totalmente
       compatible con integraciones avanzadas como flujos de Inteligencia
       Artificial, automatización en GoHighLevel o desarrollos a medida en
@@ -122,7 +128,7 @@ contact:
   social:
     instagram: https://www.instagram.com/a2ltsoluciones
   phone: "+584244691920"
-  footer_logo: ../../assets/uploads/logo-small-removebg.png
+  footer_logo: ../../assets/uploads/logo-small-removebg.webp
   address: San Diego, Carabobo, Venezuela
   footer_logo_alt: "Logotipo oficial de A2LT Soluciones Authority: El sello de
     calidad en ingeniería de software y arquitectura web para profesionales de

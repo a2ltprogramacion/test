@@ -1,6 +1,6 @@
 ---
 title: Ingeniería de Visibilidad Orgánica
-main_image: ../../assets/uploads/ingeniería-de-visibilidad-orgánica.png
+main_image: ../../assets/uploads/ingeniería-de-visibilidad-orgánica.webp
 main_image_alt: Visualización de crecimiento institucional mediante flujos de
   datos y métricas financieras sobre fondo de obsidiana profunda.
 description: Transforma tu infraestructura en un activo financiero. Una web
@@ -26,8 +26,8 @@ content_blocks:
     como Red Hat Display para títulos y Nunito para el cuerpo, garantizamos una
     jerarquía visual que no solo atrae a Google, sino que retiene al usuario,
     reduciendo la tasa de rebote y consolidando tu autoridad de forma orgánica.
-  p1_image: ../../assets/uploads/bloque-1-arquitectura-que-google-prioriza.png
-  p2_image: ../../assets/uploads/bloque-2-el-fin-de-la-dependencia-de-anuncios.png
+  p1_image: ../../assets/uploads/bloque-1-arquitectura-que-google-prioriza.webp
+  p2_image: ../../assets/uploads/bloque-2-el-fin-de-la-dependencia-de-anuncios.webp
   conclusion: La Invisibilidad Digital es un riesgo financiero que ninguna
     institución debería correr. Migrar hacia un ecosistema SEO-Ready es la
     decisión más rentable para quienes buscan dominio de mercado a largo plazo.

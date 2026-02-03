@@ -1,6 +1,6 @@
 ---
 title: Estrategia de Activos Digitales
-main_image: ../../assets/uploads/estrategia-de-activos-digitales.png
+main_image: ../../assets/uploads/estrategia-de-activos-digitales.webp
 main_image_alt: Fortaleza digital protegida por circuitos de luz, representando
   la soberanía de una web propia frente a redes sociales.
 description: Construir tu marca en redes sociales es edificar en suelo ajeno.
@@ -31,14 +31,14 @@ content_blocks:
     Authority, tú dictas las reglas y aseguras que tu mensaje llegue a tu
     audiencia sin intermediarios que puedan apagar tu visibilidad de un momento
     a otro."
-  p1_image: ../../assets/uploads/bloque-1-el-espejismo-de-la-visibilidad-gratuita.png
+  p1_image: ../../assets/uploads/bloque-1-el-espejismo-de-la-visibilidad-gratuita.webp
   conclusion: No arriesgues la trayectoria de tu empresa en suelo prestado. La
     transición hacia un ecosistema digital soberano no es un lujo, es una
     necesidad estratégica para cualquier institución o profesional que busque
     liderar su mercado con seguridad y visión de futuro. A2LT Soluciones
     "Authority" es la pieza de ingeniería que convierte tu presencia en la red
     en un activo de propiedad absoluta.
-  p3_image: ../../assets/uploads/bloque-3-el-activo-que-no-caduca.png
+  p3_image: ../../assets/uploads/bloque-3-el-activo-que-no-caduca.webp
 category: Artículo
 order: 1
 ---

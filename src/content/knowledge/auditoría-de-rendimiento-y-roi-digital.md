@@ -1,6 +1,6 @@
 ---
 title: Auditoría de Rendimiento y ROI Digital
-main_image: ../../assets/uploads/auditoría-de-rendimiento-y-roi-digital.png
+main_image: ../../assets/uploads/auditoría-de-rendimiento-y-roi-digital.webp
 main_image_alt: Gráficos de crecimiento institucional y métricas de éxito sobre
   una infraestructura de red de alta tecnología.
 description: Descubre cómo la eficiencia técnica se traduce en rentabilidad.
@@ -9,7 +9,8 @@ description: Descubre cómo la eficiencia técnica se traduce en rentabilidad.
 content_blocks:
   p1_media_type: image
   p1_title: El Código como Activo Financiero
-  p1_content: "Eficiencia que acelera el crecimiento. En el ecosistema Authority,
+  p1_content:
+    "Eficiencia que acelera el crecimiento. En el ecosistema Authority,
     cada línea de código es una inversión, no un gasto. Una infraestructura
     optimizada para SEO y rendimiento (Core Web Vitals) permite que los motores
     de búsqueda indexen tu contenido con mayor prioridad, reduciendo
@@ -21,7 +22,7 @@ content_blocks:
     visibilidad, mejor posicionamiento y un retorno de inversión sostenible a
     largo plazo."
   p1_video_url: ""
-  p1_image: ../../assets/uploads/el-código-como-activo-financiero.png
+  p1_image: ../../assets/uploads/el-código-como-activo-financiero.webp
   conclusion: La invisibilidad es el costo más alto que puede pagar una
     institución moderna. Migrar hacia una infraestructura diseñada con rigor de
     ingeniería no solo mejora la percepción de tu marca, sino que blinda tu

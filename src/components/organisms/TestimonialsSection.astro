@@ -49,35 +49,38 @@ const processedTestimonials = await Promise.all(
       </button>
 
       {/* SLIDER WINDOW */}
-      <div
-        class="relative w-full md:w-[85%] lg:w-[80%] min-h-[400px] md:min-h-[350px]"
-      >
+      <div class="relative w-full md:w-[85%] lg:w-[80%] min-h-[450px]">
         {
           processedTestimonials.map((item, index) => (
             <div
               class={`testimonio-slide absolute inset-0 transition-opacity duration-700 flex items-center justify-center ${index === 0 ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"}`}
               data-index={index}
             >
-              <div class="glass-card w-full h-full flex flex-col justify-center p-8 md:p-16 rounded-3xl relative mx-auto border border-white/5">
+              <div class="glass-card w-full h-full flex flex-col justify-between p-6 md:p-10 lg:p-12 rounded-3xl relative mx-auto border border-white/5 overflow-hidden">
                 <span class="absolute top-6 right-8 text-8xl text-primary/10 font-serif leading-none select-none">
                   "
                 </span>
 
-                <div class="relative z-10 flex flex-col items-center">
-                  <div class="text-gray-300 italic mb-10 leading-relaxed text-xl md:text-2xl text-center max-w-4xl mx-auto [&_p]:inline [&_p]:m-0">
+                <div class="relative z-10 flex flex-col h-full">
+                  {/* Contenido del testimonio */}
+                  <div class="text-gray-300 italic mb-6 md:mb-8 leading-relaxed text-base md:text-lg lg:text-xl text-center grow flex items-center justify-center overflow-y-auto max-h-[280px] md:max-h-[300px] [&_p]:inline [&_p]:m-0 px-2">
                     <Fragment set:html={item.renderedContent} />
                   </div>
 
-                  <div class="flex flex-col items-center gap-3">
-                    <div class="w-16 h-16 rounded-full bg-linear-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-2xl mb-2 shadow-lg border border-white/10">
+                  {/* Autor con icono a la izquierda */}
+                  <div class="flex items-center justify-center gap-4 pt-4 border-t border-white/10">
+                    {/* Icono de inicial */}
+                    <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-linear-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xl md:text-2xl shadow-lg border border-white/10 shrink-0">
                       {item.data.author.charAt(0)}
                     </div>
-                    <div class="text-center">
-                      <h4 class="text-white font-bold text-lg tracking-wide">
+
+                    {/* Nombre y cargo */}
+                    <div class="text-left">
+                      <h4 class="text-white font-bold text-base md:text-lg tracking-wide">
                         {item.data.author}
                       </h4>
                       {item.data.role && (
-                        <p class="text-gray-300 text-base font-medium tracking-wide">
+                        <p class="text-gray-300 text-sm md:text-base font-medium tracking-wide">
                           {item.data.role}
                         </p>
                       )}

@@ -1,6 +1,6 @@
 ---
 title: Blindaje Digital Institucional
-main_image: ../../assets/uploads/blindaje-digital-institucional.jpg
+main_image: ../../assets/uploads/blindaje-digital-institucional.webp
 main_image_alt: Infraestructura digital robusta y blindada para instituciones,
   diseñada bajo estándares de ingeniería por A2LT Soluciones.
 description: Desplegamos infraestructuras diseñadas bajo estándares de
@@ -12,7 +12,8 @@ content_blocks:
     representando la estabilidad institucional.
   p2_image_alt: Gráficos de crecimiento y jerarquía de datos en tonos neón
     simbolizando el dominio de mercado.
-  p3_image_alt: Cámara acorazada digital con circuitos integrados representando la
+  p3_image_alt:
+    Cámara acorazada digital con circuitos integrados representando la
     seguridad de la infraestructura.
   p3_text: >-
     **Soporte de Ingeniería y Continuidad**
@@ -32,13 +33,14 @@ content_blocks:
     <br>
 
     Adiós a la obsolescencia corporativa. Un sitio lento o desactualizado proyecta inestabilidad. Implementamos una arquitectura de alta disponibilidad que elimina la dependencia de terceros y de herramientas frágiles. Tu institución operará sobre una base de código limpio, garantizando que tu primer contacto digital sea sinónimo de solidez y profesionalismo absoluto.
-  p1_image: ../../assets/uploads/bloque-1-eliminación-de-la-fragilidad-técnica.jpg
-  p2_image: ../../assets/uploads/bloque-2-dominio-de-mercado-y-visibilidad-seo-de-autoridad-.jpg
-  conclusion: El Blindaje Digital Institucional es el movimiento estratégico para
+  p1_image: ../../assets/uploads/bloque-1-eliminación-de-la-fragilidad-técnica.webp
+  p2_image: ../../assets/uploads/bloque-2-dominio-de-mercado-y-visibilidad-seo-de-autoridad-.webp
+  conclusion:
+    El Blindaje Digital Institucional es el movimiento estratégico para
     PyMEs que buscan dejar de competir por precio y empezar a liderar por
     confianza. Es una infraestructura diseñada para durar, crecer y proyectar la
     magnitud real de tu organización en el entorno digital.
-  p3_image: ../../assets/uploads/bloque-3-soporte-de-ingeniería-y-continuidad.png
+  p3_image: ../../assets/uploads/bloque-3-soporte-de-ingeniería-y-continuidad.webp
 price: $210
 order: 1
 ---
