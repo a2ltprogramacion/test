@@ -5,7 +5,7 @@ modules:
   show_faq: true
   show_about: true
   show_services: true
-  show_knowledge: false
+  show_knowledge: true
   show_testimonials: true
 seo:
   site_name: A2LT Soluciones "Authority"
@@ -68,6 +68,8 @@ knowledge_section:
   subtitle: Recursos técnicos y estratégicos para entender el nuevo paradigma de
     la autoridad en internet. **Aprende a convertir tu infraestructura web en
     una ventaja competitiva real.**
+  highlighted_list:
+    - Estrategia de Activos Digitales
 faq:
   - question: ¿Por qué elegir A2LT "Authority" en lugar de un constructor web
       convencional (Wix, WordPress genérico)?
