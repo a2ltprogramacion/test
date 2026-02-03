@@ -1,5 +1,6 @@
 ---
 title: Auditoría de Rendimiento y ROI Digital
+main_image: ../../assets/uploads/auditoría-de-rendimiento-y-roi-digital.png
 main_image_alt: Gráficos de crecimiento institucional y métricas de éxito sobre
   una infraestructura de red de alta tecnología.
 description: Descubre cómo la eficiencia técnica se traduce en rentabilidad.
@@ -20,5 +21,13 @@ content_blocks:
     visibilidad, mejor posicionamiento y un retorno de inversión sostenible a
     largo plazo."
   p1_video_url: ""
-order: 0
+  p1_image: ../../assets/uploads/el-código-como-activo-financiero.png
+  conclusion: La invisibilidad es el costo más alto que puede pagar una
+    institución moderna. Migrar hacia una infraestructura diseñada con rigor de
+    ingeniería no solo mejora la percepción de tu marca, sino que blinda tu
+    crecimiento futuro. En A2LT Soluciones, no solo escribimos código;
+    construimos los cimientos de tu rentabilidad digital. Es momento de dejar de
+    pagar por clics y empezar a ser el dueño de tu autoridad.
+category: Artículo
+order: 1
 ---
