@@ -15,22 +15,21 @@ content_blocks:
   p3_image_alt: Panel de gestión intuitivo para el control total de la marca
     personal digital.
   p3_text: >-
-    #### Control Estratégico y Escalabilidad (Tu Activo Inamovible)  
+    #### Control Estratégico y Escalabilidad (Tu Activo Inamovible)
 
-      
+    <br>
 
     Autonomía total sobre tu marca. Tu ecosistema está diseñado en Nunito para una lectura humana y cercana, pero con un núcleo técnico robusto que te permite gestionar tu contenido sin depender de terceros. Centraliza tu presencia y escala tu influencia con la tranquilidad de que tu plataforma es un activo que te pertenece al 100%.
   p2_text: >-
     #### Percepción de Valor e Institución (Estética de Consultoría)  
 
+    <br>
 
     Diseño que proyecta solvencia inmediata. Utilizando una tipografía de alta jerarquía como Red Hat Display, creamos un entorno visual que eleva tu percepción de valor. Dejarás de ser un consultor más para convertirte en el referente indiscutible de tu nicho, transmitiendo seguridad mediante una interfaz limpia y poderosa.
-
-
-    ####
   p1_content: >-
     #### El Impacto de la Primera Impresión (Velocidad y Precisión)  
 
+    <br>
 
     Velocidad que respeta el tiempo de tu audiencia. En el mercado de expertos, la lentitud es falta de profesionalismo. Implementamos una arquitectura optimizada que carga en milisegundos, asegurando que tu mensaje llegue sin fricciones. Si tu web no es rápida, tu autoridad se desvanece antes de que el usuario lea tu nombre.
   p1_image: ../../assets/uploads/bloque-1-el-impacto-de-la-primera-impresión-velocidad-y-precisión-.jpg
