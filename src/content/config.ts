@@ -37,7 +37,7 @@ const detailedContentSchema = ({ image }: { image: any }) =>
         p1_media_type: z.enum(["image", "video"]).optional(), // Nuevo selector
         p1_image: image().optional(),
         p1_image_alt: z.string().optional(),
-        p1_video_url: z.string().url().optional(), // Link de YouTube
+        p1_video_url: z.string().optional(), // Link de YouTube
 
         // Bloque 2:  Imagen Izquierda - Texto Derecha
         p2_text: z.string().optional(),
@@ -72,7 +72,7 @@ const detailedContentSchema = ({ image }: { image: any }) =>
 // -----------------------------------------------------------------
 const pagesCollection = defineCollection({
   type: "content",
-  schema: ({ image }) =>
+  schema: ({ image }: { image: any }) =>
     z.object({
       // [NUEVO] CAMPOS GLOBALES (Permiten que existan Services/Knowledge)
       // -------------------------------------------------------------

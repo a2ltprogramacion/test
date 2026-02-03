@@ -8,7 +8,7 @@ backend:
   squash_merges: true
 
 # Permite usar 'npx decap-server' sin errores 404.
-local_backend: true
+# local_backend: true
 
 # Gestión de Archivos Multimedia
 media_folder: "src/assets/uploads" # Dónde se guardan en el repo
@@ -707,6 +707,7 @@ collections:
     folder: "src/content/services"
     create: true
     slug: "{{slug}}"
+    clean_accents: true
     fields:
       - {
           label: "Nombre del Servicio",
@@ -837,6 +838,7 @@ collections:
     folder: "src/content/knowledge"
     create: true
     slug: "{{slug}}"
+    clean_accents: true
     fields:
       - {
           label: "Título del Contenido",
@@ -973,6 +975,7 @@ collections:
     folder: "src/content/testimonials"
     create: true
     slug: "{{slug}}"
+    clean_accents: true
     fields:
       - {
           label: "Nombre del Cliente",

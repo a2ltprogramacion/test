@@ -1,6 +1,6 @@
 ---
 // @src/pages/knowledge/[slug].astro
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/organisms/Navbar.astro";
 
@@ -9,13 +9,18 @@ import { mdToHtml } from "../../utils/markdown";
 
 export async function getStaticPaths() {
   const knowledgeEntries = await getCollection("knowledge");
-  return knowledgeEntries.map((entry) => ({
+  return knowledgeEntries.map((entry: CollectionEntry<"knowledge">) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));
 }
 
+interface Props {
+  entry: CollectionEntry<"knowledge">;
+}
+
 const { entry } = Astro.props;
+
 const {
   title,
   main_image,

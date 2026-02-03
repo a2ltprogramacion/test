@@ -22,14 +22,7 @@ const hasData = !!data;
 // 2. Obtener Colecciones
 const services = await getCollection("services");
 const testimonials = await getCollection("testimonials");
-
-// 3. Fallback seguro para Knowledge
-let knowledge: CollectionEntry<"knowledge">[] = [];
-try {
-  knowledge = await getCollection("knowledge");
-} catch (e) {
-  console.log("Knowledge collection not found or empty");
-}
+const knowledge = await getCollection("knowledge");
 
 // 4. Control de Módulos (Feature Flags)
 const show = data?.modules || {
