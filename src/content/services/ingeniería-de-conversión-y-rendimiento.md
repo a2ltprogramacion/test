@@ -38,5 +38,5 @@ content_blocks:
     que otorga una ventaja tecnológica injusta en el mercado.
   p3_image: ../../assets/uploads/bloque-3-integración-y-ecosistema-de-ventas.png
 price: $210
-order: 0
+order: 2
 ---
