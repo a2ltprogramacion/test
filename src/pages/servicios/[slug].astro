@@ -1,6 +1,6 @@
 ---
 // @src/pages/servicios/[slug].astro
-import { getCollection, getEntry } from "astro:content";
+import { type CollectionEntry, getCollection, getEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/organisms/Navbar.astro";
 
@@ -10,11 +10,15 @@ import { mdToHtml } from "../../utils/markdown";
 // 1. Generación de Rutas Estáticas
 export async function getStaticPaths() {
   const services = await getCollection("services");
-  return services.map((entry) => ({
+  return services.map((entry: { slug: any }) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));
 }
+
+type Props = {
+  entry: CollectionEntry<"services">;
+};
 
 const { entry } = Astro.props;
 const {
@@ -55,7 +59,7 @@ const seoData = {
         class="absolute inset-0 w-full h-full object-cover"
         loading="eager"
       />
-      <div class="absolute inset-0 bg-black/60"></div>
+      <div class="absolute inset-0 bg-background/60"></div>
       <div class="relative z-10 text-center px-6">
         <h1 class="text-4xl md:text-6xl font-heading font-bold text-white mb-4">
           {title}
@@ -65,7 +69,7 @@ const seoData = {
     </section>
 
     {/* RESUMEN */}
-    <section class="py-20 bg-background">
+    <section class="py-20 bg-surface">
       <div class="container mx-auto px-6 text-center max-w-3xl">
         <p class="text-xl text-gray-300 leading-relaxed italic">
           "{description}"
@@ -76,7 +80,7 @@ const seoData = {
     {/* DISEÑO EN Z - AHORA CON ALT DINÁMICO */}
     {
       content_blocks && (
-        <section class="py-10 space-y-24 bg-background">
+        <section class="py-10 space-y-24 bg-surface">
           {/* BLOQUE 1 */}
           {content_blocks.p1_content && (
             <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
