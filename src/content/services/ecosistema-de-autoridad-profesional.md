@@ -1,6 +1,6 @@
 ---
 title: Ecosistema de Autoridad Profesional
-main_image: ../../assets/uploads/bloque-1-el-impacto-de-la-primera-impresión-velocidad-y-precisión-.jpg
+main_image: ../../assets/uploads/ecosistema-de-autoridad-profesional.jpg
 main_image_alt: Centro de comando digital premium que representa el Ecosistema
   de Autoridad Profesional de A2LT Soluciones.
 description: No es una web; es tu centro de comando. Transformamos tu
