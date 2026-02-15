@@ -9,8 +9,7 @@ description: Descubre cómo la eficiencia técnica se traduce en rentabilidad.
 content_blocks:
   p1_media_type: image
   p1_title: El Código como Activo Financiero
-  p1_content:
-    "Eficiencia que acelera el crecimiento. En el ecosistema Authority,
+  p1_content: "Eficiencia que acelera el crecimiento. En el ecosistema Authority,
     cada línea de código es una inversión, no un gasto. Una infraestructura
     optimizada para SEO y rendimiento (Core Web Vitals) permite que los motores
     de búsqueda indexen tu contenido con mayor prioridad, reduciendo
@@ -30,5 +29,6 @@ content_blocks:
     construimos los cimientos de tu rentabilidad digital. Es momento de dejar de
     pagar por clics y empezar a ser el dueño de tu autoridad.
 category: Artículo
+consultant_video: https://www.youtube.com/shorts/fNJ_kvz9Jsc
 order: 1
 ---
