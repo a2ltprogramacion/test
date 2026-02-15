@@ -35,5 +35,6 @@ content_blocks:
     talento y servicios sean encontrados sin pagar peajes constantes a las
     plataformas publicitarias.
 category: Artículo
+consultant_video: https://www.youtube.com/shorts/fNJ_kvz9Jsc
 order: 2
 ---
